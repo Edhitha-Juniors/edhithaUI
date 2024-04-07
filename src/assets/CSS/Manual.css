@@ -1,0 +1,42 @@
+.manual-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header-container {
+    background-color: #f8f8f8;
+    padding: 20px;
+    height: 80px;
+}
+
+.HeadText {
+    color: black;
+}
+
+.content-container {
+    display: flex;
+    flex: 1;
+
+}
+
+.left-container {
+    flex: 2;
+    background-color: green;
+}
+
+.right-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-right-container {
+    flex: 1;
+    background-color: pink;
+}
+
+.bottom-right-container {
+    flex: 1;
+    background-color: red;
+}
