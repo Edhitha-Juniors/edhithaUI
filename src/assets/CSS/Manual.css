@@ -1,3 +1,8 @@
+.div {
+    background: #dde1e7;
+
+}
+
 .manual-container {
     display: flex;
     flex-direction: column;
@@ -8,21 +13,33 @@
     background-color: #f8f8f8;
     padding: 20px;
     height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
 
-.HeadText {
-    color: black;
+.header h1 {
+    font-size: 40px;
 }
+
+
+
+.logoM {
+    max-height: 200px;
+    /* Adjust the height of the logo */
+    /* Add any additional styling for the logo */
+}
+
 
 .content-container {
     display: flex;
     flex: 1;
-
 }
 
 .left-container {
     flex: 2;
-    background-color: green;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .right-container {
@@ -33,10 +50,225 @@
 
 .top-right-container {
     flex: 1;
-    background-color: pink;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    overflow-y: auto;
+    /* Enable vertical scrollbar if needed */
+    max-height: calc(100vh - 80px);
+    padding: 30px;
 }
 
 .bottom-right-container {
     flex: 1;
-    background-color: red;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 10px;
+}
+
+.Control-Button {
+
+    display: inline-block;
+    outline: 0;
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 30px;
+    border: 0;
+    color: #fff;
+    font-size: 17.5px;
+    border: 2px solid transparent;
+    border-color: #000;
+    color: #000;
+    background: transparent;
+    transition: background, color .1s ease-in-out;
+}
+
+.Control-Button:hover {
+    background-color: #708090;
+    color: #fff;
+}
+
+
+.connection-button {
+    background-color: #007bff;
+    /* Blue color for default state */
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    /* Padding for inner content */
+    border-radius: 5px;
+    /* Rounded corners */
+    margin-right: 60px;
+    font-size: 20px;
+    /* Font size */
+    transition: background-color 0.3s ease;
+    /* Smooth transition effect */
+}
+
+.connection-button img {
+    filter: invert(100%);
+    width: 24px;
+    /* Adjust icon size */
+    height: 30px;
+    margin-right: 10px;
+}
+
+.connect-text {
+    font-size: 16px;
+    /* Font size */
+}
+
+.connection-button.green {
+    background-color: #28a745;
+    /* Green color for connected state */
+}
+
+.red {
+    background-color: #f44336 !important;
+    color: white !important;
+}
+
+.saveButton {
+    background-color: #4CAF50;
+    /* Green */
+    height: 30%;
+    width: 26%;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 16px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.saveButton:hover {
+    background-color: #45a049;
+    /* Darker Green */
+}
+
+.inputsContainer {
+    margin-top: auto;
+    padding-left: 55px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inputsContainer input[type="text"] {
+    width: 25%;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* Ensures padding and border are included in the width */
+    font-size: 16px;
+}
+
+.inputsContainer input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+    /* Change border color on focus */
+}
+
+.bottom-right-container {
+    flex: 1;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    overflow-y: auto;
+    max-height: calc(100vh - 80px);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-up-container {
+    box-shadow: 0px 1px 1px rgba(9, 30, 66, 0.25), 0px 0px 1px 1px rgba(9, 30, 66, 0.13);
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 20%;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom-down-container {
+    margin-top: 10px;
+    box-shadow: 0px 1px 1px rgba(9, 30, 66, 0.25), 0px 0px 1px 1px rgba(9, 30, 66, 0.13);
+    height: 80%;
+    padding: 30px;
+    flex: 1;
+}
+
+.data-box {
+    margin-bottom: 10px;
+}
+
+.data-box input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+
+.data-box input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.message-box-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-box {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.message-box:last-child {
+    margin-bottom: 0;
+}
+
+.message-box.no-message {
+    background-color: #f2f2f2;
+}
+
+.message-box-distance {
+    background-color: #f2f2f2;
+}
+
+.message-box p {
+    margin: 0;
+}
+
+.image-box {
+    height: 65%;
+    margin: 20px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 20px;
+    /* Add spacing between image-box and inputsContainer */
+}
+
+.image-box p {
+    font-size: 18px;
+    font-weight: bold;
 }
