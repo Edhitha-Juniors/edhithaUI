@@ -37,15 +37,24 @@ const Manual = () => {
             <div className="content-container">
                 <div className="left-container">
                     <div className="image-box">
-                        <p>Image</p>
+                        <div className="mainImage">
+                            <p>Main Image</p>
+                            {/* Content for main image */}
+                        </div>
+                        <div className="croppedImage">
+                            <p>Cropped Image</p>
+                            {/* Content for cropped image */}
+                        </div>
                     </div>
+
+
                     <div className="inputsContainer">
                         <input type="text" placeholder="Shape" />
                         <input type="text" placeholder="Colour" />
                         <input type="text" placeholder="Alphanumeric" />
                         <input type="text" placeholder="Alphanumeric Colour" />
                         <input type="text" placeholder="Coordinates (to be rendered)" value={backendData.coordinates} readOnly />
-                        <button className="saveButton">Save</button>
+                        <button className="saveButton">Store</button>
                     </div>
                 </div>
 
