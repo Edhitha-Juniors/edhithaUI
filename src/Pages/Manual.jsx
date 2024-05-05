@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../assets/CSS/Manual.css';
 import droneConnectedIcon from '../assets/images/droneConnected.svg';
 import logo from '../assets/images/logo.png';
@@ -14,6 +14,8 @@ const Manual = () => {
         message2: 'Distance from Target - NA'
     });
 
+    const [mainImageUrl, setMainImageUrl] = useState(null); // State to store the URL of the main image
+
     const handleToggleConnection = () => {
         setIsConnected(!isConnected);
     };
@@ -22,7 +24,25 @@ const Manual = () => {
         setIsGeotagging(!isGeotagging);
     };
 
+    useEffect(() => {
+        // Fetch main image URL from the backend when the component mounts
+        fetchMainImageUrl();
+    }, []);
 
+    const fetchMainImageUrl = async () => {
+        try {
+            // Fetch main image URL from the backend endpoint
+            const response = await fetch('http://127.0.0.1:8080/img');
+            if (response.ok) {
+                // Extract main image URL from the response
+                setMainImageUrl(response.url);
+            } else {
+                console.error('Failed to fetch main image URL');
+            }
+        } catch (error) {
+            console.error('Error fetching main image URL:', error);
+        }
+    };
 
     return (
         <div className="manual-container">
@@ -40,8 +60,7 @@ const Manual = () => {
                 <div className="left-container">
                     <div className="image-box">
                         <div className="mainImage">
-                            <p>Main Image</p>
-                            {/* Content for main image */}
+                            {mainImageUrl && <img src={mainImageUrl} alt="Main Image" />}
                         </div>
                         <div className="croppedImage">
                             <p>Cropped Image</p>

@@ -21,17 +21,24 @@ int main()
     crow::SimpleApp app;
 
     // Route to handle image requests
-    CROW_ROUTE(app, "/")
+    CROW_ROUTE(app, "/img")
     ([]()
      {
-         std::string imagePath = "/home/aahil/edhithaGCS/src/assets/images/imagename.jpg";
+         std::string imagePath = "/home/aahil/edhithaGCS/src/assets/images/image2.jpg";
          std::string imageContent = readImageFile(imagePath);
          if (imageContent.empty())
          {
              return crow::response("L");
          }
-         return crow::response(200, imageContent); // Return image content
-     });
+         // Create a response with the image content
+         crow::response res(imageContent);
+         
+         // Set CORS headers to allow requests from all origins
+         res.add_header("Access-Control-Allow-Origin", "*");
+         res.add_header("Access-Control-Allow-Methods", "GET, OPTIONS");
+         res.add_header("Access-Control-Allow-Headers", "Content-Type");
+         
+         return res; });
 
     app.bindaddr("127.0.0.1").port(8080).multithreaded().run();
 
