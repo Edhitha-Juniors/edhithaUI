@@ -24,7 +24,7 @@ int main()
     CROW_ROUTE(app, "/img")
     ([]()
      {
-         std::string imagePath = "/home/aahil/edhithaGCS/src/assets/images/image2.jpg";
+         std::string imagePath = "../../src/assets/images/image2.jpg";
          std::string imageContent = readImageFile(imagePath);
          if (imageContent.empty())
          {
