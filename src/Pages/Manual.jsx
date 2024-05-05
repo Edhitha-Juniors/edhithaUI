@@ -22,6 +22,8 @@ const Manual = () => {
         setIsGeotagging(!isGeotagging);
     };
 
+
+
     return (
         <div className="manual-container">
             <div className="header-container">
