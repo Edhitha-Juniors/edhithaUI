@@ -6,42 +6,15 @@ import logo from '../assets/images/logo.png';
 const Manual = () => {
     const [isConnected, setIsConnected] = useState(false);
     const [isGeotagging, setIsGeotagging] = useState(false);
-    const [backendImageList, setBackendImageList] = useState([]);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [backendData, setBackendData] = useState({
+        voltage: '',
+        current: '',
+        temperature: '',
+        message1: 'NO MESSAGE',
+        message2: 'Distance from Target - NA'
+    });
 
-    useEffect(() => {
-        fetchImageList();
-    }, []);
-
-    useEffect(() => {
-        if (backendImageList.length > 0) {
-            const intervalId = setInterval(() => {
-                setCurrentImageIndex(prevIndex => {
-                    const nextIndex = (prevIndex + 1) % backendImageList.length;
-                    // If next index is 0, indicating the last image, stop cycling
-                    if (nextIndex === 0) clearInterval(intervalId);
-                    return nextIndex === 0 ? prevIndex : nextIndex;
-                });
-            }, 1000);
-
-            return () => clearInterval(intervalId);
-        }
-    }, [backendImageList]);
-
-
-    const fetchImageList = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:8080/imglst');
-            if (response.ok) {
-                const imageList = await response.json();
-                setBackendImageList(imageList);
-            } else {
-                console.error('Failed to fetch image list');
-            }
-        } catch (error) {
-            console.error('Error fetching image list:', error);
-        }
-    };
+    const [mainImageUrl, setMainImageUrl] = useState(null); // State to store the URL of the main image
 
     const handleToggleConnection = () => {
         setIsConnected(!isConnected);
@@ -49,6 +22,26 @@ const Manual = () => {
 
     const handleToggleGeotag = () => {
         setIsGeotagging(!isGeotagging);
+    };
+
+    useEffect(() => {
+        // Fetch main image URL from the backend when the component mounts
+        fetchMainImageUrl();
+    }, []);
+
+    const fetchMainImageUrl = async () => {
+        try {
+            // Fetch main image URL from the backend endpoint
+            const response = await fetch('http://127.0.0.1:9080/img/2.jpg');
+            if (response.ok) {
+                // Extract main image URL from the response
+                setMainImageUrl(response.url);
+            } else {
+                console.error('Failed to fetch main image URL');
+            }
+        } catch (error) {
+            console.error('Error fetching main image URL:', error);
+        }
     };
 
     return (
@@ -59,7 +52,7 @@ const Manual = () => {
                     <h1>Manual Flight</h1>
                     <button className={`connection-button ${isConnected ? 'green' : ''}`} onClick={handleToggleConnection}>
                         <img src={droneConnectedIcon} alt="Drone Connection" />
-                        <span className="connect-text">{isConnected ? 'Connected' : 'Connect'}</span>
+                        <span className="connect-text">Connect</span>
                     </button>
                 </header>
             </div>
@@ -67,28 +60,32 @@ const Manual = () => {
                 <div className="left-container">
                     <div className="image-box">
                         <div className="mainImage">
-                            {backendImageList.length > 0 && (
-                                <img src={`http://127.0.0.1:8080/img/${backendImageList[currentImageIndex]}`} alt="Main Image" />
-                            )}
+                            {mainImageUrl && <img src={mainImageUrl} alt="Main Image" />}
                         </div>
                         <div className="croppedImage">
                             <p>Cropped Image</p>
                             {/* Content for cropped image */}
                         </div>
                     </div>
+
+
                     <div className="inputsContainer">
                         <input type="text" placeholder="Shape" />
                         <input type="text" placeholder="Colour" />
                         <input type="text" placeholder="Alphanumeric" />
                         <input type="text" placeholder="Alphanumeric Colour" />
-                        <input type="text" placeholder="Coordinates (to be rendered)" readOnly />
+                        <input type="text" placeholder="Coordinates (to be rendered)" value={backendData.coordinates} readOnly />
                         <button className="saveButton">Store</button>
                     </div>
                 </div>
+
                 <div className="right-container">
                     <div className="top-right-container">
                         <div className="button-grid">
-                            <button className={`Control-Button ${isGeotagging ? 'red Geotag_Button' : ''}`} onClick={handleToggleGeotag}>
+                            <button
+                                className={`Control-Button ${isGeotagging ? 'red' : ''} ${isGeotagging ? 'Geotag_Button' : ''}`}
+                                onClick={handleToggleGeotag}
+                            >
                                 {isGeotagging ? 'Stop Geotag' : 'Start Geotag'}
                             </button>
                             <button className="Control-Button">Lock Servo</button>
@@ -104,21 +101,21 @@ const Manual = () => {
                     <div className="bottom-right-container">
                         <div className="bottom-up-container">
                             <div className="data-box">
-                                <input type="text" placeholder="Voltage" readOnly />
+                                <input type="text" placeholder="Voltage" value={backendData.voltage} readOnly />
                             </div>
                             <div className="data-box">
-                                <input type="text" placeholder="Current" readOnly />
+                                <input type="text" placeholder="Current" value={backendData.current} readOnly />
                             </div>
                             <div className="data-box">
-                                <input type="text" placeholder="Temperature" readOnly />
+                                <input type="text" placeholder="Temperature" value={backendData.temperature} readOnly />
                             </div>
                         </div>
                         <div className="bottom-down-container">
                             <div className="message-box">
-                                <p>NO MESSAGE</p>
+                                <p>{backendData.message1}</p>
                             </div>
                             <div className="message-box">
-                                <p>Distance from Target - NA</p>
+                                <p>{backendData.message2}</p>
                             </div>
                         </div>
                     </div>

@@ -62,6 +62,10 @@ public:
         uint64_t content_length = std::stoull(content_length_str);
         response.headers().add<Pistache::Http::Header::ContentLength>(content_length);
 
+        // Add CORS headers
+        response.headers().add<Pistache::Http::Header::AccessControlAllowOrigin>("*");    // Allow requests from any origin
+        response.headers().add<Pistache::Http::Header::AccessControlAllowMethods>("GET"); // Allow only GET requests
+
         // Send image data as response body
         std::stringstream buffer;
         buffer << image_file.rdbuf();
@@ -76,8 +80,10 @@ int main()
                     .threads(1);
 
     Http::Endpoint server(addr);
+
     server.init(opts);
     server.setHandler(Http::make_handler<ImageHandler>());
     server.serve();
+
     return 0;
 }
