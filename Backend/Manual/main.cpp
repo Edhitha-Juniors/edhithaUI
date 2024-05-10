@@ -1,89 +1,83 @@
-#include <crow.h>
+#include <pistache/endpoint.h>
+#include <pistache/http.h>
 #include <fstream>
-#include <sstream>
 #include <filesystem>
-#include <nlohmann/json.hpp> // Include nlohmann/json library
-#include <chrono>
-#include <thread>
+#include <string>
+#include <sstream>
 
-using json = nlohmann::json; // Alias for nlohmann::json
+const std::string image_dir = "/home/aahil/edhithaGCS/src/assets/images"; // Replace with your actual directory
+using namespace Pistache;
+using namespace std::filesystem;
 
-namespace fs = std::filesystem;
-
-// Function to fetch image list from the directory
-json getImageList()
+class ImageHandler : public Http::Handler
 {
-    std::vector<std::string> imageList;
-    for (const auto &entry : fs::directory_iterator("../../src/assets/images/"))
+public:
+    HTTP_PROTOTYPE(ImageHandler)
+
+    void onRequest(const Http::Request &request, Http::ResponseWriter response) override
     {
-        imageList.push_back(entry.path().filename().string());
+        // Extract requested image name from the URL path
+        std::string path = request.resource();
+
+        std::string image_name = path.substr(path.rfind("/") + 1);
+
+        // Check if requested image exists
+        std::string image_path = image_dir + "/" + image_name;
+        if (!exists(image_path))
+        {
+            response.send(Http::Code::Not_Found, "Image not found");
+            return;
+        }
+
+        // Read image data from file
+        std::ifstream image_file(image_path, std::ios::binary);
+        if (!image_file.is_open())
+        {
+            response.send(Http::Code::Internal_Server_Error, "Failed to open image");
+            return;
+        }
+
+        // Get image size and set content type header
+        image_file.seekg(0, std::ios::end);
+        size_t image_size = image_file.tellg();
+        image_file.seekg(0, std::ios::beg);
+        std::string content_type = "image/";
+        if (path.find(".jpg") != std::string::npos)
+        {
+            content_type += "jpeg";
+        }
+        else if (path.find(".png") != std::string::npos)
+        {
+            content_type += "png";
+        }
+        else
+        {
+            response.send(Http::Code::Bad_Request, "Unsupported image format");
+            return;
+        }
+        response.headers().add<Pistache::Http::Header::ContentType>(content_type);
+
+        // Convert image size to string and then to uint64_t for content length
+        std::string content_length_str = std::to_string(image_size);
+        uint64_t content_length = std::stoull(content_length_str);
+        response.headers().add<Pistache::Http::Header::ContentLength>(content_length);
+
+        // Send image data as response body
+        std::stringstream buffer;
+        buffer << image_file.rdbuf();
+        response.send(Http::Code::Ok, buffer.str());
     }
-    return json(imageList);
-}
+};
 
 int main()
 {
-    crow::SimpleApp app;
+    Pistache::Address addr(Pistache::Ipv4::any(), Pistache::Port(9080));
+    auto opts = Pistache::Http::Endpoint::options()
+                    .threads(1);
 
-    // Route to serve individual images
-    CROW_ROUTE(app, "/img/<string>")
-    ([](const crow::request &req, crow::response &res, std::string filename)
-     {
-        std::string imagePath = "../../src/assets/images/" + filename;
-        std::ifstream file(imagePath, std::ios::binary);
-        if (!file) {
-            res.code = 404;
-            res.write("Image NF");
-            res.end();
-            return;
-        }
-        std::ostringstream oss;
-        oss << file.rdbuf();
-        res.set_header("Access-Control-Allow-Origin", "*");
-        res.set_header("Access-Control-Allow-Methods", "GET, OPTIONS");
-        res.set_header("Access-Control-Allow-Headers", "Content-Type");
-        res.set_header("Content-Type", "image/jpeg");
-        res.write(oss.str());
-        res.end(); });
-
-    // Route to serve image list
-    CROW_ROUTE(app, "/imglst")
-    ([]()
-     {
-        // Get the initial image list
-        json initialList = getImageList();
-        
-        // Create a response with initial image list
-        crow::response res(initialList.dump());
-        
-        // Set CORS headers to allow requests from all origins
-        res.set_header("Access-Control-Allow-Origin", "*");
-        res.set_header("Access-Control-Allow-Methods", "GET, OPTIONS");
-        res.set_header("Access-Control-Allow-Headers", "Content-Type");
-        
-        return res; });
-
-    // Function to periodically fetch and update the image list
-    auto updateImageList = [&app]()
-    {
-        while (true)
-        {
-            // Fetch the latest image list
-            json latestList = getImageList();
-
-            // Broadcast the updated image list to all clients
-            app.get_context<crow::app>()->broadcast("/imglst", latestList.dump());
-
-            // Sleep for 5 seconds before fetching again
-            std::this_thread::sleep_for(std::chrono::seconds(5));
-        }
-    };
-
-    // Start the thread to periodically update the image list
-    std::thread(updateImageList).detach();
-
-    // Run the server
-    app.bindaddr("127.0.0.1").port(8080).multithreaded().run();
-
+    Http::Endpoint server(addr);
+    server.init(opts);
+    server.setHandler(Http::make_handler<ImageHandler>());
+    server.serve();
     return 0;
 }
