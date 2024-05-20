@@ -1,35 +1,94 @@
 #include <pistache/endpoint.h>
 #include <pistache/http.h>
+#include <pistache/router.h>
 #include <fstream>
 #include <filesystem>
 #include <string>
 #include <sstream>
+#include <chrono>
+#include <thread>
+#include <nlohmann/json.hpp> // Include the JSON library
+#include <algorithm>         // Include the algorithm library for sorting
 
 const std::string image_dir = "/home/aahil/edhithaGCS/src/assets/images"; // Replace with your actual directory
 using namespace Pistache;
 using namespace std::filesystem;
+using json = nlohmann::json;
 
-class ImageHandler : public Http::Handler
+class ImageHandler
 {
 public:
-    HTTP_PROTOTYPE(ImageHandler)
+    ImageHandler(Address addr)
+        : httpEndpoint(std::make_shared<Http::Endpoint>(addr)) {}
 
-    void onRequest(const Http::Request &request, Http::ResponseWriter response) override
+    void init(size_t threads = 1)
     {
-        // Extract requested image name from the URL path
-        std::string path = request.resource();
+        auto opts = Http::Endpoint::options()
+                        .threads(static_cast<int>(threads));
+        httpEndpoint->init(opts);
+        setupRoutes();
+    }
 
-        std::string image_name = path.substr(path.rfind("/") + 1);
+    void start()
+    {
+        httpEndpoint->setHandler(router.handler());
+        httpEndpoint->serve();
+    }
 
-        // Check if requested image exists
-        std::string image_path = image_dir + "/" + image_name;
+    void shutdown()
+    {
+        httpEndpoint->shutdown();
+    }
+
+private:
+    void setupRoutes()
+    {
+        using namespace Rest;
+
+        Routes::Get(router, "/all-images", Routes::bind(&ImageHandler::listAllImages, this));
+        Routes::Get(router, "/images/:filename", Routes::bind(&ImageHandler::serveImage, this));
+        Routes::Post(router, "/toggle-connection", Routes::bind(&ImageHandler::toggleConnection, this));
+        Routes::Post(router, "/toggle-geotag", Routes::bind(&ImageHandler::toggleGeotag, this));
+        Routes::Post(router, "/lock-servo", Routes::bind(&ImageHandler::lockServo, this));
+        Routes::Post(router, "/mission-start", Routes::bind(&ImageHandler::missionStart, this));
+        Routes::Post(router, "/arm-drone", Routes::bind(&ImageHandler::armDrone, this));
+        Routes::Post(router, "/disarm-drone", Routes::bind(&ImageHandler::disarmDrone, this));
+        Routes::Post(router, "/guided", Routes::bind(&ImageHandler::guided, this));
+        Routes::Post(router, "/auto", Routes::bind(&ImageHandler::autoMode, this));
+        Routes::Post(router, "/rtl", Routes::bind(&ImageHandler::rtl, this));
+    }
+
+    void listAllImages(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        std::vector<std::string> imageUrls;
+        for (const auto &entry : directory_iterator(image_dir))
+        {
+            if (entry.is_regular_file())
+            {
+                imageUrls.push_back(entry.path().filename().string());
+            }
+        }
+
+        // Sort the image URLs to ensure new images are added at the end
+        std::sort(imageUrls.begin(), imageUrls.end());
+
+        json responseJson = {{"imageUrls", imageUrls}};
+        response.headers().add<Http::Header::ContentType>("application/json");
+        response.headers().add<Http::Header::AccessControlAllowOrigin>("*"); // Add CORS header
+        response.send(Http::Code::Ok, responseJson.dump());
+    }
+
+    void serveImage(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        auto filename = request.param(":filename").as<std::string>();
+        std::string image_path = image_dir + "/" + filename;
+
         if (!exists(image_path))
         {
             response.send(Http::Code::Not_Found, "Image not found");
             return;
         }
 
-        // Read image data from file
         std::ifstream image_file(image_path, std::ios::binary);
         if (!image_file.is_open())
         {
@@ -37,16 +96,16 @@ public:
             return;
         }
 
-        // Get image size and set content type header
         image_file.seekg(0, std::ios::end);
         size_t image_size = image_file.tellg();
         image_file.seekg(0, std::ios::beg);
+
         std::string content_type = "image/";
-        if (path.find(".jpg") != std::string::npos)
+        if (filename.find(".jpg") != std::string::npos)
         {
             content_type += "jpeg";
         }
-        else if (path.find(".png") != std::string::npos)
+        else if (filename.find(".png") != std::string::npos)
         {
             content_type += "png";
         }
@@ -55,35 +114,109 @@ public:
             response.send(Http::Code::Bad_Request, "Unsupported image format");
             return;
         }
-        response.headers().add<Pistache::Http::Header::ContentType>(content_type);
 
-        // Convert image size to string and then to uint64_t for content length
-        std::string content_length_str = std::to_string(image_size);
-        uint64_t content_length = std::stoull(content_length_str);
-        response.headers().add<Pistache::Http::Header::ContentLength>(content_length);
+        response.headers().add<Http::Header::ContentType>(content_type);
+        response.headers().add<Http::Header::ContentLength>(image_size);
+        response.headers().add<Http::Header::AccessControlAllowOrigin>("*"); // Add CORS header
+        response.headers().add<Http::Header::AccessControlAllowMethods>("GET");
 
-        // Add CORS headers
-        response.headers().add<Pistache::Http::Header::AccessControlAllowOrigin>("*");    // Allow requests from any origin
-        response.headers().add<Pistache::Http::Header::AccessControlAllowMethods>("GET"); // Allow only GET requests
-
-        // Send image data as response body
         std::stringstream buffer;
         buffer << image_file.rdbuf();
         response.send(Http::Code::Ok, buffer.str());
     }
+
+    void toggleConnection(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        // Logic for toggling connection
+        std::cout << "Toggle Connection button pressed" << std::endl;
+        response.send(Http::Code::Ok, "Connection toggled");
+    }
+
+    void toggleGeotag(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        // Logic for toggling geotag
+        std::cout << "Toggle Geotag button pressed" << std::endl;
+        response.send(Http::Code::Ok, "Geotag toggled");
+    }
+
+    void lockServo(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        // Logic for locking servo
+        std::cout << "Lock Servo button pressed" << std::endl;
+        response.send(Http::Code::Ok, "Servo locked");
+    }
+
+    void missionStart(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        // Logic for starting mission
+        std::cout << "Mission Start button pressed" << std::endl;
+        response.send(Http::Code::Ok, "Mission started");
+    }
+
+    void armDrone(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        // Logic for arming drone
+        std::cout << "Arm Drone button pressed" << std::endl;
+        response.send(Http::Code::Ok, "Drone armed");
+    }
+
+    void disarmDrone(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        // Logic for disarming drone
+        std::cout << "Disarm Drone button pressed" << std::endl;
+        response.send(Http::Code::Ok, "Drone disarmed");
+    }
+
+    void guided(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        // Logic for setting guided mode
+        std::cout << "Guided button pressed" << std::endl;
+        response.send(Http::Code::Ok, "Drone set to guided mode");
+    }
+
+    void autoMode(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        // Logic for setting auto mode
+        std::cout << "Auto button pressed" << std::endl;
+        response.send(Http::Code::Ok, "Drone set to auto mode");
+    }
+
+    void rtl(const Rest::Request &request, Http::ResponseWriter response)
+    {
+        // Logic for return-to-launch
+        std::cout << "RTL button pressed" << std::endl;
+        response.send(Http::Code::Ok, "Drone set to return-to-launch mode");
+    }
+
+    std::shared_ptr<Http::Endpoint> httpEndpoint;
+    Rest::Router router;
 };
+
+void checkForNewImages()
+{
+    while (true)
+    {
+        // Check for new images in the directory
+        // Your logic to check for new images here
+
+        // Sleep for 2 seconds
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    }
+}
 
 int main()
 {
+    std::thread imageCheckThread(checkForNewImages);
+
     Pistache::Address addr(Pistache::Ipv4::any(), Pistache::Port(9080));
-    auto opts = Pistache::Http::Endpoint::options()
-                    .threads(1);
+    ImageHandler handler(addr);
 
-    Http::Endpoint server(addr);
+    handler.init(1);
+    handler.start();
 
-    server.init(opts);
-    server.setHandler(Http::make_handler<ImageHandler>());
-    server.serve();
+    imageCheckThread.join();
+
+    handler.shutdown();
 
     return 0;
 }

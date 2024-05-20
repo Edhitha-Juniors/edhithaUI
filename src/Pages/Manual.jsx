@@ -14,33 +14,154 @@ const Manual = () => {
         message2: 'Distance from Target - NA'
     });
 
-    const [mainImageUrl, setMainImageUrl] = useState(null); // State to store the URL of the main image
+    const [imageUrls, setImageUrls] = useState([]); // State to store all image URLs
+    const [currentImageUrlIndex, setCurrentImageUrlIndex] = useState(-1); // State to track the index of the current image being displayed
 
-    const handleToggleConnection = () => {
-        setIsConnected(!isConnected);
+    const handleToggleConnection = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/toggle-connection', {
+                method: 'POST'
+            });
+            if (response.ok) {
+                setIsConnected(!isConnected);
+            } else {
+                console.error('Failed to toggle connection');
+            }
+        } catch (error) {
+            console.error('Error toggling connection:', error);
+        }
     };
 
-    const handleToggleGeotag = () => {
-        setIsGeotagging(!isGeotagging);
+    const handleToggleGeotag = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/toggle-geotag', {
+                method: 'POST'
+            });
+            if (response.ok) {
+                setIsGeotagging(!isGeotagging);
+            } else {
+                console.error('Failed to toggle geotag');
+            }
+        } catch (error) {
+            console.error('Error toggling geotag:', error);
+        }
+    };
+
+    const handleLockServo = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/lock-servo', {
+                method: 'POST'
+            });
+            if (!response.ok) {
+                console.error('Failed to lock servo');
+            }
+        } catch (error) {
+            console.error('Error locking servo:', error);
+        }
+    };
+
+    const handleMissionStart = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/mission-start', {
+                method: 'POST'
+            });
+            if (!response.ok) {
+                console.error('Failed to start mission');
+            }
+        } catch (error) {
+            console.error('Error starting mission:', error);
+        }
+    };
+
+    const handleArmDrone = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/arm-drone', {
+                method: 'POST'
+            });
+            if (!response.ok) {
+                console.error('Failed to arm drone');
+            }
+        } catch (error) {
+            console.error('Error arming drone:', error);
+        }
+    };
+
+    const handleDisarmDrone = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/disarm-drone', {
+                method: 'POST'
+            });
+            if (!response.ok) {
+                console.error('Failed to disarm drone');
+            }
+        } catch (error) {
+            console.error('Error disarming drone:', error);
+        }
+    };
+
+    const handleGuided = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/guided', {
+                method: 'POST'
+            });
+            if (!response.ok) {
+                console.error('Failed to set guided mode');
+            }
+        } catch (error) {
+            console.error('Error setting guided mode:', error);
+        }
+    };
+
+    const handleAuto = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/auto', {
+                method: 'POST'
+            });
+            if (!response.ok) {
+                console.error('Failed to set auto mode');
+            }
+        } catch (error) {
+            console.error('Error setting auto mode:', error);
+        }
+    };
+
+    const handleRTL = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/rtl', {
+                method: 'POST'
+            });
+            if (!response.ok) {
+                console.error('Failed to set return-to-launch mode');
+            }
+        } catch (error) {
+            console.error('Error setting return-to-launch mode:', error);
+        }
     };
 
     useEffect(() => {
-        // Fetch main image URL from the backend when the component mounts
-        fetchMainImageUrl();
+        const interval = setInterval(() => {
+            fetchImageUrls();
+        }, 2000); // Poll every 2 seconds
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(interval);
     }, []);
 
-    const fetchMainImageUrl = async () => {
+    const fetchImageUrls = async () => {
         try {
-            // Fetch main image URL from the backend endpoint
-            const response = await fetch('http://127.0.0.1:9080/img/2.jpg');
+            const response = await fetch('http://127.0.0.1:9080/all-images');
             if (response.ok) {
-                // Extract main image URL from the response
-                setMainImageUrl(response.url);
+                const data = await response.json();
+                const formattedUrls = data.imageUrls.map(url => `http://127.0.0.1:9080/images/${url}`);
+                setImageUrls(formattedUrls);
+                if (formattedUrls.length > 0) {
+                    setCurrentImageUrlIndex(formattedUrls.length - 1); // Display the last image
+                }
             } else {
-                console.error('Failed to fetch main image URL');
+                console.error('Failed to fetch image URLs');
             }
         } catch (error) {
-            console.error('Error fetching main image URL:', error);
+            console.error('Error fetching image URLs:', error);
         }
     };
 
@@ -60,14 +181,13 @@ const Manual = () => {
                 <div className="left-container">
                     <div className="image-box">
                         <div className="mainImage">
-                            {mainImageUrl && <img src={mainImageUrl} alt="Main Image" />}
+                            {imageUrls.length > 0 && <img src={imageUrls[currentImageUrlIndex]} alt="Main Image" />}
                         </div>
                         <div className="croppedImage">
                             <p>Cropped Image</p>
                             {/* Content for cropped image */}
                         </div>
                     </div>
-
 
                     <div className="inputsContainer">
                         <input type="text" placeholder="Shape" />
@@ -88,14 +208,14 @@ const Manual = () => {
                             >
                                 {isGeotagging ? 'Stop Geotag' : 'Start Geotag'}
                             </button>
-                            <button className="Control-Button">Lock Servo</button>
+                            <button className="Control-Button" onClick={handleLockServo}>Lock Servo</button>
                             <button className="Control-Button">Back</button>
-                            <button className="Control-Button">Mission Start</button>
-                            <button className="Control-Button">Arm Drone</button>
-                            <button className="Control-Button">Disarm Drone</button>
-                            <button className="Control-Button">Guided</button>
-                            <button className="Control-Button">Auto</button>
-                            <button className="Control-Button">RTL</button>
+                            <button className="Control-Button" onClick={handleMissionStart}>Mission Start</button>
+                            <button className="Control-Button" onClick={handleArmDrone}>Arm Drone</button>
+                            <button className="Control-Button" onClick={handleDisarmDrone}>Disarm Drone</button>
+                            <button className="Control-Button" onClick={handleGuided}>Guided</button>
+                            <button className="Control-Button" onClick={handleAuto}>Auto</button>
+                            <button className="Control-Button" onClick={handleRTL}>RTL</button>
                         </div>
                     </div>
                     <div className="bottom-right-container">
