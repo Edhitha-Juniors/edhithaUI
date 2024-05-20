@@ -1,7 +1,10 @@
 #include <pistache/endpoint.h>
 #include <pistache/http.h>
+#include <glog/logging.h>
 #include <pistache/router.h>
+#include <ctime>
 #include <fstream>
+#include <iostream>
 #include <filesystem>
 #include <string>
 #include <sstream>
@@ -204,8 +207,13 @@ void checkForNewImages()
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+    google::InitGoogleLogging(argv[0]);
+    FLAGS_logtostderr = 1; // Log to stderr for simplicity
+
+    LOG(INFO) << "Starting the image handler server...";
+
     std::thread imageCheckThread(checkForNewImages);
 
     Pistache::Address addr(Pistache::Ipv4::any(), Pistache::Port(9080));
@@ -218,5 +226,8 @@ int main()
 
     handler.shutdown();
 
+    LOG(INFO) << "Server shutdown complete.";
+
+    google::ShutdownGoogleLogging();
     return 0;
 }

@@ -231,12 +231,6 @@ const Manual = () => {
                             </div>
                         </div>
                         <div className="bottom-down-container">
-                            <div className="message-box">
-                                <p>{backendData.message1}</p>
-                            </div>
-                            <div className="message-box">
-                                <p>{backendData.message2}</p>
-                            </div>
                         </div>
                     </div>
                 </div>
