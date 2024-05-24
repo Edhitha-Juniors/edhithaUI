@@ -15,7 +15,8 @@ const Manual = () => {
     });
 
     const [imageUrls, setImageUrls] = useState([]); // State to store all image URLs
-    const [currentImageUrlIndex, setCurrentImageUrlIndex] = useState(-1); // State to track the index of the current image being displayed
+    const [selectedImageUrl, setSelectedImageUrl] = useState(''); // State to store the selected image URL
+    const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 }); // State to store click position for cropping
 
     const handleToggleConnection = async () => {
         try {
@@ -29,112 +30,6 @@ const Manual = () => {
             }
         } catch (error) {
             console.error('Error toggling connection:', error);
-        }
-    };
-
-    const handleToggleGeotag = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/toggle-geotag', {
-                method: 'POST'
-            });
-            if (response.ok) {
-                setIsGeotagging(!isGeotagging);
-            } else {
-                console.error('Failed to toggle geotag');
-            }
-        } catch (error) {
-            console.error('Error toggling geotag:', error);
-        }
-    };
-
-    const handleLockServo = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/lock-servo', {
-                method: 'POST'
-            });
-            if (!response.ok) {
-                console.error('Failed to lock servo');
-            }
-        } catch (error) {
-            console.error('Error locking servo:', error);
-        }
-    };
-
-    const handleMissionStart = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/mission-start', {
-                method: 'POST'
-            });
-            if (!response.ok) {
-                console.error('Failed to start mission');
-            }
-        } catch (error) {
-            console.error('Error starting mission:', error);
-        }
-    };
-
-    const handleArmDrone = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/arm-drone', {
-                method: 'POST'
-            });
-            if (!response.ok) {
-                console.error('Failed to arm drone');
-            }
-        } catch (error) {
-            console.error('Error arming drone:', error);
-        }
-    };
-
-    const handleDisarmDrone = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/disarm-drone', {
-                method: 'POST'
-            });
-            if (!response.ok) {
-                console.error('Failed to disarm drone');
-            }
-        } catch (error) {
-            console.error('Error disarming drone:', error);
-        }
-    };
-
-    const handleGuided = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/guided', {
-                method: 'POST'
-            });
-            if (!response.ok) {
-                console.error('Failed to set guided mode');
-            }
-        } catch (error) {
-            console.error('Error setting guided mode:', error);
-        }
-    };
-
-    const handleAuto = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/auto', {
-                method: 'POST'
-            });
-            if (!response.ok) {
-                console.error('Failed to set auto mode');
-            }
-        } catch (error) {
-            console.error('Error setting auto mode:', error);
-        }
-    };
-
-    const handleRTL = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/rtl', {
-                method: 'POST'
-            });
-            if (!response.ok) {
-                console.error('Failed to set return-to-launch mode');
-            }
-        } catch (error) {
-            console.error('Error setting return-to-launch mode:', error);
         }
     };
 
@@ -155,7 +50,7 @@ const Manual = () => {
                 const formattedUrls = data.imageUrls.map(url => `http://127.0.0.1:9080/images/${url}`);
                 setImageUrls(formattedUrls);
                 if (formattedUrls.length > 0) {
-                    setCurrentImageUrlIndex(formattedUrls.length - 1); // Display the last image
+                    setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]); // Display the last image by default
                 }
             } else {
                 console.error('Failed to fetch image URLs');
@@ -163,6 +58,44 @@ const Manual = () => {
         } catch (error) {
             console.error('Error fetching image URLs:', error);
         }
+    };
+
+    const handleImageClick = (e) => {
+        if (e.shiftKey && selectedImageUrl) {
+            const windowWidth = 1100;
+            const windowHeight = 700;
+
+            const imageWindow = window.open("", "ImageWindow", `width=${windowWidth},height=${windowHeight}`);
+            imageWindow.document.write(`<img src="${selectedImageUrl}" style="width:auto; height:auto; max-width:100%; max-height:100%;">`);
+        }
+    };
+
+    const handleImageCrop = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/crop-image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    imageUrl: selectedImageUrl.split('/').pop(),
+                    clickX: clickPosition.x,
+                    clickY: clickPosition.y
+                })
+            });
+            if (response.ok) {
+                console.log('Cropped image saved successfully');
+                // You can handle success here, like showing a notification
+            } else {
+                console.error('Failed to save cropped image');
+            }
+        } catch (error) {
+            console.error('Error saving cropped image:', error);
+        }
+    };
+
+    const handleImageMouseDown = (e) => {
+        setClickPosition({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
     };
 
     return (
@@ -178,59 +111,45 @@ const Manual = () => {
                 </header>
             </div>
             <div className="content-container">
-                <div className="left-container">
+                <div className="Top-container">
                     <div className="image-box">
+                        <div className="image-grid">
+                            <div className="grid-container">
+                                {imageUrls.map((url, index) => (
+                                    <img
+                                        key={index}
+                                        src={url}
+                                        alt={`Grid Image ${index}`}
+                                        onClick={() => setSelectedImageUrl(url)}
+                                        className={selectedImageUrl === url ? 'selected' : ''}
+                                    />
+                                ))}
+                            </div>
+                        </div>
                         <div className="mainImage">
-                            {imageUrls.length > 0 && <img src={imageUrls[currentImageUrlIndex]} alt="Main Image" />}
+                            {selectedImageUrl && (
+                                <img
+                                    src={selectedImageUrl}
+                                    alt="Main Image"
+                                    onClick={handleImageClick}
+                                    onMouseDown={handleImageMouseDown}
+                                />
+                            )}
                         </div>
                         <div className="croppedImage">
-                            <p>Cropped Image</p>
+                            <div className="croppedImageDisplay">
+                                {/* Add your cropped image here */}
+                                <img src="your_image_url" alt="Cropped Image" />
+                            </div>
                             {/* Content for cropped image */}
-                        </div>
-                    </div>
-
-                    <div className="inputsContainer">
-                        <input type="text" placeholder="Shape" />
-                        <input type="text" placeholder="Colour" />
-                        <input type="text" placeholder="Alphanumeric" />
-                        <input type="text" placeholder="Alphanumeric Colour" />
-                        <input type="text" placeholder="Coordinates (to be rendered)" value={backendData.coordinates} readOnly />
-                        <button className="saveButton">Store</button>
-                    </div>
-                </div>
-
-                <div className="right-container">
-                    <div className="top-right-container">
-                        <div className="button-grid">
-                            <button
-                                className={`Control-Button ${isGeotagging ? 'red' : ''} ${isGeotagging ? 'Geotag_Button' : ''}`}
-                                onClick={handleToggleGeotag}
-                            >
-                                {isGeotagging ? 'Stop Geotag' : 'Start Geotag'}
-                            </button>
-                            <button className="Control-Button" onClick={handleLockServo}>Lock Servo</button>
-                            <button className="Control-Button">Back</button>
-                            <button className="Control-Button" onClick={handleMissionStart}>Mission Start</button>
-                            <button className="Control-Button" onClick={handleArmDrone}>Arm Drone</button>
-                            <button className="Control-Button" onClick={handleDisarmDrone}>Disarm Drone</button>
-                            <button className="Control-Button" onClick={handleGuided}>Guided</button>
-                            <button className="Control-Button" onClick={handleAuto}>Auto</button>
-                            <button className="Control-Button" onClick={handleRTL}>RTL</button>
-                        </div>
-                    </div>
-                    <div className="bottom-right-container">
-                        <div className="bottom-up-container">
-                            <div className="data-box">
-                                <input type="text" placeholder="Voltage" value={backendData.voltage} readOnly />
+                            <div className="inputsContainer">
+                                <input className="inputBox" type="text" placeholder="Shape" />
+                                <input className="inputBox" type="text" placeholder="Colour" />
+                                <input className="inputBox" type="text" placeholder="Alphanumeric" />
+                                <input className="inputBox" type="text" placeholder="Alphanumeric Colour" />
+                                <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
+                                <button className="saveButton" onClick={handleImageCrop}>Store</button>
                             </div>
-                            <div className="data-box">
-                                <input type="text" placeholder="Current" value={backendData.current} readOnly />
-                            </div>
-                            <div className="data-box">
-                                <input type="text" placeholder="Temperature" value={backendData.temperature} readOnly />
-                            </div>
-                        </div>
-                        <div className="bottom-down-container">
                         </div>
                     </div>
                 </div>

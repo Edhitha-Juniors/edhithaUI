@@ -1,22 +1,16 @@
 #include <pistache/endpoint.h>
 #include <pistache/http.h>
-#include <glog/logging.h>
 #include <pistache/router.h>
-#include <ctime>
-#include <fstream>
 #include <iostream>
+#include <fstream>
+#include <opencv2/opencv.hpp>
+#include <nlohmann/json.hpp>
 #include <filesystem>
-#include <string>
-#include <sstream>
-#include <chrono>
-#include <thread>
-#include <nlohmann/json.hpp> // Include the JSON library
-#include <algorithm>         // Include the algorithm library for sorting
 
-const std::string image_dir = "/home/aahil/edhithaGCS/src/assets/images"; // Replace with your actual directory
 using namespace Pistache;
-using namespace std::filesystem;
 using json = nlohmann::json;
+
+const std::string image_dir = "/home/aahil/edhithaGCS/src/assets/DispImages"; // Replace with your image directory
 
 class ImageHandler
 {
@@ -47,37 +41,23 @@ private:
     void setupRoutes()
     {
         using namespace Rest;
-
         Routes::Get(router, "/all-images", Routes::bind(&ImageHandler::listAllImages, this));
         Routes::Get(router, "/images/:filename", Routes::bind(&ImageHandler::serveImage, this));
-        Routes::Post(router, "/toggle-connection", Routes::bind(&ImageHandler::toggleConnection, this));
-        Routes::Post(router, "/toggle-geotag", Routes::bind(&ImageHandler::toggleGeotag, this));
-        Routes::Post(router, "/lock-servo", Routes::bind(&ImageHandler::lockServo, this));
-        Routes::Post(router, "/mission-start", Routes::bind(&ImageHandler::missionStart, this));
-        Routes::Post(router, "/arm-drone", Routes::bind(&ImageHandler::armDrone, this));
-        Routes::Post(router, "/disarm-drone", Routes::bind(&ImageHandler::disarmDrone, this));
-        Routes::Post(router, "/guided", Routes::bind(&ImageHandler::guided, this));
-        Routes::Post(router, "/auto", Routes::bind(&ImageHandler::autoMode, this));
-        Routes::Post(router, "/rtl", Routes::bind(&ImageHandler::rtl, this));
+        Routes::Post(router, "/crop-image", Routes::bind(&ImageHandler::cropImage, this));
     }
 
     void listAllImages(const Rest::Request &request, Http::ResponseWriter response)
     {
         std::vector<std::string> imageUrls;
-        for (const auto &entry : directory_iterator(image_dir))
+        for (const auto &entry : std::filesystem::directory_iterator(image_dir))
         {
             if (entry.is_regular_file())
             {
                 imageUrls.push_back(entry.path().filename().string());
             }
         }
-
-        // Sort the image URLs to ensure new images are added at the end
-        std::sort(imageUrls.begin(), imageUrls.end());
-
         json responseJson = {{"imageUrls", imageUrls}};
         response.headers().add<Http::Header::ContentType>("application/json");
-        response.headers().add<Http::Header::AccessControlAllowOrigin>("*"); // Add CORS header
         response.send(Http::Code::Ok, responseJson.dump());
     }
 
@@ -86,7 +66,7 @@ private:
         auto filename = request.param(":filename").as<std::string>();
         std::string image_path = image_dir + "/" + filename;
 
-        if (!exists(image_path))
+        if (!std::filesystem::exists(image_path))
         {
             response.send(Http::Code::Not_Found, "Image not found");
             return;
@@ -128,106 +108,54 @@ private:
         response.send(Http::Code::Ok, buffer.str());
     }
 
-    void toggleConnection(const Rest::Request &request, Http::ResponseWriter response)
+    void cropImage(const Rest::Request &request, Http::ResponseWriter response)
     {
-        // Logic for toggling connection
-        std::cout << "Toggle Connection button pressed" << std::endl;
-        response.send(Http::Code::Ok, "Connection toggled");
-    }
+        auto data = json::parse(request.body());
+        std::string imageUrl = data["imageUrl"];
+        int clickX = data["clickX"];
+        int clickY = data["clickY"];
 
-    void toggleGeotag(const Rest::Request &request, Http::ResponseWriter response)
-    {
-        // Logic for toggling geotag
-        std::cout << "Toggle Geotag button pressed" << std::endl;
-        response.send(Http::Code::Ok, "Geotag toggled");
-    }
+        std::string imagePath = image_dir + "/" + imageUrl;
 
-    void lockServo(const Rest::Request &request, Http::ResponseWriter response)
-    {
-        // Logic for locking servo
-        std::cout << "Lock Servo button pressed" << std::endl;
-        response.send(Http::Code::Ok, "Servo locked");
-    }
+        cv::Mat image = cv::imread(imagePath, cv::IMREAD_UNCHANGED);
+        if (image.empty())
+        {
+            response.send(Http::Code::Internal_Server_Error, "Failed to open image");
+            return;
+        }
 
-    void missionStart(const Rest::Request &request, Http::ResponseWriter response)
-    {
-        // Logic for starting mission
-        std::cout << "Mission Start button pressed" << std::endl;
-        response.send(Http::Code::Ok, "Mission started");
-    }
+        int cropWidth = 200;
+        int cropHeight = 200;
+        int startX = std::max(0, clickX - cropWidth / 2);
+        int startY = std::max(0, clickY - cropHeight / 2);
+        int endX = std::min(image.cols, startX + cropWidth);
+        int endY = std::min(image.rows, startY + cropHeight);
 
-    void armDrone(const Rest::Request &request, Http::ResponseWriter response)
-    {
-        // Logic for arming drone
-        std::cout << "Arm Drone button pressed" << std::endl;
-        response.send(Http::Code::Ok, "Drone armed");
-    }
+        cv::Rect cropRegion(startX, startY, endX - startX, endY - startY);
+        cv::Mat croppedImage = image(cropRegion);
 
-    void disarmDrone(const Rest::Request &request, Http::ResponseWriter response)
-    {
-        // Logic for disarming drone
-        std::cout << "Disarm Drone button pressed" << std::endl;
-        response.send(Http::Code::Ok, "Drone disarmed");
-    }
+        std::string croppedImagePath = "/home/aahil/edhithaGCS/src/assets/CroppedImages" + imageUrl.substr(0, imageUrl.find_last_of(".")) + "_cropped.png";
+        if (!cv::imwrite(croppedImagePath, croppedImage))
+        {
+            response.send(Http::Code::Internal_Server_Error, "Failed to save cropped image");
+            return;
+        }
 
-    void guided(const Rest::Request &request, Http::ResponseWriter response)
-    {
-        // Logic for setting guided mode
-        std::cout << "Guided button pressed" << std::endl;
-        response.send(Http::Code::Ok, "Drone set to guided mode");
-    }
-
-    void autoMode(const Rest::Request &request, Http::ResponseWriter response)
-    {
-        // Logic for setting auto mode
-        std::cout << "Auto button pressed" << std::endl;
-        response.send(Http::Code::Ok, "Drone set to auto mode");
-    }
-
-    void rtl(const Rest::Request &request, Http::ResponseWriter response)
-    {
-        // Logic for return-to-launch
-        std::cout << "RTL button pressed" << std::endl;
-        response.send(Http::Code::Ok, "Drone set to return-to-launch mode");
+        response.send(Http::Code::Ok, "Cropped image saved successfully");
     }
 
     std::shared_ptr<Http::Endpoint> httpEndpoint;
     Rest::Router router;
 };
 
-void checkForNewImages()
+int main()
 {
-    while (true)
-    {
-        // Check for new images in the directory
-        // Your logic to check for new images here
+    Address addr(Ipv4::any(), Port(9080));
+    ImageHandler imageHandler(addr);
 
-        // Sleep for 2 seconds
-        std::this_thread::sleep_for(std::chrono::seconds(2));
-    }
-}
+    imageHandler.init();
+    imageHandler.start();
+    imageHandler.shutdown();
 
-int main(int argc, char *argv[])
-{
-    google::InitGoogleLogging(argv[0]);
-    FLAGS_logtostderr = 1; // Log to stderr for simplicity
-
-    LOG(INFO) << "Starting the image handler server...";
-
-    std::thread imageCheckThread(checkForNewImages);
-
-    Pistache::Address addr(Pistache::Ipv4::any(), Pistache::Port(9080));
-    ImageHandler handler(addr);
-
-    handler.init(1);
-    handler.start();
-
-    imageCheckThread.join();
-
-    handler.shutdown();
-
-    LOG(INFO) << "Server shutdown complete.";
-
-    google::ShutdownGoogleLogging();
     return 0;
 }
