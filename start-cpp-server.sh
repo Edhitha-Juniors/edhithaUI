@@ -15,7 +15,7 @@ trap cleanup SIGINT
 cd /home/aahil/edhithaGCS/Backend/Manual
 
 # Compile the C++ server
-g++ -o server main.cpp -lglog -lpistache -lstdc++fs
+g++ main.cpp -o server -lpistache -lglog `pkg-config --cflags --libs opencv4`
 
 # Run the C++ server
 ./server

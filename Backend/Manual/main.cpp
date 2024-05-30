@@ -10,18 +10,16 @@
 using namespace Pistache;
 using json = nlohmann::json;
 
-const std::string image_dir = "/home/aahil/edhithaGCS/src/assets/DispImages"; // Replace with your image directory
+const std::string image_dir = "/home/aahil/edhithaGCS/src/assets/DispImages";
 
 class ImageHandler
 {
 public:
-    ImageHandler(Address addr)
-        : httpEndpoint(std::make_shared<Http::Endpoint>(addr)) {}
+    ImageHandler(Address addr) : httpEndpoint(std::make_shared<Http::Endpoint>(addr)) {}
 
     void init(size_t threads = 1)
     {
-        auto opts = Http::Endpoint::options()
-                        .threads(static_cast<int>(threads));
+        auto opts = Http::Endpoint::options().threads(static_cast<int>(threads));
         httpEndpoint->init(opts);
         setupRoutes();
     }
@@ -37,13 +35,30 @@ public:
         httpEndpoint->shutdown();
     }
 
+    void handleOptions(const Rest::Request &, Http::ResponseWriter response)
+    {
+        response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
+        response.headers().add<Http::Header::AccessControlAllowMethods>("GET, POST, OPTIONS");
+        response.headers().add<Http::Header::AccessControlAllowHeaders>("Content-Type");
+        response.send(Http::Code::Ok);
+    }
+
 private:
     void setupRoutes()
     {
         using namespace Rest;
+
+        // Route to handle preflight requests
+        Routes::Options(router, "/crop-image-preview", Routes::bind(&ImageHandler::handleOptions, this));
+
+        // Route to list all images
         Routes::Get(router, "/all-images", Routes::bind(&ImageHandler::listAllImages, this));
+
+        // Route to serve individual images
         Routes::Get(router, "/images/:filename", Routes::bind(&ImageHandler::serveImage, this));
-        Routes::Post(router, "/crop-image", Routes::bind(&ImageHandler::cropImage, this));
+
+        // Route to handle image cropping preview
+        Routes::Post(router, "/crop-image-preview", Routes::bind(&ImageHandler::cropImagePreview, this));
     }
 
     void listAllImages(const Rest::Request &request, Http::ResponseWriter response)
@@ -58,6 +73,8 @@ private:
         }
         json responseJson = {{"imageUrls", imageUrls}};
         response.headers().add<Http::Header::ContentType>("application/json");
+        response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
+        response.headers().add<Http::Header::AccessControlAllowMethods>("GET");
         response.send(Http::Code::Ok, responseJson.dump());
     }
 
@@ -100,7 +117,7 @@ private:
 
         response.headers().add<Http::Header::ContentType>(content_type);
         response.headers().add<Http::Header::ContentLength>(image_size);
-        response.headers().add<Http::Header::AccessControlAllowOrigin>("*"); // Add CORS header
+        response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
         response.headers().add<Http::Header::AccessControlAllowMethods>("GET");
 
         std::stringstream buffer;
@@ -108,7 +125,7 @@ private:
         response.send(Http::Code::Ok, buffer.str());
     }
 
-    void cropImage(const Rest::Request &request, Http::ResponseWriter response)
+    void cropImagePreview(const Rest::Request &request, Http::ResponseWriter response)
     {
         auto data = json::parse(request.body());
         std::string imageUrl = data["imageUrl"];
@@ -134,14 +151,12 @@ private:
         cv::Rect cropRegion(startX, startY, endX - startX, endY - startY);
         cv::Mat croppedImage = image(cropRegion);
 
-        std::string croppedImagePath = "/home/aahil/edhithaGCS/src/assets/CroppedImages" + imageUrl.substr(0, imageUrl.find_last_of(".")) + "_cropped.png";
-        if (!cv::imwrite(croppedImagePath, croppedImage))
-        {
-            response.send(Http::Code::Internal_Server_Error, "Failed to save cropped image");
-            return;
-        }
+        std::vector<uchar> buffer;
+        cv::imencode(".png", croppedImage, buffer); // Encode cropped image to PNG format
 
-        response.send(Http::Code::Ok, "Cropped image saved successfully");
+        response.headers().add<Http::Header::ContentType>("image/png");
+        response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
+        response.send(Http::Code::Ok, reinterpret_cast<const char *>(buffer.data()), Http::Mime::MediaType::fromString("image/png"));
     }
 
     std::shared_ptr<Http::Endpoint> httpEndpoint;

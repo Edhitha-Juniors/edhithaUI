@@ -5,24 +5,21 @@ import logo from '../assets/images/logo.png';
 
 const Manual = () => {
     const [isConnected, setIsConnected] = useState(false);
-    const [isGeotagging, setIsGeotagging] = useState(false);
+    const [croppedImageUrl, setCroppedImageUrl] = useState('');
+    const [imageUrls, setImageUrls] = useState([]);
+    const [selectedImageUrl, setSelectedImageUrl] = useState('');
     const [backendData, setBackendData] = useState({
         voltage: '',
         current: '',
         temperature: '',
         message1: 'NO MESSAGE',
-        message2: 'Distance from Target - NA'
+        message2: 'Distance from Target - NA',
+        coordinates: '' // Add coordinates property to backendData
     });
-
-    const [imageUrls, setImageUrls] = useState([]); // State to store all image URLs
-    const [selectedImageUrl, setSelectedImageUrl] = useState(''); // State to store the selected image URL
-    const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 }); // State to store click position for cropping
 
     const handleToggleConnection = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:9080/toggle-connection', {
-                method: 'POST'
-            });
+            const response = await fetch('http://127.0.0.1:9080/toggle-connection', { method: 'POST' });
             if (response.ok) {
                 setIsConnected(!isConnected);
             } else {
@@ -38,7 +35,6 @@ const Manual = () => {
             fetchImageUrls();
         }, 2000); // Poll every 2 seconds
 
-        // Cleanup interval on component unmount
         return () => clearInterval(interval);
     }, []);
 
@@ -50,7 +46,7 @@ const Manual = () => {
                 const formattedUrls = data.imageUrls.map(url => `http://127.0.0.1:9080/images/${url}`);
                 setImageUrls(formattedUrls);
                 if (formattedUrls.length > 0) {
-                    setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]); // Display the last image by default
+                    setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]);
                 }
             } else {
                 console.error('Failed to fetch image URLs');
@@ -60,42 +56,28 @@ const Manual = () => {
         }
     };
 
-    const handleImageClick = (e) => {
-        if (e.shiftKey && selectedImageUrl) {
-            const windowWidth = 1100;
-            const windowHeight = 700;
-
-            const imageWindow = window.open("", "ImageWindow", `width=${windowWidth},height=${windowHeight}`);
-            imageWindow.document.write(`<img src="${selectedImageUrl}" style="width:auto; height:auto; max-width:100%; max-height:100%;">`);
-        }
-    };
-
-    const handleImageCrop = async () => {
+    const handleImageClick = async (e) => {
+        const clickX = e.nativeEvent.offsetX;
+        const clickY = e.nativeEvent.offsetY;
         try {
-            const response = await fetch('http://127.0.0.1:9080/crop-image', {
+            const response = await fetch('http://127.0.0.1:9080/crop-image-preview', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     imageUrl: selectedImageUrl.split('/').pop(),
-                    clickX: clickPosition.x,
-                    clickY: clickPosition.y
+                    clickX,
+                    clickY
                 })
             });
             if (response.ok) {
-                console.log('Cropped image saved successfully');
-                // You can handle success here, like showing a notification
+                const data = await response.json();
+                setCroppedImageUrl(`http://127.0.0.1:9080/images/${data.croppedImageUrl}`);
             } else {
-                console.error('Failed to save cropped image');
+                console.error('Failed to preview cropped image');
             }
         } catch (error) {
-            console.error('Error saving cropped image:', error);
+            console.error('Error previewing cropped image:', error);
         }
-    };
-
-    const handleImageMouseDown = (e) => {
-        setClickPosition({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
     };
 
     return (
@@ -132,23 +114,21 @@ const Manual = () => {
                                     src={selectedImageUrl}
                                     alt="Main Image"
                                     onClick={handleImageClick}
-                                    onMouseDown={handleImageMouseDown}
                                 />
                             )}
                         </div>
                         <div className="croppedImage">
                             <div className="croppedImageDisplay">
-                                {/* Add your cropped image here */}
-                                <img src="your_image_url" alt="Cropped Image" />
+                                {croppedImageUrl && (
+                                    <img src={croppedImageUrl} alt="Cropped Image" />
+                                )}
                             </div>
-                            {/* Content for cropped image */}
                             <div className="inputsContainer">
                                 <input className="inputBox" type="text" placeholder="Shape" />
                                 <input className="inputBox" type="text" placeholder="Colour" />
                                 <input className="inputBox" type="text" placeholder="Alphanumeric" />
                                 <input className="inputBox" type="text" placeholder="Alphanumeric Colour" />
                                 <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
-                                <button className="saveButton" onClick={handleImageCrop}>Store</button>
                             </div>
                         </div>
                     </div>
