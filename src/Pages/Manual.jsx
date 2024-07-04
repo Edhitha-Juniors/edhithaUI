@@ -38,6 +38,7 @@ const Manual = () => {
         return () => clearInterval(interval);
     }, []);
 
+    // Fetches images constantly
     const fetchImageUrls = async () => {
         try {
             const response = await fetch('http://127.0.0.1:9080/all-images');
@@ -56,27 +57,25 @@ const Manual = () => {
         }
     };
 
-    const handleImageClick = async (e) => {
-        const clickX = e.nativeEvent.offsetX;
-        const clickY = e.nativeEvent.offsetY;
-        try {
-            const response = await fetch('http://127.0.0.1:9080/crop-image-preview', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    imageUrl: selectedImageUrl.split('/').pop(),
-                    clickX,
-                    clickY
-                })
-            });
-            if (response.ok) {
-                const data = await response.json();
-                setCroppedImageUrl(`http://127.0.0.1:9080/images/${data.croppedImageUrl}`);
-            } else {
-                console.error('Failed to preview cropped image');
+    // Shift+Click: Open modal with selected image
+    const openImage = (event) => {
+        if (event.shiftKey && selectedImageUrl) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            if (modal && modalImg) {
+                modal.style.display = 'block';
+                modalImg.src = selectedImageUrl;
+                modalImg.style.maxWidth = '1100px'; // Adjust max width as needed
+                modalImg.style.maxHeight = '700px'; // Adjust max height as needed
             }
-        } catch (error) {
-            console.error('Error previewing cropped image:', error);
+        }
+    };
+
+    // Close modal
+    const closeModal = () => {
+        const modal = document.getElementById('image-modal');
+        if (modal) {
+            modal.style.display = 'none';
         }
     };
 
@@ -113,7 +112,7 @@ const Manual = () => {
                                 <img
                                     src={selectedImageUrl}
                                     alt="Main Image"
-                                    onClick={handleImageClick}
+                                    onClick={openImage}
                                 />
                             )}
                         </div>
@@ -133,6 +132,11 @@ const Manual = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            {/* Modal for displaying selected image */}
+            <div id="image-modal" className="image-modal" onClick={closeModal}>
+                <span className="close-modal" onClick={closeModal}>&times;</span>
+                <img id="modal-image" src={selectedImageUrl} alt="Enlarged Image" className="modal-content" />
             </div>
         </div>
     );

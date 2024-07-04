@@ -4,13 +4,15 @@
 #include <iostream>
 #include <fstream>
 #include <opencv2/opencv.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 #include <nlohmann/json.hpp>
 #include <filesystem>
 
 using namespace Pistache;
 using json = nlohmann::json;
 
-const std::string image_dir = "/home/aahil/edhithaGCS/src/assets/DispImages";
+const std::string image_dir = "/Users/aahil/Downloads/edhithaGCS/src/assets/DispImages";
 
 class ImageHandler
 {
@@ -129,8 +131,7 @@ private:
     {
         auto data = json::parse(request.body());
         std::string imageUrl = data["imageUrl"];
-        int clickX = data["clickX"];
-        int clickY = data["clickY"];
+        bool interactive = data["interactive"];
 
         std::string imagePath = image_dir + "/" + imageUrl;
 
@@ -141,22 +142,28 @@ private:
             return;
         }
 
-        int cropWidth = 200;
-        int cropHeight = 200;
-        int startX = std::max(0, clickX - cropWidth / 2);
-        int startY = std::max(0, clickY - cropHeight / 2);
-        int endX = std::min(image.cols, startX + cropWidth);
-        int endY = std::min(image.rows, startY + cropHeight);
+        if (interactive)
+        {
+            cv::namedWindow("image", cv::WINDOW_AUTOSIZE);
+            cv::Rect roi = cv::selectROI("image", image);
+            if (roi.width == 0 || roi.height == 0)
+            {
+                response.send(Http::Code::Bad_Request, "No ROI selected");
+                return;
+            }
+            cv::Mat croppedImage = image(roi);
 
-        cv::Rect cropRegion(startX, startY, endX - startX, endY - startY);
-        cv::Mat croppedImage = image(cropRegion);
+            std::vector<uchar> buffer;
+            cv::imencode(".png", croppedImage, buffer); // Encode cropped image to PNG format
 
-        std::vector<uchar> buffer;
-        cv::imencode(".png", croppedImage, buffer); // Encode cropped image to PNG format
-
-        response.headers().add<Http::Header::ContentType>("image/png");
-        response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
-        response.send(Http::Code::Ok, reinterpret_cast<const char *>(buffer.data()), Http::Mime::MediaType::fromString("image/png"));
+            response.headers().add<Http::Header::ContentType>("image/png");
+            response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
+            response.send(Http::Code::Ok, reinterpret_cast<const char *>(buffer.data()), Http::Mime::MediaType::fromString("image/png"));
+        }
+        else
+        {
+            response.send(Http::Code::Bad_Request, "Non-interactive cropping is not supported");
+        }
     }
 
     std::shared_ptr<Http::Endpoint> httpEndpoint;
