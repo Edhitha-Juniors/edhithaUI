@@ -79,6 +79,36 @@ const Manual = () => {
         }
     };
 
+    const cropClick = async (event) => {
+        const modalImg = document.getElementById('modal-image');
+        if (modalImg) {
+            const rect = modalImg.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            const coordinates = `${x},${y}`; // Example format; adjust as per backend requirements
+
+            // Send coordinates and selected image URL to backend
+            try {
+                const response = await fetch('http://127.0.0.1:9080/crop-image', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ imageUrl: selectedImageUrl, coordinates }),
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setCroppedImageUrl(data.croppedImageUrl); // Update cropped image URL if needed
+                    setBackendData((prevData) => ({ ...prevData, coordinates })); // Update coordinates in backendData
+                } else {
+                    console.error('Failed to crop image on the backend');
+                }
+            } catch (error) {
+                console.error('Error cropping image:', error);
+            }
+        }
+    };
+
     return (
         <div className="manual-container">
             <div className="header-container">
@@ -136,7 +166,16 @@ const Manual = () => {
             {/* Modal for displaying selected image */}
             <div id="image-modal" className="image-modal" onClick={closeModal}>
                 <span className="close-modal" onClick={closeModal}>&times;</span>
-                <img id="modal-image" src={selectedImageUrl} alt="Enlarged Image" className="modal-content" />
+                <img
+                    id="modal-image"
+                    src={selectedImageUrl}
+                    alt="Enlarged Image"
+                    className="modal-content"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        cropClick(e);
+                    }}
+                />
             </div>
         </div>
     );

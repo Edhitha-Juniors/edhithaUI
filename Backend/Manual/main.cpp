@@ -13,6 +13,7 @@ using namespace Pistache;
 using json = nlohmann::json;
 
 const std::string image_dir = "/Users/aahil/Downloads/edhithaGCS/src/assets/DispImages";
+const std::string cropped_image_dir = "/Users/aahil/Downloads/edhithaGCS/src/assets/CroppedImages";
 
 class ImageHandler
 {
@@ -50,8 +51,7 @@ private:
     {
         using namespace Rest;
 
-        // Route to handle preflight requests
-        Routes::Options(router, "/crop-image-preview", Routes::bind(&ImageHandler::handleOptions, this));
+        Routes::Options(router, "/crop-image", Routes::bind(&ImageHandler::handleOptions, this));
 
         // Route to list all images
         Routes::Get(router, "/all-images", Routes::bind(&ImageHandler::listAllImages, this));
@@ -59,8 +59,15 @@ private:
         // Route to serve individual images
         Routes::Get(router, "/images/:filename", Routes::bind(&ImageHandler::serveImage, this));
 
-        // Route to handle image cropping preview
-        Routes::Post(router, "/crop-image-preview", Routes::bind(&ImageHandler::cropImagePreview, this));
+        // Route to handle image cropping
+        Routes::Post(router, "/crop-image", Routes::bind(&ImageHandler::cropImage, this));
+    }
+
+    void addCorsHeaders(Http::ResponseWriter &response)
+    {
+        response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
+        response.headers().add<Http::Header::AccessControlAllowMethods>("GET, POST, OPTIONS");
+        response.headers().add<Http::Header::AccessControlAllowHeaders>("Content-Type");
     }
 
     void listAllImages(const Rest::Request &request, Http::ResponseWriter response)
@@ -75,8 +82,7 @@ private:
         }
         json responseJson = {{"imageUrls", imageUrls}};
         response.headers().add<Http::Header::ContentType>("application/json");
-        response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
-        response.headers().add<Http::Header::AccessControlAllowMethods>("GET");
+        addCorsHeaders(response);
         response.send(Http::Code::Ok, responseJson.dump());
     }
 
@@ -119,50 +125,72 @@ private:
 
         response.headers().add<Http::Header::ContentType>(content_type);
         response.headers().add<Http::Header::ContentLength>(image_size);
-        response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
-        response.headers().add<Http::Header::AccessControlAllowMethods>("GET");
+        addCorsHeaders(response);
 
         std::stringstream buffer;
         buffer << image_file.rdbuf();
         response.send(Http::Code::Ok, buffer.str());
     }
 
-    void cropImagePreview(const Rest::Request &request, Http::ResponseWriter response)
+    void cropImage(const Rest::Request &request, Http::ResponseWriter response)
     {
-        auto data = json::parse(request.body());
-        std::string imageUrl = data["imageUrl"];
-        bool interactive = data["interactive"];
-
-        std::string imagePath = image_dir + "/" + imageUrl;
-
-        cv::Mat image = cv::imread(imagePath, cv::IMREAD_UNCHANGED);
-        if (image.empty())
+        try
         {
-            response.send(Http::Code::Internal_Server_Error, "Failed to open image");
-            return;
-        }
+            auto body = request.body();
+            auto jsonBody = json::parse(body);
 
-        if (interactive)
-        {
-            cv::namedWindow("image", cv::WINDOW_AUTOSIZE);
-            cv::Rect roi = cv::selectROI("image", image);
-            if (roi.width == 0 || roi.height == 0)
+            if (jsonBody.contains("imageUrl") && jsonBody.contains("coordinates"))
             {
-                response.send(Http::Code::Bad_Request, "No ROI selected");
-                return;
+                std::string imageUrl = jsonBody["imageUrl"];
+                std::string coordinates = jsonBody["coordinates"];
+
+                std::cout << "Received image URL: " << imageUrl << std::endl;
+                std::cout << "Received coordinates: " << coordinates << std::endl;
+
+                // Parse coordinates
+                int x, y;
+                sscanf(coordinates.c_str(), "%d,%d", &x, &y);
+
+                // Load the image using OpenCV
+                std::string image_path = image_dir + "/" + std::filesystem::path(imageUrl).filename().string();
+                cv::Mat image = cv::imread(image_path);
+                if (image.empty())
+                {
+                    response.send(Http::Code::Internal_Server_Error, "Failed to load image");
+                    return;
+                }
+
+                // Calculate crop rectangle
+                int crop_size = 200;
+                int half_crop_size = crop_size / 2;
+                int x_start = std::max(0, x - half_crop_size);
+                int y_start = std::max(0, y - half_crop_size);
+                int x_end = std::min(image.cols, x + half_crop_size);
+                int y_end = std::min(image.rows, y + half_crop_size);
+
+                cv::Rect crop_rect(x_start, y_start, x_end - x_start, y_end - y_start);
+
+                // Crop the image
+                cv::Mat cropped_image = image(crop_rect);
+
+                // Save the cropped image
+                std::string cropped_image_filename = "cropped_" + std::filesystem::path(imageUrl).filename().string();
+                std::string cropped_image_path = cropped_image_dir + "/" + cropped_image_filename;
+                cv::imwrite(cropped_image_path, cropped_image);
+
+                json responseJson = {{"status", "success"}, {"message", "Image cropped successfully"}, {"croppedImageUrl", "/images/" + cropped_image_filename}};
+                response.headers().add<Http::Header::ContentType>("application/json");
+                addCorsHeaders(response);
+                response.send(Http::Code::Ok, responseJson.dump());
             }
-            cv::Mat croppedImage = image(roi);
-
-            std::vector<uchar> buffer;
-            cv::imencode(".png", croppedImage, buffer); // Encode cropped image to PNG format
-
-            response.headers().add<Http::Header::ContentType>("image/png");
-            response.headers().add<Http::Header::AccessControlAllowOrigin>("*");
-            response.send(Http::Code::Ok, reinterpret_cast<const char *>(buffer.data()), Http::Mime::MediaType::fromString("image/png"));
+            else
+            {
+                response.send(Http::Code::Bad_Request, "Invalid request payload");
+            }
         }
-        else
+        catch (const std::exception &e)
         {
-            response.send(Http::Code::Bad_Request, "Non-interactive cropping is not supported");
+            response.send(Http::Code::Internal_Server_Error, "An error occurred");
         }
     }
 
