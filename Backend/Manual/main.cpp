@@ -8,6 +8,7 @@
 #include <opencv2/imgproc.hpp>
 #include <nlohmann/json.hpp>
 #include <filesystem>
+#include <opencv2/core/types.hpp>
 
 using namespace Pistache;
 using json = nlohmann::json;
@@ -161,17 +162,17 @@ private:
                 }
 
                 // Calculate crop rectangle
-                int crop_size = 200;
-                int half_crop_size = crop_size / 2;
-                int x_start = std::max(0, x - half_crop_size);
-                int y_start = std::max(0, y - half_crop_size);
-                int x_end = std::min(image.cols, x + half_crop_size);
-                int y_end = std::min(image.rows, y + half_crop_size);
+                // int crop_size = 200;
+                // int half_crop_size = crop_size / 2;
+                // int x_start = std::max(0, x - half_crop_size);
+                // int y_start = std::max(0, y - half_crop_size);
+                // int x_end = std::min(image.cols, x + half_crop_size);
+                // int y_end = std::min(image.rows, y + half_crop_size);
 
-                cv::Rect crop_rect(x_start, y_start, x_end - x_start, y_end - y_start);
+                // cv::Rect crop_rect(x_start, y_start, x_end - x_start, y_end - y_start);
 
                 // Crop the image
-                cv::Mat cropped_image = image(crop_rect);
+                cv::Mat cropped_image = image(cv::Range(y - 100, y + 100), cv::Range(x - 100, x + 100));
 
                 // Save the cropped image
                 std::string cropped_image_filename = "cropped_" + std::filesystem::path(imageUrl).filename().string();

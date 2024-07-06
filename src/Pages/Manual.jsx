@@ -14,7 +14,7 @@ const Manual = () => {
         temperature: '',
         message1: 'NO MESSAGE',
         message2: 'Distance from Target - NA',
-        coordinates: '' // Add coordinates property to backendData
+        coordinates: ''
     });
 
     const handleToggleConnection = async () => {
@@ -38,7 +38,6 @@ const Manual = () => {
         return () => clearInterval(interval);
     }, []);
 
-    // Fetches images constantly
     const fetchImageUrls = async () => {
         try {
             const response = await fetch('http://127.0.0.1:9080/all-images');
@@ -57,7 +56,6 @@ const Manual = () => {
         }
     };
 
-    // Shift+Click: Open modal with selected image
     const openImage = (event) => {
         if (event.shiftKey && selectedImageUrl) {
             const modal = document.getElementById('image-modal');
@@ -65,13 +63,12 @@ const Manual = () => {
             if (modal && modalImg) {
                 modal.style.display = 'block';
                 modalImg.src = selectedImageUrl;
-                modalImg.style.maxWidth = '1100px'; // Adjust max width as needed
-                modalImg.style.maxHeight = '700px'; // Adjust max height as needed
+                modalImg.style.maxWidth = '1100px';
+                modalImg.style.maxHeight = '700px';
             }
         }
     };
 
-    // Close modal
     const closeModal = () => {
         const modal = document.getElementById('image-modal');
         if (modal) {
@@ -79,15 +76,16 @@ const Manual = () => {
         }
     };
 
+
+
     const cropClick = async (event) => {
         const modalImg = document.getElementById('modal-image');
         if (modalImg) {
             const rect = modalImg.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
-            const coordinates = `${x},${y}`; // Example format; adjust as per backend requirements
+            const coordinates = `${x},${y}`;
 
-            // Send coordinates and selected image URL to backend
             try {
                 const response = await fetch('http://127.0.0.1:9080/crop-image', {
                     method: 'POST',
@@ -98,8 +96,8 @@ const Manual = () => {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    setCroppedImageUrl(data.croppedImageUrl); // Update cropped image URL if needed
-                    setBackendData((prevData) => ({ ...prevData, coordinates })); // Update coordinates in backendData
+                    setCroppedImageUrl(`http://127.0.0.1:9080${data.croppedImageUrl}`);
+                    setBackendData((prevData) => ({ ...prevData, coordinates }));
                 } else {
                     console.error('Failed to crop image on the backend');
                 }
@@ -107,6 +105,7 @@ const Manual = () => {
                 console.error('Error cropping image:', error);
             }
         }
+
     };
 
     return (
@@ -158,12 +157,12 @@ const Manual = () => {
                                 <input className="inputBox" type="text" placeholder="Alphanumeric" />
                                 <input className="inputBox" type="text" placeholder="Alphanumeric Colour" />
                                 <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
+                                <button className="saveButton">Store</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {/* Modal for displaying selected image */}
             <div id="image-modal" className="image-modal" onClick={closeModal}>
                 <span className="close-modal" onClick={closeModal}>&times;</span>
                 <img
