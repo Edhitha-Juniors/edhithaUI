@@ -18,16 +18,16 @@ const Manual = () => {
     });
 
     const handleToggleConnection = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/toggle-connection', { method: 'POST' });
-            if (response.ok) {
-                setIsConnected(!isConnected);
-            } else {
-                console.error('Failed to toggle connection');
-            }
-        } catch (error) {
-            console.error('Error toggling connection:', error);
-        }
+        // try {
+        //     const response = await fetch('http://127.0.0.1:9080/toggle-connection', { method: 'POST' });
+        //     if (response.ok) {
+        //         setIsConnected(!isConnected);
+        //     } else {
+        //         console.error('Failed to toggle connection');
+        //     }
+        // } catch (error) {
+        //     console.error('Error toggling connection:', error);
+        // }
     };
 
     useEffect(() => {
@@ -76,37 +76,6 @@ const Manual = () => {
         }
     };
 
-
-
-    const cropClick = async (event) => {
-        const modalImg = document.getElementById('modal-image');
-        if (modalImg) {
-            const rect = modalImg.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-            const coordinates = `${x},${y}`;
-
-            try {
-                const response = await fetch('http://127.0.0.1:9080/crop-image', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ imageUrl: selectedImageUrl, coordinates }),
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setCroppedImageUrl(`http://127.0.0.1:9080${data.croppedImageUrl}`);
-                    setBackendData((prevData) => ({ ...prevData, coordinates }));
-                } else {
-                    console.error('Failed to crop image on the backend');
-                }
-            } catch (error) {
-                console.error('Error cropping image:', error);
-            }
-        }
-
-    };
 
     return (
         <div className="manual-container">

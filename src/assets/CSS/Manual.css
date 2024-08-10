@@ -240,6 +240,37 @@
     /* Highlight the selected image */
 }
 
+croppedImage {
+    padding: 10px;
+    border: 1px solid #ccc;
+
+}
+
+.croppedImageDisplay {
+    /* Adjust styles for the container displaying the cropped image */
+    width: 100%;
+    /* Make the container full width */
+    height: 200px;
+    /* Adjust height as needed */
+    overflow: hidden;
+    /* Hide any overflow */
+    margin-bottom: 10px;
+    /* Add some spacing */
+}
+
+.croppedImageDisplay img {
+    width: 100%;
+    /* Make the image fill the container */
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
+.grid-container img {
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
 .image-box {
     position: relative;
     /* Ensure relative positioning for modal */
