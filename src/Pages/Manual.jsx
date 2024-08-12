@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import '../assets/CSS/Manual.css';
 import droneConnectedIcon from '../assets/images/droneConnected.svg';
 import logo from '../assets/images/logo.png';
@@ -16,44 +16,61 @@ const Manual = () => {
         message2: 'Distance from Target - NA',
         coordinates: ''
     });
+    const [isLive, setIsLive] = useState(true);
+    const [intervalId, setIntervalId] = useState(null);
 
-    const handleToggleConnection = async () => {
-        // try {
-        //     const response = await fetch('http://127.0.0.1:9080/toggle-connection', { method: 'POST' });
-        //     if (response.ok) {
-        //         setIsConnected(!isConnected);
-        //     } else {
-        //         console.error('Failed to toggle connection');
-        //     }
-        // } catch (error) {
-        //     console.error('Error toggling connection:', error);
-        // }
-    };
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            fetchImageUrls();
-        }, 2000); // Poll every 2 seconds
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const fetchImageUrls = async () => {
+    const fetchImageUrls = useCallback(async () => {
         try {
             const response = await fetch('http://127.0.0.1:9080/all-images');
-            if (response.ok) {
-                const data = await response.json();
-                const formattedUrls = data.imageUrls.map(url => `http://127.0.0.1:9080/images/${url}`);
-                setImageUrls(formattedUrls);
-                if (formattedUrls.length > 0) {
-                    setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]);
-                }
-            } else {
-                console.error('Failed to fetch image URLs');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            const formattedUrls = data.imageUrls.map(url => `http://127.0.0.1:9080/images/${url}`);
+            setImageUrls(formattedUrls);
+            if (formattedUrls.length > 0 && isLive && !selectedImageUrl) {
+                setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]);
             }
         } catch (error) {
-            console.error('Error fetching image URLs:', error);
+            console.error('Error fetching image URLs:', error.message);
         }
+    }, [isLive, selectedImageUrl]);
+
+    useEffect(() => {
+        if (isLive) {
+            fetchImageUrls(); // Fetch images immediately when going live
+            const id = setInterval(fetchImageUrls, 2000); // Poll every 2 seconds
+            setIntervalId(id);
+            return () => clearInterval(id); // Clean up on component unmount or when not live
+        } else {
+            if (intervalId) {
+                clearInterval(intervalId); // Clear interval when not live
+                setIntervalId(null); // Reset intervalId to null
+            }
+        }
+    }, [isLive, fetchImageUrls]);
+
+    const handleImageClick = (url) => {
+        setSelectedImageUrl(url);
+        setIsLive(false); // Prevent automatic updates to the main image
+    };
+
+    const handleToggleConnection = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/toggle-connection', { method: 'POST' });
+            if (response.ok) {
+                setIsConnected(!isConnected);
+            } else {
+                console.error('Failed to toggle connection');
+            }
+        } catch (error) {
+            console.error('Error toggling connection:', error);
+        }
+    };
+
+    const handleLiveButtonClick = () => {
+        setIsLive(true);
+        setSelectedImageUrl(''); // Reset to live updates
     };
 
     const openImage = (event) => {
@@ -75,7 +92,6 @@ const Manual = () => {
             modal.style.display = 'none';
         }
     };
-
 
     return (
         <div className="manual-container">
@@ -99,10 +115,18 @@ const Manual = () => {
                                         key={index}
                                         src={url}
                                         alt={`Grid Image ${index}`}
-                                        onClick={() => setSelectedImageUrl(url)}
+                                        onClick={() => handleImageClick(url)}
                                         className={selectedImageUrl === url ? 'selected' : ''}
                                     />
                                 ))}
+                            </div>
+                            <div className="liveButtonContainer">
+                                <button 
+                                    className="liveButton"
+                                    onClick={handleLiveButtonClick}
+                                >
+                                    Live
+                                </button>
                             </div>
                         </div>
                         <div className="mainImage">

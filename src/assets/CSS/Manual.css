@@ -314,3 +314,22 @@ croppedImage {
     text-decoration: none;
     cursor: pointer;
 }
+
+.liveButtonContainer {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.liveButton {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.liveButton:hover {
+    background-color: #45a049;
+}
