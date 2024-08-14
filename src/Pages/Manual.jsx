@@ -28,31 +28,40 @@ const Manual = () => {
             const data = await response.json();
             const formattedUrls = data.imageUrls.map(url => `http://127.0.0.1:9080/images/${url}`);
             setImageUrls(formattedUrls);
-            if (formattedUrls.length > 0 && isLive && !selectedImageUrl) {
-                setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]);
+            if (formattedUrls.length > 0) {
+                if (isLive) {
+                    setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]);
+                }
             }
         } catch (error) {
             console.error('Error fetching image URLs:', error.message);
         }
-    }, [isLive, selectedImageUrl]);
+    }, [isLive]);
 
     useEffect(() => {
-        if (isLive) {
-            fetchImageUrls(); // Fetch images immediately when going live
-            const id = setInterval(fetchImageUrls, 2000); // Poll every 2 seconds
-            setIntervalId(id);
-            return () => clearInterval(id); // Clean up on component unmount or when not live
-        } else {
-            if (intervalId) {
-                clearInterval(intervalId); // Clear interval when not live
-                setIntervalId(null); // Reset intervalId to null
+        fetchImageUrls(); // Fetch images immediately when component mounts
+        const id = setInterval(fetchImageUrls, 2000); // Poll every 2 seconds
+        setIntervalId(id);
+        return () => clearInterval(id); // Clean up on component unmount
+    }, [fetchImageUrls]);
+
+    useEffect(() => {
+        const handleEscPress = (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
             }
-        }
-    }, [isLive, fetchImageUrls]);
+        };
+
+        document.addEventListener('keydown', handleEscPress);
+        
+        return () => {
+            document.removeEventListener('keydown', handleEscPress);
+        };
+    }, []);
 
     const handleImageClick = (url) => {
         setSelectedImageUrl(url);
-        setIsLive(false); // Prevent automatic updates to the main image
+        setIsLive(false);
     };
 
     const handleToggleConnection = async () => {
@@ -70,7 +79,9 @@ const Manual = () => {
 
     const handleLiveButtonClick = () => {
         setIsLive(true);
-        setSelectedImageUrl(''); // Reset to live updates
+        if (imageUrls.length > 0) {
+            setSelectedImageUrl(imageUrls[imageUrls.length - 1]);
+        }
     };
 
     const openImage = (event) => {
@@ -98,7 +109,7 @@ const Manual = () => {
             const response = await fetch('http://127.0.0.1:9080/crop-image', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ imageUrl: selectedImageUrl.split('/').pop(), x, y})
+                body: JSON.stringify({ imageUrl: selectedImageUrl.split('/').pop(), x, y })
             });
             if (response.ok) {
                 const data = await response.json();
@@ -110,23 +121,48 @@ const Manual = () => {
             console.error('Error cropping image:', error);
         }
     };
-     
 
     const cropClick = (event) => {
         const modalImg = document.getElementById('modal-image');
         if (!modalImg) return;
-        
+
         const rect = modalImg.getBoundingClientRect();
-        
-        // Adjust coordinates based on the image's scale
         const x = Math.floor((event.clientX - rect.left) / (rect.width / modalImg.naturalWidth));
         const y = Math.floor((event.clientY - rect.top) / (rect.height / modalImg.naturalHeight));
-        
+
         cropImage(x, y);
     };
-    
-    
-    
+
+    const handleSaveButtonClick = async () => {
+        try {
+            const shape = document.querySelector('input[placeholder="Shape"]').value;
+            const colour = document.querySelector('input[placeholder="Colour"]').value;
+            const alphanumeric = document.querySelector('input[placeholder="Alphanumeric"]').value;
+            const alphanumericColour = document.querySelector('input[placeholder="Alphanumeric Colour"]').value;
+
+            const response = await fetch('http://127.0.0.1:9080/save-details', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    croppedImageUrl,
+                    shape,
+                    colour,
+                    alphanumeric,
+                    alphanumericColour,
+                    coordinates: backendData.coordinates
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to save details');
+            }
+
+            const result = await response.json();
+            alert(result.message);
+        } catch (error) {
+            console.error('Error saving details:', error);
+        }
+    };
 
     return (
         <div className="manual-container">
@@ -185,7 +221,7 @@ const Manual = () => {
                                 <input className="inputBox" type="text" placeholder="Alphanumeric" />
                                 <input className="inputBox" type="text" placeholder="Alphanumeric Colour" />
                                 <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
-                                <button className="saveButton">Store</button>
+                                <button className="saveButton" onClick={handleSaveButtonClick}>Store</button>
                             </div>
                         </div>
                     </div>

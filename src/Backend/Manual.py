@@ -8,9 +8,10 @@ app = Flask(__name__)
 CORS(app)
 IMAGE_DIRECTORY = '../assets/DispImages'
 CROPPED_IMAGE_DIRECTORY = '../assets/CroppedImages'
+DATA_FILE = '../../Data/details.txt'  # File to store details
 global_count = 0
 
-# Ensure cropped images directory exists
+# Ensure directories exist
 if not os.path.exists(CROPPED_IMAGE_DIRECTORY):
     os.makedirs(CROPPED_IMAGE_DIRECTORY)
 
@@ -25,7 +26,6 @@ def crop_image(image_path, x, y):
     height, width, _ = image.shape
     crop_size = 100
 
-    # Ensure cropping area is within image bounds
     x_start = max(xco - crop_size, 0)
     x_end = min(xco + crop_size, width)
     y_start = max(yco - crop_size, 0)
@@ -35,7 +35,6 @@ def crop_image(image_path, x, y):
 
     print(f'Received coordinates: x={xco}, y={yco}', file=sys.stderr)
 
-    # Save the cropped image
     cropped_image_filename = f'cropped_image_{global_count}.png'
     cropped_image_path = os.path.join(
         CROPPED_IMAGE_DIRECTORY, cropped_image_filename)
@@ -75,6 +74,34 @@ def crop_image_endpoint():
 @app.route('/cropped-images/<filename>', methods=['GET'])
 def get_cropped_image(filename):
     return send_from_directory(CROPPED_IMAGE_DIRECTORY, filename)
+
+
+@app.route('/save-details', methods=['POST'])
+@app.route('/save-details', methods=['POST'])
+def save_details():
+    try:
+        data = request.json
+        image_name = data.get('croppedImageUrl', '').split('/')[-1]
+        shape = data.get('shape', '')
+        colour = data.get('colour', '')
+        alphanumeric = data.get('alphanumeric', '')
+        alphanumeric_colour = data.get('alphanumericColour', '')
+
+        # Print debug information
+        print(f"Received data: {image_name}, {shape}, {colour}, {
+              alphanumeric}, {alphanumeric_colour}", file=sys.stderr)
+
+        # Write to file
+        with open(DATA_FILE, 'a') as f:
+            f.write(f'{image_name}: Shape={shape}, Colour={colour}, Alphanumeric={
+                    alphanumeric}, Alphanumeric Colour={alphanumeric_colour} \n')
+            f.flush()  # Ensure the buffer is flushed
+
+        return jsonify({'message': 'Details saved successfully'}), 200
+    except Exception as e:
+        # Print error message
+        print(f"Error saving details: {str(e)}", file=sys.stderr)
+        return jsonify({'message': f'Failed to save details: {str(e)}'}), 500
 
 
 if __name__ == '__main__':

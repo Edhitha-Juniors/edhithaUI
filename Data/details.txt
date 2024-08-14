@@ -1,0 +1,2 @@
+cropped_image_0.png: Shape=qq, Colour=qqq, Alphanumeric=qqqq, Alphanumeric Colour=qqqq 
+cropped_image_0.png: Shape=Emergent, Colour=qqq, Alphanumeric=dddd, Alphanumeric Colour=dddd 
