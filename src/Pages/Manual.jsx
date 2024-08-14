@@ -93,6 +93,46 @@ const Manual = () => {
         }
     };
 
+    const cropImage = async (x, y, width, height) => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/crop-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ imageUrl: selectedImageUrl.split('/').pop(), x, y, width, height })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setCroppedImageUrl(data.croppedImageUrl);
+            } else {
+                console.error('Failed to crop image');
+            }
+        } catch (error) {
+            console.error('Error cropping image:', error);
+        }
+    };
+    
+
+    const cropClick = (event) => {
+        const modalImg = document.getElementById('modal-image');
+        if (!modalImg) return;
+    
+        // Get the bounding rectangle of the image
+        const rect = modalImg.getBoundingClientRect();
+    
+        // Calculate the click coordinates relative to the image
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+    
+        // Define the cropping area size (adjust as necessary)
+        const cropWidth = 200;
+        const cropHeight = 200;
+    
+        // Call the cropImage function with the coordinates and size
+        cropImage(x, y, cropWidth, cropHeight);
+    };
+    
+    
+
     return (
         <div className="manual-container">
             <div className="header-container">
