@@ -6,7 +6,7 @@ import sys
 
 app = Flask(__name__)
 CORS(app)
-IMAGE_DIRECTORY = '../assets/DispImages'
+IMAGE_DIRECTORY = '../assets/DispImages/Pictures'
 CROPPED_IMAGE_DIRECTORY = '../assets/CroppedImages'
 DATA_FILE = '../../Data/details.txt'  # File to store details
 global_count = 0
