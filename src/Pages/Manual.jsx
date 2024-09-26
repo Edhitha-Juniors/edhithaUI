@@ -4,7 +4,7 @@ import droneConnectedIcon from '../assets/images/droneConnected.svg';
 import logo from '../assets/images/logo.png';
 
 const Manual = () => {
-    const [isConnected, setIsConnected] = useState(false);
+    const [isConnected, setIsConnected] = useState(false); // State for connection status
     const [croppedImageUrl, setCroppedImageUrl] = useState('');
     const [imageUrls, setImageUrls] = useState([]);
     const [selectedImageUrl, setSelectedImageUrl] = useState('');
@@ -64,11 +64,12 @@ const Manual = () => {
         setIsLive(false);
     };
 
+    // Function to toggle connection state
     const handleToggleConnection = async () => {
         try {
             const response = await fetch('http://127.0.0.1:9080/toggle-connection', { method: 'POST' });
             if (response.ok) {
-                setIsConnected(!isConnected);
+                setIsConnected(!isConnected); // Toggle connection state
             } else {
                 console.error('Failed to toggle connection');
             }
@@ -164,6 +165,16 @@ const Manual = () => {
         }
     };
 
+    const handleTakeoff = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/takeoff', { method: 'POST' });
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Error taking off:', error);
+        }
+    };
+
     return (
         <div className="manual-container">
             <div className="header-container">
@@ -172,7 +183,7 @@ const Manual = () => {
                     <h1>Manual Flight</h1>
                     <button className={`connection-button ${isConnected ? 'green' : ''}`} onClick={handleToggleConnection}>
                         <img src={droneConnectedIcon} alt="Drone Connection" />
-                        <span className="connect-text">Connect</span>
+                        <span className="connect-text">{isConnected ? 'Connected' : 'Connect'}</span>
                     </button>
                 </header>
             </div>
@@ -222,6 +233,18 @@ const Manual = () => {
                                 <input className="inputBox" type="text" placeholder="Alphanumeric Colour" />
                                 <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
                                 <button className="saveButton" onClick={handleSaveButtonClick}>Store</button>
+                            </div>
+                            <div className="inputsContainer">
+                                <input className="inputBox" type="text" placeholder="Shape" />
+                                <input className="inputBox" type="text" placeholder="Colour" />
+                                <input className="inputBox" type="text" placeholder="Alphanumeric" />
+                                <input className="inputBox" type="text" placeholder="Alphanumeric Colour" />
+                                <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
+                                <button className="saveButton" onClick={handleSaveButtonClick}>Store</button>
+                            </div>
+                            <div className="controlsContainer">
+                                <button className="controlButton" onClick={handleTakeoff}>Takeoff</button>
+                                <button className="controlButton">Land</button>
                             </div>
                         </div>
                     </div>
