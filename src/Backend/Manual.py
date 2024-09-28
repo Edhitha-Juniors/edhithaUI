@@ -1,22 +1,35 @@
+import subprocess
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import os
 import cv2
 import sys
 from pymavlink import mavutil
+from modules.mavlink_commands import *
+from modules.latlon import *
+from modules.automation import *
 
 app = Flask(__name__)
 CORS(app)
 
 # Directories and File paths
-IMAGE_DIRECTORY = '../assets/DispImages/'
-CROPPED_IMAGE_DIRECTORY = '../assets/CroppedImages/'
-DATA_FILE = '../../Data/details.txt'  # File to store details
+parent_folder = "../../Data/"
+# IMAGE_DIRECTORY = parent_folder+"/cropped"
+IMAGE_DIRECTORY = parent_folder+"/input"
+CROPPED_IMAGE_DIRECTORY = parent_folder+"/cropped"
+DATA_FILE = '../../Data/details.txt'
+csv_path = parent_folder+'/results.csv'
+pickle_path = parent_folder+'/cam_wps.pickle'
+geo_log_path = parent_folder+"/log/geo_log.txt"
+geo_path = "./modules/geotag_on_UI_laptop.py"
 
 # Global variables
+global xco, yco, id, lats, longs
 global_count = 0
-the_connection = None  # To hold the MAVLink connection
-is_connected = False   # Connection status
+is_connected = False
+the_connection = None
+lats = ["null", "null", "null", "null", "null"]
+longs = ["null", "null", "null", "null", "null"]
 
 # Ensure directories exist
 if not os.path.exists(CROPPED_IMAGE_DIRECTORY):
@@ -24,7 +37,7 @@ if not os.path.exists(CROPPED_IMAGE_DIRECTORY):
 
 
 def crop_image(image_path, x, y):
-    global global_count
+    global global_count, xco, yco
     image = cv2.imread(image_path)
 
     xco = int(x)
@@ -50,6 +63,14 @@ def crop_image(image_path, x, y):
     global_count += 1
 
     return cropped_image_filename
+
+
+def run_python_file(file_path):
+    # Open the output file in append mode to preserve existing content
+    with open(geo_log_path, "a") as f:
+        # Start the subprocess with stderr redirected to a pipe
+        process = subprocess.Popen(["python", file_path], stdout=f)
+    return process
 
 
 @app.route('/all-images', methods=['GET'])
@@ -85,21 +106,27 @@ def get_cropped_image(filename):
 
 @app.route('/save-details', methods=['POST'])
 def save_details():
+    global xco, yco, id, lats, longs
     try:
         data = request.json
-        image_name = data.get('croppedImageUrl', '').split('/')[-1]
+        image_url = data.get('selectedImageUrl')
+        image_name = data.get('selectedImageUrl', '').split('/')[-1]
+        cropped_name = data.get('croppedImageUrl', '').split('/')[-1]
         shape = data.get('shape', '')
         colour = data.get('colour', '')
-        alphanumeric = data.get('alphanumeric', '')
-        alphanumeric_colour = data.get('alphanumericColour', '')
+        id = data.get('id', '')
+        label = data.get('label', '')
 
-        print(f"Received data: {image_name}, {shape}, {colour}, {
-              alphanumeric}, {alphanumeric_colour}", file=sys.stderr)
+        print(f"Received data: {image_name}, {
+              shape}, {colour}, {id}, {label}", file=sys.stderr, flush=True)
+        print(xco, yco, flush=True)
+        lats, longs = lat_long_calculation(
+            csv_path, image_url, image_name, xco, yco, id)
 
         # Write to file
         with open(DATA_FILE, 'a') as f:
-            f.write(f'{image_name}: Shape={shape}, Colour={colour}, Alphanumeric={
-                    alphanumeric}, Alphanumeric Colour={alphanumeric_colour}\n')
+            f.write(f'{image_name}: Shape={shape}, Colour={
+                    colour}, id={id}, Label={label}\n')
             f.flush()
 
         return jsonify({'message': 'Details saved successfully'}), 200
@@ -110,7 +137,7 @@ def save_details():
 
 # Endpoint for connecting to the drone
 @app.route('/toggle-connection', methods=['POST'])
-def toggle_connection():
+def connectDrone():
     global the_connection, is_connected
 
     # If already connected, close the connection
@@ -125,7 +152,7 @@ def toggle_connection():
 
     # Start a new connection to the drone
     try:
-        the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14553')
+        the_connection = mavutil.mavlink_connection('udp:10.42.0.55:14552')
 
         # Wait for the first heartbeat
         print("Attempting to connect to the drone...")
@@ -148,6 +175,7 @@ def toggle_connection():
 
 @app.route('/takeoff', methods=['POST'])
 def takeoff_drone():
+
     try:
         # Send arm command
         print("triggered")
@@ -170,5 +198,31 @@ def takeoff_drone():
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
+@app.route('/start_geotag', methods=['POST'])
+def start_geotagg():
+    global process
+    process = run_python_file(geo_path)
+    global msgs
+    msgs = "started geotagg"
+    # logging.info("started geotagg")
+    return "", 204
+
+
+@app.route('/reposition', methods=['POST'])
+def repos():
+    # logging.info("bottle drop" )
+    # logging.info("Target number bottle is dropping on: %s",target_no )
+    print("reposition triggered", flush="True")
+    global msg
+    target_no = 0
+    msg = "Target number bottle is dropping on: %s"+str(target_no)
+    lati = lats[id-1]
+    longi = longs[id-1]
+    print(lati)
+    # drop()
+    automation(lati, longi, id, the_connection)
+    return "", 204
+
+
 if __name__ == '__main__':
-    app.run(port=9080)
+    app.run(debug=True, port=9080)

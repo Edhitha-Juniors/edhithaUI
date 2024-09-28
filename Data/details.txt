@@ -1,3 +1,2 @@
-cropped_image_0.png: Shape=d, Colour=jj, Alphanumeric=jjj, Alphanumeric Colour=jjj 
-cropped_image_0.png: Shape=gg, Colour=ggg, Alphanumeric=ggg, Alphanumeric Colour=ggg 
-cropped_image_0.png: Shape=q, Colour=j, Alphanumeric=j, Alphanumeric Colour=j
+
+nvcamtest_9805_s00_00015.jpg: Shape=, Colour=, id=1, Label=Button 1

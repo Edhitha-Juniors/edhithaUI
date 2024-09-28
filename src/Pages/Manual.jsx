@@ -8,13 +8,14 @@ const Manual = () => {
     const [croppedImageUrl, setCroppedImageUrl] = useState('');
     const [imageUrls, setImageUrls] = useState([]);
     const [selectedImageUrl, setSelectedImageUrl] = useState('');
+    const [buttons, setButtons] = useState([]);
     const [backendData, setBackendData] = useState({
         voltage: '',
         current: '',
         temperature: '',
         message1: 'NO MESSAGE',
         message2: 'Distance from Target - NA',
-        coordinates: ''
+        coordinates: 'xyz'
     });
     const [isLive, setIsLive] = useState(true);
     const [intervalId, setIntervalId] = useState(null);
@@ -63,6 +64,7 @@ const Manual = () => {
         setSelectedImageUrl(url);
         setIsLive(false);
     };
+
 
     // Function to toggle connection state
     const handleToggleConnection = async () => {
@@ -138,36 +140,46 @@ const Manual = () => {
         try {
             const shape = document.querySelector('input[placeholder="Shape"]').value;
             const colour = document.querySelector('input[placeholder="Colour"]').value;
-            const alphanumeric = document.querySelector('input[placeholder="Alphanumeric"]').value;
-            const alphanumericColour = document.querySelector('input[placeholder="Alphanumeric Colour"]').value;
-
+            const buttonData = {
+                id: buttons.length + 1, // Create a unique ID for each button
+                label: `Button ${buttons.length + 1}`, // You can modify this to use any input data
+            };
+    
+            // Update state only when user clicks save, not during rendering
+            setButtons(prevButtons => [...prevButtons, buttonData]);
             const response = await fetch('http://127.0.0.1:9080/save-details', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    selectedImageUrl,
                     croppedImageUrl,
                     shape,
                     colour,
-                    alphanumeric,
-                    alphanumericColour,
-                    coordinates: backendData.coordinates
+                    coordinates: backendData.coordinates,
+                    id: buttonData.id,  // Include button id
+                    label: buttonData.label
                 })
             });
-
+    
             if (!response.ok) {
                 throw new Error('Failed to save details');
             }
-
+    
             const result = await response.json();
             alert(result.message);
+    
+            // Add new button after saving details
+            
+    
         } catch (error) {
             console.error('Error saving details:', error);
         }
     };
+    
 
-    const handleTakeoff = async () => {
+    const startGeotag = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:9080/takeoff', { method: 'POST' });
+            const response = await fetch('http://127.0.0.1:9080/start_geotagg', { method: 'POST' });
             const data = await response.json();
             console.log(data.message);
         } catch (error) {
@@ -175,6 +187,16 @@ const Manual = () => {
         }
     };
 
+    const automationButton = async(id) => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/reposition', { method: 'POST' });
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Error :', error);
+        }
+    };
+        
     return (
         <div className="manual-container">
             <div className="header-container">
@@ -229,24 +251,27 @@ const Manual = () => {
                             <div className="inputsContainer">
                                 <input className="inputBox" type="text" placeholder="Shape" />
                                 <input className="inputBox" type="text" placeholder="Colour" />
-                                <input className="inputBox" type="text" placeholder="Alphanumeric" />
-                                <input className="inputBox" type="text" placeholder="Alphanumeric Colour" />
                                 <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
                                 <button className="saveButton" onClick={handleSaveButtonClick}>Store</button>
-                            </div>
-                            <div className="inputsContainer">
-                                <input className="inputBox" type="text" placeholder="Shape" />
-                                <input className="inputBox" type="text" placeholder="Colour" />
-                                <input className="inputBox" type="text" placeholder="Alphanumeric" />
-                                <input className="inputBox" type="text" placeholder="Alphanumeric Colour" />
-                                <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
-                                <button className="saveButton" onClick={handleSaveButtonClick}>Store</button>
-                            </div>
-                            <div className="controlsContainer">
-                                <button className="controlButton" onClick={handleTakeoff}>Takeoff</button>
-                                <button className="controlButton">Land</button>
                             </div>
                         </div>
+                        <div className="targetContainer">
+                        <div className="croppedImageDisplay"> 
+                            {buttons.map((button) => (
+                            <button 
+                                key={button.id} 
+                                onClick={() => automationButton(button.id)} // Attach onClick function
+                            >
+                                {button.label}
+                            </button>
+                            ))}
+                        </div>    
+                        </div>
+                    </div>
+                </div>
+                <div className="bottom-box">
+                    <div className="control-buttons">
+                        <button id="start-geotag" className='geobutton'onClick={startGeotag}>Start Geotag</button>
                     </div>
                 </div>
             </div>
