@@ -44,7 +44,8 @@ def distance_lat_lon(lat1, lon1, lat2, lon2):
 #     # logging.info("In guided: %s", msg)
 
 
-def inf_drop(the_connection):
+def inf_drop():
+    global the_connection
     print("a")
     guided()
     time.sleep(1.5)
@@ -61,6 +62,8 @@ def inf_drop(the_connection):
 
 def automation(lati, longi, target_no, the_connection):
 
+    print("Automation", flush=True)
+    print(the_connection, flush=True)
     gps = the_connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
     # logging.info("GPS during calculation: %s", gps)
 

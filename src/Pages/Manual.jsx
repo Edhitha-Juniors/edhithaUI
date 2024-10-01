@@ -177,7 +177,26 @@ const Manual = () => {
         try {
             const response = await fetch('http://127.0.0.1:9080/toggle-connection', { method: 'POST' });
             if (response.ok) {
-                setIsConnected(!isConnected); // Toggle connection state
+                const data = await response.json();
+                setIsConnected(true); // Assuming the connection is successful
+    
+            // Start continuous polling for drone status
+            const statusInterval = setInterval(async () => {
+                try {
+                    const statusResponse = await fetch('http://127.0.0.1:9080/drone-status', { method: 'GET' });
+                    if (statusResponse.ok) {
+                        const statusData = await statusResponse.json();
+                        setSelectedMode(statusData.current_mode); // Update the selected mode
+                        setIsArmed(statusData.is_armed); // Update the armed status
+                    } else {
+                        console.error('Failed to get drone status');
+                    }
+                } catch (error) {
+                    console.error('Error fetching drone status:', error);
+                }
+            }, 1000); // Fetch status every 1 second (adjust as needed)
+            // Optionally store the interval ID so you can clear it later
+            return () => clearInterval(statusInterval);
             } else {
                 console.error('Failed to toggle connection');
             }
@@ -185,6 +204,7 @@ const Manual = () => {
             console.error('Error toggling connection:', error);
         }
     };
+    
 
     const handleArmClick = async () => {
         try {
@@ -351,25 +371,25 @@ const Manual = () => {
                             <button className="Control-Button">Mission Start</button>
                             {/* <button className="Control-Button">RTL</button> */}
                             <button
-                                className={`Control-Button ${selectedMode === 'stabilize' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
+                                className={`Control-Button ${selectedMode === 'STABILIZE' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
                                 onClick={() => handleModeChange('stabilize')}
                             >
                                 Stabilize
                             </button>
                             <button
-                                className={`Control-Button ${selectedMode === 'guided' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
+                                className={`Control-Button ${selectedMode === 'GUIDED' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
                                 onClick={() => handleModeChange('guided')}
                             >
                                 Guided
                             </button>
                             <button
-                                className={`Control-Button ${selectedMode === 'auto' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
+                                className={`Control-Button ${selectedMode === 'AUTO' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
                                 onClick={() => handleModeChange('auto')}
                             >
                                 Auto
                             </button>
                             <button
-                                className={`Control-Button ${selectedMode === 'loiter' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
+                                className={`Control-Button ${selectedMode === 'LOITER' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
                                 onClick={() => handleModeChange('loiter')}
                             >
                                 Loiter

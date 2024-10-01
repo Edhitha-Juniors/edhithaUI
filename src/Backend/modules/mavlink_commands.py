@@ -1,30 +1,31 @@
 from pymavlink import mavutil
 from flask import Flask, jsonify, request, send_from_directory
+import threading
+import time
+from modules.drone_status import drone_state
 
-global the_connection, is_connected
+global is_connected
 
-is_connected = False
 the_connection = None
+is_connected = False
 
 
 def toggle_connection():
     global the_connection, is_connected
-    # If already connected, close the connection
     print("meh")
+
+    # If already connected, close the connection
     if is_connected:
         if the_connection is not None:
             the_connection.close()
             the_connection = None
             is_connected = False
+            # Return None for the connection
             print("Disconnected from the drone")
-        return jsonify({'message': 'Disconnected from the drone'}), 200
 
     # Start a new connection to the drone
     try:
         the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14551')
-        # the_connection = mavutil.mavlink_connection('udpin:0.0.0.0:14551')
-
-        # Wait for the first heartbeat
         print("Attempting to connect to the drone...", flush=True)
         the_connection.wait_heartbeat()
         print("Heartbeat received from system (system %u component %u)" %
@@ -33,15 +34,40 @@ def toggle_connection():
         # Set connection status to True only after successful connection
         is_connected = True
         print("Connected successfully!", flush=True)
+
+        threading.Thread(target=monitor_drone_status, daemon=True).start()
+        print("Monitoring thread started.", flush=True)
+
         return the_connection, is_connected
+
+        # return the_connection, is_connected  # Return the connection and its status
     except Exception as e:
         print("failed")
         print(f"Failed to connect to the drone: {
               str(e)}", flush=True)  # Print the error message
-        return is_connected, jsonify({'message': f'Failed to connect to the drone: {str(e)}'}), 500
+        return None, jsonify({'message': f'Failed to connect to the drone: {str(e)}'}), 500
+
+
+def monitor_drone_status():
+    global the_connection, is_connected, drone_state
+    while is_connected:
+        msg = the_connection.recv_match(
+            type=['HEARTBEAT', 'COMMAND_ACK'], blocking=True)
+
+        if msg:
+            if msg.get_type() == 'HEARTBEAT':
+                drone_state.is_armed = bool(
+                    msg.base_mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED)
+                drone_state.current_mode = mavutil.mode_string_v10(msg)
+                print(f"Drone Status - Mode: {drone_state.current_mode}, Arm Status: {
+                      'Armed' if drone_state.is_armed else 'Disarmed'}", flush=True)
+
+        time.sleep(0.5)
+ # Adjust the frequency of status updates as needed
 
 
 def arm():
+    global the_connection
     try:
         the_connection.mav.command_long_send(
             the_connection.target_system, the_connection.target_component, 400, 0, 1, 0, 0, 0, 0, 0, 0)
@@ -74,6 +100,7 @@ def takeoffcommand():
 
 
 def disarm():
+    global the_connection
     try:
         the_connection.mav.command_long_send(
             the_connection.target_system, the_connection.target_component, 400, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -88,6 +115,7 @@ def disarm():
 
 
 def auto():
+    global the_connection
     try:
         the_connection.mav.command_long_send(
             the_connection.target_system, the_connection.target_component, 176, 0, 1, 3, 0, 0, 0, 0, 0)
@@ -118,6 +146,7 @@ def loiter():
 
 
 def guided():
+    global the_connection
     try:
         the_connection.mav.command_long_send(
             the_connection.target_system, the_connection.target_component, 176, 0, 1, 4, 0, 0, 0, 0, 0)

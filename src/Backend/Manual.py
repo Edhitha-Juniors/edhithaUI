@@ -8,6 +8,7 @@ from pymavlink import mavutil
 from modules.mavlink_commands import *
 from modules.latlon import *
 from modules.automation import *
+from modules.drone_status import drone_state
 
 app = Flask(__name__)
 CORS(app)
@@ -23,7 +24,7 @@ geo_log_path = parent_folder+"/log/geo_log.txt"
 geo_path = "./modules/geotag_on_UI_laptop.py"
 
 # Global variables
-global xco, yco, id, lats, longs
+global xco, yco, id, lats, longs, connection
 global_count = 0
 is_connected = False
 the_connection = None
@@ -138,16 +139,26 @@ def save_details():
 # Endpoint for connecting to the drone
 @app.route('/toggle-connection', methods=['POST'])
 def connectDrone():
-    global the_connection, is_connected
-    the_connection, is_connected = toggle_connection()
-    if is_connected:
+    global connection, is_connected
+    connection, is_connected = toggle_connection()  # Capture the connection
+
+    if is_connected:  # Check if connection is valid
         return jsonify({'message': 'Connected to the drone',
-                        'system': the_connection.target_system,
-                        'component': the_connection.target_component}), 200
+                        'system': connection.target_system,
+                        'component': connection.target_component}), 200
     else:
         print(f"Failed to connect to the drone",
               flush=True)  # Print the error message
-        return jsonify({'message': f'Failed to connect to the drone: '}), 500
+        return jsonify({'message': 'Failed to connect to the drone'}), 500
+
+
+@app.route('/drone-status', methods=['GET'])
+def get_drone_status():
+    print("Current Mode: ", drone_state.current_mode, flush=True)
+    return jsonify({
+        'current_mode': drone_state.current_mode,
+        'is_armed': drone_state.is_armed
+    }), 200
 
 
 @app.route('/arm-disarm', methods=['POST'])
@@ -210,19 +221,20 @@ def start_geotagg():
 
 @app.route('/reposition', methods=['POST'])
 def repos():
+    global connection
     # logging.info("bottle drop" )
     # logging.info("Target number bottle is dropping on: %s",target_no )
     print("Moving towards target...", flush="True")
     global msg
     target_no = 0
     msg = "Target number bottle is dropping on: %s"+str(target_no)
+    print(lats, longs, id, flush=True)
     lati = lats[id-1]
     longi = longs[id-1]
-    print(lati)
     # drop()
-    automation(lati, longi, id, the_connection)
+    automation(lati, longi, id, connection)
     return "", 204
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=9080)
+    app.run(debug=True, threaded=True, port=9080)
