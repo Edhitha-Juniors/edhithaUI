@@ -1,0 +1,1 @@
+nvcamtest_7563_s00_00070.jpg: Shape=, Colour=, id=1, Label=Target 1

@@ -21,7 +21,7 @@ def toggle_connection():
 
     # Start a new connection to the drone
     try:
-        the_connection = mavutil.mavlink_connection('udpin:0.0.0.0:14551')
+        the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14551')
         # the_connection = mavutil.mavlink_connection('udpin:0.0.0.0:14551')
 
         # Wait for the first heartbeat
