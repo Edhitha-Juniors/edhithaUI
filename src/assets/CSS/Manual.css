@@ -1,12 +1,20 @@
+.div {
+    background: #dde1e7;
+}
+
 .manual-container {
     display: flex;
     flex-direction: column;
     height: 100vh;
 }
 
+/* ---------------------------------------------------------------------------------------------------------------
+Header */
+
 .header-container {
     background-color: #f8f8f8;
-    padding: 2px;
+    padding: 20px;
+    padding-bottom: 0px;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -14,61 +22,18 @@
     position: relative;
 }
 
-.header h1 {
-    font-size: 25px;
-}
-
-.header {
+.header{
     height: 12%;
 }
 
 .logoM {
-    max-height: 150px;
+    max-height: 100px;
     /* Adjust the height of the logo */
     /* Add any additional styling for the logo */
 }
 
-.content-container {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-    flex-direction: column;
-    /* Prevent content from overflowing */
-}
-
-.left-container {
-    flex: 2;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    overflow-y: auto;
-    /* Enable scrolling for the left container */
-}
-
-.button-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    padding: 10px;
-}
-
-.Control-Button {
-    display: inline-block;
-    outline: 0;
-    text-align: center;
-    cursor: pointer;
-    padding: 15px 30px;
-    border: 0;
-    color: #fff;
-    font-size: 17.5px;
-    border: 2px solid transparent;
-    border-color: #000;
-    color: #000;
-    background: transparent;
-    transition: background, color .1s ease-in-out;
-}
-
-.Control-Button:hover {
-    background-color: #708090;
-    color: #fff;
+.header h1 {
+    font-size: 25px;
 }
 
 .connection-button {
@@ -108,117 +73,59 @@
     /* Green color for connected state */
 }
 
+
+
 .red {
     background-color: #f44336 !important;
     color: white !important;
 }
 
-.coordinatesBox {
-    width: 85%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-.saveButton {
-    background-color: #4CAF50;
-    /* Green */
-    height: 30%;
-    width: 85%;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 9px 0px;
-    cursor: pointer;
-    border-radius: 8px;
-    margin-right: 10px;
-}
-
-.saveButton:hover {
-    background-color: #45a049;
-    /* Darker Green */
-}
-
-.inputsContainer {
+.content-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-top: 10px;
-    /* Spread items evenly */
+    flex: 1;
 }
 
-.inputsContainer .inputBox[type="text"] {
-    width: 38%;
-    /* Adjust width to evenly spread out */
-    margin-bottom: 10px;
-    margin-right: 10px;
-    /* Add some spacing between inputs */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
+
+/* ---------------------------------------------------------------------------------------------------------------
+Left side */
 
 .image-box {
     display: flex;
-    height: auto;
-    margin: 20px;
+    height: 60%;
+    margin: 10px;
+    margin-bottom: 0;
+    padding-bottom: 0;
     padding: 10px;
-    margin-bottom: 20px;
+    position: relative;
 }
 
-.image-grid,
+/* -------------------------------
+Common */
+.imageGrid,
 .mainImage,
 .croppedImage {
-    flex: 8;
+    flex: 7;
     /* Adjusted to 8 */
-    height: 400px;
+    /* flex-basis: 60%; */
     margin-right: 10px;
     /* Add some spacing between the two containers */
 }
-
-.croppedImage {
+.left-container {
     flex: 2;
-    /* Adjusted to 2 */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.mainImage {
-    background-color: #f0f0f0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    overflow: hidden;
-}
+/* -------------------------------
+Image grid */
 
-.mainImage img {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    margin: 0 auto;
-    object-fit: contain; /* This should keep the image aspect ratio intact */
-}
-
-.croppedImage {
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
-
-.image-grid {
+.imageGrid{
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     border: 1px solid #ccc;
     flex: 3;
-    height: 420px;
+    height: 400px;
 }
 
 .grid-container {
@@ -236,6 +143,9 @@
     width: 100px;
     height: auto;
     border: 1px solid #ddd;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
 }
 
 .grid-container img.selected {
@@ -243,40 +153,42 @@
     /* Highlight the selected image */
 }
 
-.croppedImage {
+.liveButtonContainer {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.liveButton {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.liveButton:hover {
+    background-color: #45a049;
+}
+
+
+/* -------------------------------
+Main Image */
+
+.mainImage {
+    background-color: #f0f0f0;
     padding: 10px;
     border: 1px solid #ccc;
-
+    overflow: hidden
 }
 
-.croppedImageDisplay {
-    /* Adjust styles for the container displaying the cropped image */
-    width: 100%;
-    /* Make the container full width */
-    height: 200px;
-    /* Adjust height as needed */
-    /* overflow: hidden; */
-    /* Hide any overflow */
-    margin-bottom: 0px;
-    /* Add some spacing */
-}
-
-.croppedImageDisplay img {
-    width: 100%;
-    /* Make the image fill the container */
-    height: auto;
-    /* Maintain aspect ratio */
-}
-
-.grid-container img {
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: border-color 0.3s ease;
-}
-
-.image-box {
-    position: relative;
-    /* Ensure relative positioning for modal */
+.mainImage img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain; /* This should keep the image aspect ratio intact */
 }
 
 .image-modal {
@@ -328,125 +240,310 @@
     text-decoration: none;
     cursor: pointer;
 }
-
-
-.liveButtonContainer {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.liveButton {
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.liveButton:hover {
-    background-color: #45a049;
-}
-
-
-
-/* CSS for the Controls Container */
-.controlsContainer {
-    display: flex;
-    flex-direction: column; /* Align buttons vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically if needed */
-    margin-top: 50px; /* Space from the top */
-  }
-  
-  /* CSS for Takeoff and Land buttons */
-  .controlButton {
-    appearance: none;
-    background-color: transparent;
-    border: 2px solid #1A1A1A;
-    border-radius: 15px;
-    box-sizing: border-box;
-    color: #3B3B3B;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 16px;
-    font-weight: 600;
-    line-height: normal;
-    margin: 5px 0; /* Add some space between the buttons */
-    min-height: 60px;
-    outline: none;
-    padding: 16px 24px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: 150px; /* Adjust width as needed */
-    will-change: transform;
-  }
-  
-  .controlButton:disabled {
-    pointer-events: none;
-  }
-  
-  .controlButton:hover {
-    color: #fff;
-    background-color: #1A1A1A;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-    transform: translateY(-2px);
-  }
-  
-  .controlButton:active {
-    box-shadow: none;
-    transform: translateY(0);
-  }
-  
-  .targetContainer{
+/* -------------------------------
+Cropped Image */
+.croppedImage {
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     padding: 10px;
     border: 1px solid #ccc;
-    flex: 2;
-  }
+    flex: 3;
+    margin-right: 0px;
+}
 
-  .bottom-box {
+.croppedImageDisplay {
+    /* Adjust styles for the container displaying the cropped image */
     width: 100%;
-    height: 100px; /* Adjust as needed */
+    /* Make the container full width */
+    height: 200px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    object-fit: contain;
+    /* Add some spacing */
+}
+
+.croppedImageDisplay img {
+    padding-left: 15px;
+    /* Make the image fill the container */
+    /* height: auto; */
+    
+    /* Maintain aspect ratio */
+}
+
+.inputsContainer {
     display: flex;
-    justify-content: flex-end; /* Aligns control-buttons to the right end */
-    align-items: center; /* Centers vertically */
-    padding: 0 20px; /* Adds some padding for spacing */
-    background-color: #f8f8f8; /* Example background color */
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    /* Spread items evenly */
+}
+
+.inputsContainer .inputBox[type="text"] {
+    width: 45%;
+    /* Adjust width to evenly spread out */
+    margin-bottom: 10px;
+    /* Add some spacing between inputs */
+    padding: 10px;
     border: 1px solid #ccc;
-  }
-  
-  .control-buttons {
-    display: flex;
-    align-items: center;
-  }
-  
-  .control-buttons .geobutton {
-    background-color: #007bff;
-    /* Blue color for default state */
-    color: white;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    /* Padding for inner content */
     border-radius: 5px;
-    /* Rounded corners */
-    margin-right: 60px;
-    font-size: 20px;
-    /* Font size */
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.coordinatesBox {
+    width: 93%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.saveButton {
+    background-color: #4CAF50;
+    /* Green */
+    height: 30%;
+    width: 92%;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0px 0px 0px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.saveButton:hover {
+    background-color: #45a049;
+    /* Darker Green */
+}
+
+/* ---------------------------------------------------------------------------------------------------------------
+Terminal */
+
+.terminal-box {
+    display: flex;
+    justify-content: space-between; /* Aligns children divs side by side */
+    display: flex;
+    height: 32%;
+    margin: 10px;
+    margin-top: 0;
+    padding-top: 0;
+    padding: 10px;/* Space above the terminal box */
+}
+
+.image_Processing {
+    flex: 1; /* Allows it to grow */
+    margin-right: 5px;
+    background-color: #000; /* Space between the two boxes */
+    /* Add additional styles as needed */
+}
+
+.drone_Status {
+    flex: 1; /* Allows it to grow */
+    margin-left: 5px;
+    background-color: #000; /* Space between the two boxes */
+    /* Add additional styles as needed */
+}
+
+
+/* ---------------------------------------------------------------------------------------------------------------
+Right side */
+.right-container {
+    flex-basis: 25%;
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+
+/* -------------------------------
+Controls */
+.top-right-container {
+    flex-basis: 35%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    overflow-y: auto;
+    /* Enable vertical scrollbar if needed */
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+    padding: 25px;
+}
+
+.Control-Button {
+    height: auto;
+    display: inline-block;
+    outline: 0;
+    text-align: center;
+    cursor: pointer;
+    /* padding: 15px 30px; */
+    border: 0;
+    color: #fff;
+    font-size: 15px;
+    border: 2px solid transparent;
+    border-color: #000;
+    color: #000;
+    background: transparent;
+    transition: background, color .1s ease-in-out;
+}
+
+.Control-Button:hover {
+    background-color: #708090;
+    color: #fff;
+}
+
+.armed {
+    background-color: rgb(236, 64, 64);
     transition: background-color 0.3s ease;
-    /* Smooth transition effect */
+    color: white;
+    border-color: None;
+}
+.armed:hover {
+    background-color: rgb(236, 64, 64);
+    color: white;
+    border-color: white;
+}
+
+.disarmed {
+    background-color: #45a049;
+    color: white;
+    border-color: None;
+}
+.disarmed:hover {
+    background-color: #45a049;
+    color: white;
+    border-color: white;
+}
+
+.active-mode{
+    background-color: #45a049;
+}
+/* -------------------------------
+ Target Container*/
+
+ .bottom-right-container {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    height: auto;
+    flex-basis: 65%; /* Ensure container doesn't exceed the viewport */
+    display: flex; 
+    flex-direction: column;
+}
+
+.bottom-up-container {
+    box-shadow: 0px 1px 1px rgba(9, 30, 66, 0.25), 0px 0px 1px 1px rgba(9, 30, 66, 0.13);
+    height: 44%; /* Manually adjustable height for the container */
+    display: grid;
+    overflow-y: scroll;
+    grid-template-columns: repeat(3, 1fr); /* 3-column grid layout */
+    grid-auto-rows: 35%; /* Each row will take 35% of the container height */
+    grid-gap: 15px;
+    padding: 25px;
+}
+
+
+
+.bottom-up-container button {
+    width: 100%; /* Button takes full width of the grid item */
+    height: 100%; /* Button takes full height of the grid item */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* From Uiverse.io by abrahamcalsin */ 
+.Repos-Button {
+    border-radius: 5px;
+    background: #183153;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border: none;
   }
   
-  .control-buttons button:hover {
-    background-color: #0056b3;
+  .Repos-Button:after {
+    content: " ";
+    width: 0%;
+    background: #ffd401;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    right: 0;
   }
   
+  
+  .Repos-Button span {
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    z-index: 20;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .Repos-Button:hover span {
+    color: yellow;
+    animation: scaleUp 0.3s ease-in-out;
+  }
+  
+  
+
+
+/* Custom scrollbar styles */
+.bottom-up-container::-webkit-scrollbar {
+    width: 3px; /* Width of the scrollbar */
+}
+
+.bottom-up-container::-webkit-scrollbar-thumb {
+    background: rgba(9, 30, 66, 0.5); /* Color of the scrollbar thumb */
+    /* border-radius: 4px; Rounded corners for the thumb */
+}
+
+.bottom-up-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(9, 30, 66, 0.8); /* Darker color on hover */
+}
+
+.bottom-up-container::-webkit-scrollbar-track {
+    background: rgba(200, 200, 200, 0.2); /* Background of the scrollbar track */
+}
+
+.bottom-down-container {
+    box-shadow: 0px 1px 1px rgba(9, 30, 66, 0.25), 0px 0px 1px 1px rgba(9, 30, 66, 0.13);
+    height: 60%; /* Manually adjustable height */
+    padding: 30px;
+}
+
+
+
+/* -------------------------------
+*/
+
+
+/* Battery */
+/* .data-box {
+    margin-bottom: 10px;
+}
+
+.data-box input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+
+.data-box input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+} */
+
+
+
+
+
+
+

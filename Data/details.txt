@@ -1,2 +1,0 @@
-
-nvcamtest_9805_s00_00015.jpg: Shape=, Colour=, id=1, Label=Button 1

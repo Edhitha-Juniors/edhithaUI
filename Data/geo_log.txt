@@ -1,0 +1,40 @@
+['images', 'cropped']
+Data
+/Users/aahil/Downloads/edhithaGCS/Data_1
+Created a new folder: /Users/aahil/Downloads/edhithaGCS/Data_1
+Moved contents of /Users/aahil/Downloads/edhithaGCS/Data to /Users/aahil/Downloads/edhithaGCS/Data_1
+made images folder
+made cropped folder
+['images', 'cropped']
+Data
+/Users/aahil/Downloads/edhithaGCS/Data_1
+Created a new folder: /Users/aahil/Downloads/edhithaGCS/Data_1
+Moved contents of /Users/aahil/Downloads/edhithaGCS/Data to /Users/aahil/Downloads/edhithaGCS/Data_1
+made images folder
+made cropped folder
+Connected to host ...
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.9.253-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Infrastructure is not enabled.
+
+0 updates can be applied immediately.
+
+228 additional security updates can be applied with ESM Infra.
+Learn more about enabling ESM Infra service for Ubuntu 18.04 at
+https://ubuntu.com/18-04
+
+Last login: Mon Sep 30 15:29:24 2024 from 192.168.1.34
+
+Ran all the commands ..
+./geotag.sh
+edhitha@edhitha:~$ ./geotag.sh
+-bash: ./geotag.sh: No such file or directory
+edhitha@edhitha:~$ 

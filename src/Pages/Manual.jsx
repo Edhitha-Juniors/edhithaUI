@@ -5,10 +5,13 @@ import logo from '../assets/images/logo.png';
 
 const Manual = () => {
     const [isConnected, setIsConnected] = useState(false); // State for connection status
+    const [isArmed, setIsArmed] = useState(false); // State to track if the drone is armed
+    const [isGeotagging, setIsGeotagging] = useState(false);
     const [croppedImageUrl, setCroppedImageUrl] = useState('');
     const [imageUrls, setImageUrls] = useState([]);
     const [selectedImageUrl, setSelectedImageUrl] = useState('');
     const [buttons, setButtons] = useState([]);
+    const [selectedMode, setSelectedMode] = useState(null); 
     const [backendData, setBackendData] = useState({
         voltage: '',
         current: '',
@@ -64,21 +67,7 @@ const Manual = () => {
         setSelectedImageUrl(url);
         setIsLive(false);
     };
-
-
-    // Function to toggle connection state
-    const handleToggleConnection = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/toggle-connection', { method: 'POST' });
-            if (response.ok) {
-                setIsConnected(!isConnected); // Toggle connection state
-            } else {
-                console.error('Failed to toggle connection');
-            }
-        } catch (error) {
-            console.error('Error toggling connection:', error);
-        }
-    };
+    
 
     const handleLiveButtonClick = () => {
         setIsLive(true);
@@ -142,7 +131,7 @@ const Manual = () => {
             const colour = document.querySelector('input[placeholder="Colour"]').value;
             const buttonData = {
                 id: buttons.length + 1, // Create a unique ID for each button
-                label: `Button ${buttons.length + 1}`, // You can modify this to use any input data
+                label: `Target ${buttons.length + 1}`, // You can modify this to use any input data
             };
     
             // Update state only when user clicks save, not during rendering
@@ -166,7 +155,7 @@ const Manual = () => {
             }
     
             const result = await response.json();
-            alert(result.message);
+            // alert(result.message);
     
             // Add new button after saving details
             
@@ -176,6 +165,82 @@ const Manual = () => {
         }
     };
     
+// --Pymavlink-----------------------------------------------------
+
+    const handleToggleGeotag = () => {
+        setIsGeotagging(!isGeotagging);
+    };
+
+
+    // Function to toggle connection state
+    const handleDroneConnection = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/toggle-connection', { method: 'POST' });
+            if (response.ok) {
+                setIsConnected(!isConnected); // Toggle connection state
+            } else {
+                console.error('Failed to toggle connection');
+            }
+        } catch (error) {
+            console.error('Error toggling connection:', error);
+        }
+    };
+
+    const handleArmClick = async () => {
+        try {
+            const action = isArmed ? 'disarm' : 'arm'; // Decide action based on current state
+    
+            const response = await fetch('http://127.0.0.1:9080/arm-disarm', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action }), // Send action ('arm' or 'disarm') in the body
+            });
+    
+            const data = await response.json();
+            if (response.ok) {
+                setIsArmed(!isArmed); // Toggle armed state if request succeeds
+                // Optionally show success message
+                // alert(data.message);
+            } else {
+                alert(`Error: ${data.message}`); // Show error message from backend
+            }
+        } catch (error) {
+            console.error('Error in arm/disarm:', error);
+            alert('An error occurred. Please try again.');
+        }
+    };
+
+    const handleTakeoff = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/takeoff', { method: 'POST' });
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Error taking off:', error);
+        }
+    };
+
+    const handleModeChange = async (mode) => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/change-mode', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mode }),  // Send the selected mode to the backend
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                setSelectedMode(mode);  // Update the selected mode state
+                // alert(data.message);  // Optional: Show the backend message
+            } else {
+                alert(`Error: ${data.message}`);  // Show error if the request fails
+            }
+        } catch (error) {
+            console.error('Error changing mode:', error);
+            alert('An error occurred. Please try again.');
+        }
+    };
+
 
     const startGeotag = async () => {
         try {
@@ -196,54 +261,56 @@ const Manual = () => {
             console.error('Error :', error);
         }
     };
-        
+
+// --Pymavlink-----------------------------------------------------
+
     return (
         <div className="manual-container">
             <div className="header-container">
                 <header className="header">
                     <img src={logo} alt="Logo" className="logoM" />
                     <h1>Manual Flight</h1>
-                    <button className={`connection-button ${isConnected ? 'green' : ''}`} onClick={handleToggleConnection}>
+                    <button className={`connection-button ${isConnected ? 'green' : ''}`} onClick={handleDroneConnection}>
                         <img src={droneConnectedIcon} alt="Drone Connection" />
                         <span className="connect-text">{isConnected ? 'Connected' : 'Connect'}</span>
                     </button>
                 </header>
             </div>
             <div className="content-container">
-                <div className="Top-container">
+                <div className="left-container">
                     <div className="image-box">
-                        <div className="image-grid">
+                        <div className="imageGrid">
                             <div className="grid-container">
-                                {imageUrls.map((url, index) => (
-                                    <img
-                                        key={index}
-                                        src={url}
-                                        alt={`Grid Image ${index}`}
-                                        onClick={() => handleImageClick(url)}
-                                        className={selectedImageUrl === url ? 'selected' : ''}
-                                    />
-                                ))}
+                                    {imageUrls.map((url, index) => (
+                                        <img
+                                            key={index}
+                                            src={url}
+                                            alt={`Grid Image ${index}`}
+                                            onClick={() => handleImageClick(url)}
+                                            className={selectedImageUrl === url ? 'selected' : ''}
+                                        />
+                                    ))}
                             </div>
                             <div className="liveButtonContainer">
-                                <button 
-                                    className="liveButton"
-                                    onClick={handleLiveButtonClick}
-                                >
-                                    Live
-                                </button>
+                                    <button 
+                                        className="liveButton"
+                                        onClick={handleLiveButtonClick}
+                                    >
+                                        Live
+                                    </button>
                             </div>
                         </div>
                         <div className="mainImage">
                             {selectedImageUrl && (
-                                <img
-                                    src={selectedImageUrl}
-                                    alt="Main Image"
-                                    onClick={openImage}
-                                />
-                            )}
+                                    <img
+                                        src={selectedImageUrl}
+                                        alt="Main Image"
+                                        onClick={openImage}
+                                    />
+                                )}
                         </div>
                         <div className="croppedImage">
-                            <div className="croppedImageDisplay">
+                        <div className="croppedImageDisplay">
                                 {croppedImageUrl && (
                                     <img src={croppedImageUrl} alt="Cropped Image" />
                                 )}
@@ -255,23 +322,83 @@ const Manual = () => {
                                 <button className="saveButton" onClick={handleSaveButtonClick}>Store</button>
                             </div>
                         </div>
-                        <div className="targetContainer">
-                        <div className="croppedImageDisplay"> 
-                            {buttons.map((button) => (
-                            <button 
-                                key={button.id} 
-                                onClick={() => automationButton(button.id)} // Attach onClick function
-                            >
-                                {button.label}
-                            </button>
-                            ))}
-                        </div>    
+                    </div>
+                    <div className="terminal-box">
+                        <div className="image_Processing">
+                            {/* Content for Image Processing */}
+                        </div>
+                        <div className="drone_Status">
+                            {/* Content for Drone Status*/} 
                         </div>
                     </div>
                 </div>
-                <div className="bottom-box">
-                    <div className="control-buttons">
-                        <button id="start-geotag" className='geobutton'onClick={startGeotag}>Start Geotag</button>
+                <div className="right-container">
+                    <div className="top-right-container">
+                        <div className="button-grid">
+                        <button
+                            className={`Control-Button ${isArmed ? 'armed' : 'disarmed'}`}  // Add 'armed' class if the drone is armed
+                            onClick={handleArmClick}  // Call the handleArmClick function when clicked
+                        >
+                            {isArmed ? 'Armed' : 'Disarmed'}  
+                        </button>
+                            <button className="Control-Button" onClick={handleTakeoff}>Take Off</button>
+                            <button
+                                onClick={startGeotag}
+                            >
+                                Geotag
+                            </button>
+                            <button className="Control-Button">Lock Servo</button>
+                            <button className="Control-Button">Mission Start</button>
+                            {/* <button className="Control-Button">RTL</button> */}
+                            <button
+                                className={`Control-Button ${selectedMode === 'stabilize' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
+                                onClick={() => handleModeChange('stabilize')}
+                            >
+                                Stabilize
+                            </button>
+                            <button
+                                className={`Control-Button ${selectedMode === 'guided' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
+                                onClick={() => handleModeChange('guided')}
+                            >
+                                Guided
+                            </button>
+                            <button
+                                className={`Control-Button ${selectedMode === 'auto' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
+                                onClick={() => handleModeChange('auto')}
+                            >
+                                Auto
+                            </button>
+                            <button
+                                className={`Control-Button ${selectedMode === 'loiter' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
+                                onClick={() => handleModeChange('loiter')}
+                            >
+                                Loiter
+                            </button>
+                        </div>
+                    </div>
+                    <div className="bottom-right-container">
+                        <div className="bottom-up-container">
+                            {buttons.map((button) => (
+                                <button className='Repos-Button'
+                                    key={button.id} 
+                                    onClick={() => automationButton(button.id)} // Attach onClick function
+                                >
+                                    <span>{button.label}</span>
+                                </button>
+                                ))}
+                            {/* <div className="data-box">
+                                <input type="text" placeholder="Voltage" value={backendData.voltage} readOnly />
+                            </div>
+                            <div className="data-box">
+                                <input type="text" placeholder="Current" value={backendData.current} readOnly />
+                            </div>
+                            <div className="data-box">
+                                <input type="text" placeholder="Temperature" value={backendData.temperature} readOnly />
+                            </div> */}
+                        </div>
+                        <div className="bottom-down-container">
+            
+                        </div>
                     </div>
                 </div>
             </div>

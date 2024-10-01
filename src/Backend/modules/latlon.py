@@ -29,7 +29,7 @@ def read_dict_from_file(pickle_path):
 
 def get_midpoint(image_path):
     # Open the image
-    print("Getting midpoint from ", image_path, flush=True)
+    print("Getting midpoint from image",  flush=True)
     response = requests.get(image_path)
 
 # Check if the request was successful
@@ -67,7 +67,7 @@ def newlatlon(lat, lon, hdg, dist, movementHead):
 
 
 def lat_long_calculation(csv_path, img_path, image_name, x_cord, y_cord, target_no):
-    print("target aquired", flush=True)
+    print("Calculating Latitude and Longitude", flush=True)
     print(img_path, flush=True)
     point2 = get_midpoint(img_path)
     point1 = (x_cord, y_cord)
@@ -113,7 +113,7 @@ def lat_long_calculation(csv_path, img_path, image_name, x_cord, y_cord, target_
     lat_to_use, long_to_use, alt_to_use, heading_to_use, yaw, = row[
         'lat'], row['lon'], row['alt'], row['head'], row['yaw']
     # logging.info("Index of data %s", df.loc[index])
-    print("lat=", lat_to_use, flush=True)
+    print("Latitude: ", lat_to_use, "Longitutde: ", long_to_use, flush=True)
     if lat_to_use == None:
         # logging.info("NO LAT AND LON FOUND, EXITNG FUNCTION")
         return
@@ -127,7 +127,7 @@ def lat_long_calculation(csv_path, img_path, image_name, x_cord, y_cord, target_
 
     value = newlatlon(lat_to_use, long_to_use, yaw, real_distance_gsd, angle)
 
-    print("Found latitude and longitude: %s", value, flush=True)
+    print("Found Real latitude and longitude: ", value, flush=True)
     lati = value[0]
     longi = value[1]
 

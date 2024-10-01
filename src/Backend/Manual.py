@@ -14,8 +14,7 @@ CORS(app)
 
 # Directories and File paths
 parent_folder = "../../Data/"
-# IMAGE_DIRECTORY = parent_folder+"/cropped"
-IMAGE_DIRECTORY = parent_folder+"/input"
+IMAGE_DIRECTORY = parent_folder+"/images"
 CROPPED_IMAGE_DIRECTORY = parent_folder+"/cropped"
 DATA_FILE = '../../Data/details.txt'
 csv_path = parent_folder+'/results.csv'
@@ -54,7 +53,7 @@ def crop_image(image_path, x, y):
     crop = image[y_start:y_end, x_start:x_end]
 
     print(f'Received coordinates: x={xco}, y={yco}', file=sys.stderr)
-
+    print('Cropping Image...', flush=True)
     cropped_image_filename = f'cropped_image_{global_count}.png'
     cropped_image_path = os.path.join(
         CROPPED_IMAGE_DIRECTORY, cropped_image_filename)
@@ -117,9 +116,10 @@ def save_details():
         id = data.get('id', '')
         label = data.get('label', '')
 
-        print(f"Received data: {image_name}, {
-              shape}, {colour}, {id}, {label}", file=sys.stderr, flush=True)
-        print(xco, yco, flush=True)
+        # print(f"Received data: {image_name}, {
+        #       shape}, {colour}, {id}, {label}", file=sys.stderr, flush=True)
+        print("Saving Details...")
+        # print(xco, yco, flush=True)
         lats, longs = lat_long_calculation(
             csv_path, image_url, image_name, xco, yco, id)
 
@@ -139,68 +139,68 @@ def save_details():
 @app.route('/toggle-connection', methods=['POST'])
 def connectDrone():
     global the_connection, is_connected
-
-    # If already connected, close the connection
-    print("meh")
+    the_connection, is_connected = toggle_connection()
     if is_connected:
-        if the_connection is not None:
-            the_connection.close()
-            the_connection = None
-            is_connected = False
-            print("Disconnected from the drone")
-        return jsonify({'message': 'Disconnected from the drone'}), 200
-
-    # Start a new connection to the drone
-    try:
-        the_connection = mavutil.mavlink_connection('udp:10.42.0.55:14552')
-
-        # Wait for the first heartbeat
-        print("Attempting to connect to the drone...")
-        the_connection.wait_heartbeat()
-        print("Heartbeat received from system (system %u component %u)" %
-              (the_connection.target_system, the_connection.target_component))
-
-        # Set connection status to True only after successful connection
-        is_connected = True
-
-        print("Connected successfully!")
         return jsonify({'message': 'Connected to the drone',
                         'system': the_connection.target_system,
                         'component': the_connection.target_component}), 200
-    except Exception as e:
-        print(f"Failed to connect to the drone: {
-              str(e)}")  # Print the error message
-        return jsonify({'message': f'Failed to connect to the drone: {str(e)}'}), 500
+    else:
+        print(f"Failed to connect to the drone",
+              flush=True)  # Print the error message
+        return jsonify({'message': f'Failed to connect to the drone: '}), 500
 
 
-@app.route('/takeoff', methods=['POST'])
-def takeoff_drone():
+@app.route('/arm-disarm', methods=['POST'])
+def armdisarm():
+    data = request.get_json()
+    action = data.get('action')  # Get the action ('arm' or 'disarm')
 
     try:
-        # Send arm command
-        print("triggered")
-        the_connection.mav.command_long_send(the_connection.target_system, the_connection.target_component,
-                                             mavutil.mavlink.MAV_CMD_COMPONENT_ARM_DISARM, 0, 1, 0, 0, 0, 0, 0, 0)
+        if action == 'arm':
+            msgs = arm()  # Call the arm function
+        elif action == 'disarm':
+            msgs = disarm()  # Call the disarm function
+        else:
+            raise ValueError('Invalid action')
 
-        # Wait for an acknowledgment
-        msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
-        print(msg)
+        return jsonify({'status': 'success', 'message': msgs}), 200
 
-        # Send takeoff command
-        the_connection.mav.command_long_send(the_connection.target_system, the_connection.target_component,
-                                             mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, 0, 0, 0, 0, 0, 0, 0, 10)
-
-        # Wait for an acknowledgment
-        msg2 = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
-        print(msg2)
-        return jsonify({'status': 'success', 'message': str(msg)}), 200
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
-@app.route('/start_geotag', methods=['POST'])
+@app.route('/change-mode', methods=['POST'])
+def change_mode():
+    try:
+        mode = request.json.get('mode')
+
+        if mode == 'auto':
+            msgs = auto()  # Call auto mode function
+        elif mode == 'guided':
+            msgs = guided()  # Call guided mode function
+        elif mode == 'loiter':
+            msgs = loiter()  # Call loiter mode function
+        elif mode == 'stabilize':
+            msgs = stabilize()
+        else:
+            return jsonify({'status': 'error', 'message': 'Invalid mode'}), 400
+
+        return jsonify({'status': 'success', 'message': msgs}), 200
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/takeoff', methods=['POST'])
+def takeoffdrone():
+    response = takeoffcommand()
+    return response
+
+
+@app.route('/start_geotagg', methods=['POST'])
 def start_geotagg():
+    print("running geotag", flush=True)
     global process
+    print("running geotag", flush=True)
     process = run_python_file(geo_path)
     global msgs
     msgs = "started geotagg"
@@ -212,7 +212,7 @@ def start_geotagg():
 def repos():
     # logging.info("bottle drop" )
     # logging.info("Target number bottle is dropping on: %s",target_no )
-    print("reposition triggered", flush="True")
+    print("Moving towards target...", flush="True")
     global msg
     target_no = 0
     msg = "Target number bottle is dropping on: %s"+str(target_no)

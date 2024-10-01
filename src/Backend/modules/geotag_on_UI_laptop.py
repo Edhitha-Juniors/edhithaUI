@@ -9,16 +9,20 @@ import pandas
 import paramiko
 from folium.features import DivIcon
 
+
 def signal_handler(sig, frame):
     print("Stopping execution...")
     sys.exit(0)
 
+
 signal.signal(signal.SIGTERM, signal_handler)
+
 
 def move_and_create_unique_folder(folder_name, l_path):
     # Get a list of all existing folders in the current directory
     # print(os.listdir(folder_name))
-    existing_folders = [folder for folder in os.listdir(folder_name) if os.path.isdir(os.path.join(folder_name, folder))]
+    existing_folders = [folder for folder in os.listdir(
+        folder_name) if os.path.isdir(os.path.join(folder_name, folder))]
 
     print(existing_folders)
     # Initialize a counter for postfixing the folder name
@@ -48,21 +52,25 @@ def move_and_create_unique_folder(folder_name, l_path):
 
         print(f"Moved contents of {l_path} to {new_folder_name}")
 
+
 def parse_string_to_variables(input_string):
     # Use regular expression to extract values from the string
-    match = re.match(r"\$' (\S+) (\S+) (\S+) (\S+) (\S+) (\S+) (\S+) '\$", input_string)
-    
+    match = re.match(
+        r"\$' (\S+) (\S+) (\S+) (\S+) (\S+) (\S+) (\S+) '\$", input_string)
+
     if match:
         # Extract the matched groups
         file, lat, lon, alt, head, yaw, time = match.groups()
-        
+
         # Convert numerical values to appropriate types
-        lat, lon, alt, head, yaw, time = map(float, (lat, lon, alt, head, yaw, time))
-        
+        lat, lon, alt, head, yaw, time = map(
+            float, (lat, lon, alt, head, yaw, time))
+
         return file, lat, lon, alt, head, yaw, time
     else:
         return None
-    
+
+
 def path_map(waypoints, l_path):
     # Check if waypoints list is empty
     if not waypoints:
@@ -78,9 +86,10 @@ def path_map(waypoints, l_path):
         icon = DivIcon(
             icon_size=(20, 20),
             icon_anchor=(10, 10),
-            html=f'<div style="transform: rotate({yaw}deg); color: red;">&#11015;</div>',
+            html=f'<div style="transform: rotate({
+                yaw}deg); color: red;">&#11015;</div>',
         )
-        
+
         folium.Marker(
             [lat, lon],
             icon=icon,
@@ -137,10 +146,12 @@ def ssh_and_run_commands(hostname, username, password, commands, l_path, cam_way
             prev_file = None
             # Print the captured lines
             for line in captured_lines:
-                file, lat, lon, alt, head, yaw, time = parse_string_to_variables(line)
+                file, lat, lon, alt, head, yaw, time = parse_string_to_variables(
+                    line)
                 if file != prev_file:
                     # Print the extracted values
-                    print("File:", file,"Latitude:", lat,"Longitude:", lon,"Altitude:", alt,"Head:", head,"Yaw:", yaw,"Time:", time)
+                    print("File:", file, "Latitude:", lat, "Longitude:", lon,
+                          "Altitude:", alt, "Head:", head, "Yaw:", yaw, "Time:", time)
                     # print(line.strip())
 
                     try:
@@ -156,7 +167,6 @@ def ssh_and_run_commands(hostname, username, password, commands, l_path, cam_way
                     except Exception as e:
                         print(f"Error updating results_df: {e}")
 
-                
                     results_df.to_csv(results_csv_file, index=False)
                     cam_waypoints.append((lat, lon, alt, head, yaw, time))
 
@@ -173,32 +183,33 @@ def ssh_and_run_commands(hostname, username, password, commands, l_path, cam_way
         print(f"Error: {e}")
         path_map(cam_waypoints, l_path)
 
+
 if __name__ == '__main__':
     # Replace these values with your actual remote device details
-    while(True):
+    while (True):
         hostname = '192.168.1.21'
         username = 'edhitha'
         password = 'password'
         commands_to_run = [
-        './geotag.sh'
+            './geotag.sh'
             # Add more commands as needed
         ]
 
         # Folder Paths
-        l_path = r"C:\Users\nikha\flights24\ui_28_05"
+        l_path = "/Users/aahil/Downloads/edhithaGCS/Data/test"
         os.makedirs(l_path, exist_ok=True)
         # Parent folder to save there
-        parent_path = r'C:\Users\nikha\flights24'
+        parent_path = '/Users/aahil/Downloads/edhithaGCS/Data'
         move_and_create_unique_folder(parent_path, l_path)
         os.makedirs(l_path+'/images', exist_ok=True)
         print("made images folder")
         os.makedirs(l_path+'/cropped', exist_ok=True)
         print("made cropped folder")
 
-        # Global variables 
+        # Global variables
         cam_waypoints = []
 
-
         # Run the SSH and command execution
-        ssh_and_run_commands(hostname, username, password, commands_to_run, l_path, cam_waypoints)
+        ssh_and_run_commands(hostname, username, password,
+                             commands_to_run, l_path, cam_waypoints)
         pass
