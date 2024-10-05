@@ -25,8 +25,9 @@ def toggle_connection():
 
     # Start a new connection to the drone
     try:
-        the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14551')
-        print("Attempting to connect to the drone...", flush=True)
+        # #the_connection = mavutil.mavlink_connection('tcp:10.42.0.1:5760')
+        the_connection = mavutil.mavlink_connection('udp:10.42.0.55:14555')
+        # the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14551')
         the_connection.wait_heartbeat()
         print("Heartbeat received from system (system %u component %u)" %
               (the_connection.target_system, the_connection.target_component), flush=True)
@@ -50,21 +51,35 @@ def toggle_connection():
 
 def monitor_drone_status():
     global the_connection, is_connected, drone_state
+    # Store previous values for comparison
+    prev_armed_status = None
+    prev_mode = None
+
     while is_connected:
-        msg = the_connection.recv_match(
-            type=['HEARTBEAT', 'COMMAND_ACK'], blocking=True)
+        # Use a non-blocking call to receive messages
+        msg = the_connection.recv_match(type=['HEARTBEAT', 'COMMAND_ACK'], blocking=False)
 
-        if msg:
-            if msg.get_type() == 'HEARTBEAT':
-                drone_state.is_armed = bool(
-                    msg.base_mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED)
-                drone_state.current_mode = mavutil.mode_string_v10(msg)
-                print(f"Drone Status - Mode: {drone_state.current_mode}, Arm Status: {
-                      'Armed' if drone_state.is_armed else 'Disarmed'}", flush=True)
+        if msg and msg.get_type() == 'HEARTBEAT':
+            # Get the current armed status and mode
+            current_armed_status = bool(
+                msg.base_mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED)
+            current_mode = mavutil.mode_string_v10(msg)
 
-        time.sleep(0.5)
- # Adjust the frequency of status updates as needed
+            # Check if there is a change in armed status or mode
+            if current_armed_status != prev_armed_status or current_mode != prev_mode:
+                # Update the drone state
+                drone_state.is_armed = current_armed_status
+                drone_state.current_mode = current_mode
 
+                # Print only when there is a change
+                print(f"Drone Status - Mode: {drone_state.current_mode}, Arm Status: "
+                      f"{'Armed' if drone_state.is_armed else 'Disarmed'}", flush=True)
+
+                # Update previous state variables
+                prev_armed_status = current_armed_status
+                prev_mode = current_mode
+
+        # No need for time.sleep() since the function waits for new messages asynchronously
 
 def arm():
     global the_connection
@@ -174,3 +189,19 @@ def stabilize():
         stabilizemsgs = "Error in stabilize: " + str(e)
         return stabilizemsgs
         # logging.error("Error in loiter: %s", e)
+
+
+def rtl():
+    global the_connection
+    try:
+        print("Entering RTL...", flush=True)
+        the_connection.mav.command_long_send(
+            the_connection.target_system, the_connection.target_component, 192, 0, 0, 0, 0, 0, 0, 0, 0)
+        msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
+        global rtlmsgs
+        rtlmsgs = "In RTL: " + str(msg)
+        return rtlmsgs
+    except Exception as e:
+        rtlmsgs = "Error in RTL: " + str(e)
+        return rtlmsgs
+        # logging.error("Error in RTL: %s", e)

@@ -12,3 +12,6 @@ nvcamtest_7563_s00_00070.jpg: Shape=, Colour=, id=1, Label=Target 1
 nvcamtest_7563_s00_00070.jpg: Shape=, Colour=, id=1, Label=Target 1
 nvcamtest_7563_s00_00070.jpg: Shape=, Colour=, id=1, Label=Target 1
 nvcamtest_7563_s00_00070.jpg: Shape=, Colour=, id=1, Label=Target 1
+nvcamtest_7563_s00_00070.jpg: Shape=, Colour=, id=1, Label=Target 1
+nvcamtest_7563_s00_00070.jpg: Shape=, Colour=, id=1, Label=Target 1
+nvcamtest_7563_s00_00070.jpg: Shape=, Colour=, id=2, Label=Target 2

@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import '../assets/CSS/Manual.css';
 import droneConnectedIcon from '../assets/images/droneConnected.svg';
 import logo from '../assets/images/logo.png';
+import Terminal from 'react-console-emulator';
+import { height } from '@fortawesome/free-solid-svg-icons/fa0';
+
 
 const Manual = () => {
     const [isConnected, setIsConnected] = useState(false); // State for connection status
@@ -240,6 +243,16 @@ const Manual = () => {
         }
     };
 
+    const handleRTL = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/rtl', { method: 'POST' });
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Error taking off:', error);
+        }
+    };
+
     const handleModeChange = async (mode) => {
         try {
             const response = await fetch('http://127.0.0.1:9080/change-mode', {
@@ -345,10 +358,30 @@ const Manual = () => {
                     </div>
                     <div className="terminal-box">
                         <div className="image_Processing">
-                            {/* Content for Image Processing */}
+                        <Terminal
+                                className="terminal" 
+                                welcomeMessage={''}
+                                promptLabel={'>'}
+                                autoFocus={true}
+                                style={{ 
+                                    width: '100%', 
+                                    height: '100%', 
+                                    minHeight: '0'  // Ensure the terminal doesn't overflow
+                                }}
+                            />
                         </div>
                         <div className="drone_Status">
-                            {/* Content for Drone Status*/} 
+                            <Terminal
+                                className="terminal" 
+                                welcomeMessage={''}
+                                promptLabel={'>'}
+                                autoFocus={true}
+                                style={{ 
+                                    width: '100%', 
+                                    height: '100%', 
+                                    minHeight: '0'  // Ensure the terminal doesn't overflow
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -367,9 +400,8 @@ const Manual = () => {
                             >
                                 Geotag
                             </button>
-                            <button className="Control-Button">Lock Servo</button>
                             <button className="Control-Button">Mission Start</button>
-                            {/* <button className="Control-Button">RTL</button> */}
+                            <button className="Control-Button" onClick={handleRTL}>RTL</button>
                             <button
                                 className={`Control-Button ${selectedMode === 'STABILIZE' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
                                 onClick={() => handleModeChange('stabilize')}
@@ -394,6 +426,7 @@ const Manual = () => {
                             >
                                 Loiter
                             </button>
+                            <button className="Control-Button">Lock Servo</button>
                         </div>
                     </div>
                     <div className="bottom-right-container">
@@ -417,7 +450,7 @@ const Manual = () => {
                             </div> */}
                         </div>
                         <div className="bottom-down-container">
-            
+                            L
                         </div>
                     </div>
                 </div>

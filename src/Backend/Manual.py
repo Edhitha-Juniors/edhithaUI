@@ -207,6 +207,16 @@ def takeoffdrone():
     return response
 
 
+@app.route('/rtl', methods=['GET'])
+def rtl_command():
+    try:
+        # Call the rtl function
+        result = rtl()
+        return jsonify({"status": "success", "message": result}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+    
+
 @app.route('/start_geotagg', methods=['POST'])
 def start_geotagg():
     print("running geotag", flush=True)

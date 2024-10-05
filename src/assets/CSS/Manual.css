@@ -327,16 +327,19 @@ Terminal */
     display: flex;
     justify-content: space-between; /* Aligns children divs side by side */
     display: flex;
-    height: 32%;
+    height: 34%;
     margin: 10px;
     margin-top: 0;
+    padding: 10px;
     padding-top: 0;
-    padding: 10px;/* Space above the terminal box */
+    padding-bottom: 0;
+    /* Space above the terminal box */
 }
 
 .image_Processing {
     flex: 1; /* Allows it to grow */
     margin-right: 5px;
+    padding-top: 0;
     background-color: #000; /* Space between the two boxes */
     /* Add additional styles as needed */
 }
@@ -344,6 +347,7 @@ Terminal */
 .drone_Status {
     flex: 1; /* Allows it to grow */
     margin-left: 5px;
+    padding-top: 0;
     background-color: #000; /* Space between the two boxes */
     /* Add additional styles as needed */
 }
