@@ -184,22 +184,22 @@ const Manual = () => {
                 setIsConnected(true); // Assuming the connection is successful
     
             // Start continuous polling for drone status
-            const statusInterval = setInterval(async () => {
-                try {
-                    const statusResponse = await fetch('http://127.0.0.1:9080/drone-status', { method: 'GET' });
-                    if (statusResponse.ok) {
-                        const statusData = await statusResponse.json();
-                        setSelectedMode(statusData.current_mode); // Update the selected mode
-                        setIsArmed(statusData.is_armed); // Update the armed status
-                    } else {
-                        console.error('Failed to get drone status');
-                    }
-                } catch (error) {
-                    console.error('Error fetching drone status:', error);
-                }
-            }, 1000); // Fetch status every 1 second (adjust as needed)
-            // Optionally store the interval ID so you can clear it later
-            return () => clearInterval(statusInterval);
+            // const statusInterval = setInterval(async () => {
+            //     try {
+            //         const statusResponse = await fetch('http://127.0.0.1:9080/drone-status', { method: 'GET' });
+            //         if (statusResponse.ok) {
+            //             const statusData = await statusResponse.json();
+            //             setSelectedMode(statusData.current_mode); // Update the selected mode
+            //             setIsArmed(statusData.is_armed); // Update the armed status
+            //         } else {
+            //             console.error('Failed to get drone status');
+            //         }
+            //     } catch (error) {
+            //         console.error('Error fetching drone status:', error);
+            //     }
+            // }, 1000); // Fetch status every 1 second (adjust as needed)
+            // // Optionally store the interval ID so you can clear it later
+            // return () => clearInterval(statusInterval);
             } else {
                 console.error('Failed to toggle connection');
             }
