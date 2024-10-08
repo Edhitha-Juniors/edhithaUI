@@ -196,7 +196,7 @@ if __name__ == '__main__':
         ]
 
         # Folder Paths
-        l_path = "/Users/aahil/Downloads/edhithaGCS/Data/test"
+        l_path = "/Users/aahil/Downloads/edhithaGCS/Data/Test"
         os.makedirs(l_path, exist_ok=True)
         # Parent folder to save there
         parent_path = '/Users/aahil/Downloads/edhithaGCS/Data'

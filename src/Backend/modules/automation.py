@@ -3,7 +3,7 @@ from pymavlink import mavutil
 import math
 from modules.mavlink_commands import *
 
-alti = 31
+alti = 20
 
 
 def distance_lat_lon(lat1, lon1, lat2, lon2):
@@ -44,29 +44,29 @@ def distance_lat_lon(lat1, lon1, lat2, lon2):
 #     # logging.info("In guided: %s", msg)
 
 
-def inf_drop():
-    global the_connection
-    print("a")
+def inf_drop(the_connection):
+    global alti
     guided()
     time.sleep(1.5)
+    print("BABA", flush=True)
     gps = the_connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
-    # logging.info("Current GPS: %s",gps )
+    print("Current GPS: %s", gps, flush=True )
     lati = gps.lat
     longi = gps.lon
-    print("Lat and Long for drop is: ", lati, longi)
+    # print("Lat and Long for drop is: ", lati, longi)
     the_connection.mav.send(mavutil.mavlink.MAVLink_set_position_target_global_int_message(
         10, the_connection.target_system, the_connection.target_component, 6, 1024, int(lati), int(longi), alti, 0, 0, 0, 0, 0, 0, 0, 0))
     global msgs
     msgs = "Repositioning for target: "+str(1)
+    print(msgs, flush=True)
 
 
 def automation(lati, longi, target_no, the_connection):
-
+    
     print("Automation", flush=True)
-    print(the_connection, flush=True)
     gps = the_connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
     # logging.info("GPS during calculation: %s", gps)
-
+    print("Checking lat and long...", flush=True)
     if lati == "null" or longi == "null":
         inf_drop(the_connection)
     else:
@@ -84,6 +84,7 @@ def automation(lati, longi, target_no, the_connection):
         guided()
         # drop()
         time.sleep(1.5)
+        print("Moving...",flush=True)
         the_connection.mav.send(mavutil.mavlink.MAVLink_set_position_target_global_int_message(
             10, the_connection.target_system, the_connection.target_component, 6, 1024, int(lati), int(longi), alti, 0, 0, 0, 0, 0, 0, 0, 0))
         """ msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
@@ -127,7 +128,7 @@ def automation(lati, longi, target_no, the_connection):
 
                     # loiter()
                     # the_connection.mav.set_mode_send(the_connection.target_system,mavutil.mavlink.MAV_MODE_FLAG_CUSTOM_MODE_ENABLED,17)
-                    loiter()  # Replace with your desired action
+                    guided()  # Replace with your desired action
                     break
         except Exception as e:
             pass

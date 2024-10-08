@@ -277,7 +277,7 @@ const Manual = () => {
 
     const startGeotag = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:9080/start_geotagg', { method: 'POST' });
+            const response = await fetch('http://127.0.0.1:9080/start_geotagg', { method: 'POST', mode: 'no-cors' });
             const data = await response.json();
             console.log(data.message);
         } catch (error) {
@@ -358,7 +358,7 @@ const Manual = () => {
                     </div>
                     <div className="terminal-box">
                         <div className="image_Processing">
-                        <Terminal
+                        {/* <Terminal
                                 className="terminal" 
                                 welcomeMessage={''}
                                 promptLabel={'>'}
@@ -368,10 +368,10 @@ const Manual = () => {
                                     height: '100%', 
                                     minHeight: '0'  // Ensure the terminal doesn't overflow
                                 }}
-                            />
+                            /> */}
                         </div>
                         <div className="drone_Status">
-                            <Terminal
+                            {/* <Terminal
                                 className="terminal" 
                                 welcomeMessage={''}
                                 promptLabel={'>'}
@@ -381,7 +381,7 @@ const Manual = () => {
                                     height: '100%', 
                                     minHeight: '0'  // Ensure the terminal doesn't overflow
                                 }}
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>

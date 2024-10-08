@@ -14,18 +14,19 @@ app = Flask(__name__)
 CORS(app)
 
 # Directories and File paths
-parent_folder = "../../Data/"
+parent_folder = "../../Data/Test"
 IMAGE_DIRECTORY = parent_folder+"/images"
 CROPPED_IMAGE_DIRECTORY = parent_folder+"/cropped"
 DATA_FILE = '../../Data/details.txt'
 csv_path = parent_folder+'/results.csv'
 pickle_path = parent_folder+'/cam_wps.pickle'
-geo_log_path = parent_folder+"/log/geo_log.txt"
+geo_log_path = parent_folder+"/geo_log.txt"
 geo_path = "./modules/geotag_on_UI_laptop.py"
 
 # Global variables
 global xco, yco, id, lats, longs, connection
 global_count = 0
+connection = None
 is_connected = False
 the_connection = None
 lats = ["null", "null", "null", "null", "null"]
@@ -33,8 +34,13 @@ longs = ["null", "null", "null", "null", "null"]
 
 # Ensure directories exist
 if not os.path.exists(CROPPED_IMAGE_DIRECTORY):
-    os.makedirs(CROPPED_IMAGE_DIRECTORY)
+    os.makedirs(CROPPED_IMAGE_DIRECTORY, exist_ok=True)
 
+if not os.path.exists(IMAGE_DIRECTORY):
+    os.makedirs(IMAGE_DIRECTORY, exist_ok=True)
+
+# if not os.path.exists(geo_log_path):
+#     os.makedirs(geo_log_path, exist_ok=True)
 
 def crop_image(image_path, x, y):
     global global_count, xco, yco
@@ -231,6 +237,7 @@ def start_geotagg():
 
 @app.route('/reposition', methods=['POST'])
 def repos():
+    print("LALA",flush=True)
     global connection
     # logging.info("bottle drop" )
     # logging.info("Target number bottle is dropping on: %s",target_no )
@@ -238,13 +245,14 @@ def repos():
     global msg
     target_no = 0
     msg = "Target number bottle is dropping on: %s"+str(target_no)
-    print(lats, longs, id, flush=True)
+    # print(lats, longs, id, flush=True)
     lati = lats[id-1]
     longi = longs[id-1]
     # drop()
+    print(lati, longi, flush=True)
     automation(lati, longi, id, connection)
     return "", 204
 
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True, port=9080)
+    app.run(debug=True,  port=9080)
