@@ -1,8 +1,8 @@
 from pymavlink import mavutil
 from flask import Flask, jsonify, request, send_from_directory
-# import threading
-# import time
-# from modules.drone_status import drone_state
+import threading
+import time
+from modules.drone_status import drone_state
 
 global is_connected
 
@@ -25,9 +25,9 @@ def toggle_connection():
 
     # Start a new connection to the drone
     try:
-        # #the_connection = mavutil.mavlink_connection('tcp:10.42.0.1:5760')
+        the_connection = mavutil.mavlink_connection('tcp:10.42.0.1:5760')
         # the_connection = mavutil.mavlink_connection('udp:10.42.0.55:14555')
-        the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14550')
+        # the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14550')
         the_connection.wait_heartbeat()
         print("Heartbeat received from system (system %u component %u)" %
               (the_connection.target_system, the_connection.target_component), flush=True)
@@ -49,21 +49,21 @@ def toggle_connection():
         return None, jsonify({'message': f'Failed to connect to the drone: {str(e)}'}), 500
 
 
-# def monitor_drone_status():
-#     global the_connection, is_connected, drone_state
-#     while is_connected:
-#         msg = the_connection.recv_match(
-#             type=['HEARTBEAT', 'COMMAND_ACK'], blocking=True)
+def monitor_drone_status():
+    global the_connection, is_connected, drone_state
+    while is_connected:
+        msg = the_connection.recv_match(
+            type=['HEARTBEAT', 'COMMAND_ACK'], blocking=True)
 
-#         if msg:
-#             if msg.get_type() == 'HEARTBEAT':
-#                 drone_state.is_armed = bool(
-#                     msg.base_mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED)
-#                 drone_state.current_mode = mavutil.mode_string_v10(msg)
-#                 print(f"Drone Status - Mode: {drone_state.current_mode}, Arm Status: {
-#                       'Armed' if drone_state.is_armed else 'Disarmed'}", flush=True)
+        if msg:
+            if msg.get_type() == 'HEARTBEAT':
+                drone_state.is_armed = bool(
+                    msg.base_mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED)
+                drone_state.current_mode = mavutil.mode_string_v10(msg)
+                print(f"Drone Status - Mode: {drone_state.current_mode}, Arm Status: {
+                      'Armed' if drone_state.is_armed else 'Disarmed'}", flush=True)
 
-#         time.sleep(0.5)
+        time.sleep(0.5)
  # Adjust the frequency of status updates as needed
 
 
