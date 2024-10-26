@@ -1,4 +1,4 @@
-#!/Users/aahil/Downloads/edhithaGCS/.venv/bin/python3.12
+#!/Users/aahil/Edhitha/edhithaGCS/.venv/bin/python3.12
 
 '''
 Summarize MAVLink logs. Useful for identifying which log is of interest in a large set.

@@ -1,4 +1,4 @@
-#!/Users/aahil/Downloads/edhithaGCS/.venv/bin/python3.12
+#!/Users/aahil/Edhitha/edhithaGCS/.venv/bin/python3.12
 
 '''
 extract ISBH and ISBD messages from AP_Logging files and produce FFT plots

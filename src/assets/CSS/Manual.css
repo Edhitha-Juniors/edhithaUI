@@ -91,7 +91,7 @@ Left side */
 
 .image-box {
     display: flex;
-    height: 60%;
+    height: 90%;
     margin: 10px;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -246,8 +246,9 @@ Cropped Image */
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     padding: 10px;
     border: 1px solid #ccc;
-    flex: 3;
+    flex: 2;
     margin-right: 0px;
+    overflow-y: scroll;
 }
 
 .croppedImageDisplay {
@@ -289,6 +290,17 @@ Cropped Image */
     font-size: 15px;
 }
 
+.repo-button-grid {
+    
+    height: 25%; /* Manually adjustable height for the container */
+    display: grid;
+    overflow-y: scroll;
+    grid-template-columns: repeat(2, 1fr); /* 3-column grid layout */
+    /*grid-auto-rows: 25%;  Each row will take 35% of the container height */
+    grid-gap: 15px;
+    padding: 10% 0% 0% 2%;
+}
+
 .coordinatesBox {
     width: 93%;
     padding: 10px;
@@ -324,33 +336,43 @@ Cropped Image */
 Terminal */
 
 .terminal-box {
-    display: flex;
-    justify-content: space-between; /* Aligns children divs side by side */
-    display: flex;
-    height: 34%;
-    margin: 10px;
-    margin-top: 0;
-    padding: 10px;
-    padding-top: 0;
-    padding-bottom: 0;
-    /* Space above the terminal box */
+    height: 150px; /* Fixed height for consistent layout */
+    overflow-y: auto; /* Enable scrolling */
+    color: #0f0; /* Green text for terminal feel */
+    background-color: #1e1e1e; /* Darker background for contrast */
+    font-family: "Courier New", Courier, monospace; /* Monospace font */
+    font-size: 14px; /* Adjust for readability */
+    padding: 10px 15px; /* Adjusted padding */
+    border-radius: 5px; /* Softened corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow for depth */
 }
 
-.image_Processing {
-    flex: 1; /* Allows it to grow */
-    margin-right: 5px;
-    padding-top: 0;
-    background-color: #000; /* Space between the two boxes */
-    /* Add additional styles as needed */
+/* Optional: Add a blinking cursor effect */
+@keyframes blink {
+    50% { opacity: 0; }
+}
+.terminal-box::after {
+    content: "_";
+    animation: blink 1s step-start infinite;
+    color: #0f0; /* Matches text color */
 }
 
-.drone_Status {
-    flex: 1; /* Allows it to grow */
-    margin-left: 5px;
-    padding-top: 0;
-    background-color: #000; /* Space between the two boxes */
-    /* Add additional styles as needed */
+/* Style scrollbar for modern look */
+.terminal-box::-webkit-scrollbar {
+    width: 8px;
 }
+.terminal-box::-webkit-scrollbar-track {
+    background: #2e2e2e;
+}
+.terminal-box::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
+    border: 2px solid #2e2e2e;
+}
+.terminal-box::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
 
 
 /* ---------------------------------------------------------------------------------------------------------------
@@ -440,12 +462,8 @@ Controls */
 .bottom-up-container {
     box-shadow: 0px 1px 1px rgba(9, 30, 66, 0.25), 0px 0px 1px 1px rgba(9, 30, 66, 0.13);
     height: 44%; /* Manually adjustable height for the container */
-    display: grid;
-    overflow-y: scroll;
-    grid-template-columns: repeat(3, 1fr); /* 3-column grid layout */
-    grid-auto-rows: 35%; /* Each row will take 35% of the container height */
-    grid-gap: 15px;
-    padding: 25px;
+    
+    padding: 10px;
 }
 
 

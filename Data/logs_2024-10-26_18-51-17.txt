@@ -1,0 +1,30 @@
+2024-10-26 18:51:17,463 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-26 18:51:17,475 - WARNING -  * Debugger is active!
+2024-10-26 18:51:20,714 - INFO - Client connected
+2024-10-26 18:51:21,520 - INFO - Received coordinates: x=2063, y=1037
+2024-10-26 18:51:21,521 - INFO - Cropping Image...
+2024-10-26 18:51:22,715 - INFO - Client connected
+2024-10-26 18:51:24,365 - INFO - Received data: nvcamtest_8706_s00_00052.jpg, , , 1, Target 1
+2024-10-26 18:51:24,366 - INFO - Saving Details...
+2024-10-26 18:51:24,376 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-26 18:51:24,378 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_8706_s00_00052.jpg HTTP/11" 200 2019542
+2024-10-26 18:51:24,395 - INFO - Real distance GSD: 4.068723723724677
+2024-10-26 18:51:24,399 - INFO - Desired Latitude and Longitude sent ....
+2024-10-26 18:51:24,399 - INFO - Pixel distance: 1312.4915237821538
+2024-10-26 18:51:24,399 - INFO - Angle: -35.009901659657494
+2024-10-26 18:51:24,400 - INFO - Calculated Real-life distance: 4.068723723724677
+2024-10-26 18:51:24,400 - INFO - saved target lat and long: 130310248, 775653299
+2024-10-26 18:51:24,401 - INFO - Saved Succesfully.
+2024-10-26 18:51:27,881 - INFO - Client connected
+2024-10-26 18:51:30,439 - INFO - Received data: nvcamtest_8706_s00_00052.jpg, , , 2, Target 2
+2024-10-26 18:51:30,440 - INFO - Saving Details...
+2024-10-26 18:51:30,446 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-26 18:51:30,448 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_8706_s00_00052.jpg HTTP/11" 200 2019542
+2024-10-26 18:51:30,457 - INFO - Real distance GSD: 4.068723723724677
+2024-10-26 18:51:30,460 - INFO - Desired Latitude and Longitude sent ....
+2024-10-26 18:51:30,461 - INFO - Pixel distance: 1312.4915237821538
+2024-10-26 18:51:30,461 - INFO - Angle: -35.009901659657494
+2024-10-26 18:51:30,461 - INFO - Calculated Real-life distance: 4.068723723724677
+2024-10-26 18:51:30,462 - INFO - saved target lat and long: 130310248, 775653299
+2024-10-26 18:51:30,463 - INFO - Saved Succesfully.
+2024-10-26 18:51:32,018 - INFO - Failed to connect to the drone: {str(e)}

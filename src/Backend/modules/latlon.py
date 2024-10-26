@@ -7,6 +7,7 @@ import sys
 from io import *
 import pandas
 import os
+from modules.logger_config import *
 
 GSD = 0.31
 orange_text = '\033[93m'  # ANSI escape code for orange text
@@ -88,7 +89,7 @@ def lat_long_calculation(csv_path, img_path, image_name, x_cord, y_cord, target_
 
     # convert the pixel distance to real-life distance using the GSD constant
     real_distance_gsd = (pixel_distance * GSD)/100
-    # print("Real distance GSD: %s",real_distance_gsd )
+    logging.info("Real distance GSD: %s",real_distance_gsd )
 
     df = None
     while df == None:
@@ -120,10 +121,10 @@ def lat_long_calculation(csv_path, img_path, image_name, x_cord, y_cord, target_
     if yaw == None:
         yaw = 0
 
-    # logging.info('Desired Latitude and Longitude sent ....')
-    # logging.info("Pixel distance: %s", pixel_distance)
-    # logging.info("Angle: %s", angle)
-    # logging.info("Calculated Real-life distance: %s", real_distance_gsd)
+    logging.info('Desired Latitude and Longitude sent ....')
+    logging.info("Pixel distance: %s", pixel_distance)
+    logging.info("Angle: %s", angle)
+    logging.info("Calculated Real-life distance: %s", real_distance_gsd)
 
     value = newlatlon(lat_to_use, long_to_use, yaw, real_distance_gsd, angle)
 
@@ -134,7 +135,7 @@ def lat_long_calculation(csv_path, img_path, image_name, x_cord, y_cord, target_
     latitudes[target_no-1] = lati
     longitudes[target_no-1] = longi
 
-    # logging.info("saved target lat and long: %s, %s", lati, longi)
+    logging.info("saved target lat and long: %s, %s", lati, longi)
     global msgs
     msgs = "Saved target "+str(target_no) + \
         " for lat and long:"+str(lati/1e7) + " ,"+str(longi/1e7)

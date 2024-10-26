@@ -1,4 +1,4 @@
-#!/Users/aahil/Downloads/edhithaGCS/.venv/bin/python3.12
+#!/Users/aahil/Edhitha/edhithaGCS/.venv/bin/python3.12
 
 '''
 example program to extract GPS data from a mavlink log, and create a GPX

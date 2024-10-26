@@ -1,4 +1,4 @@
-#!/Users/aahil/Downloads/edhithaGCS/.venv/bin/python3.12
+#!/Users/aahil/Edhitha/edhithaGCS/.venv/bin/python3.12
 
 '''
 parse a MAVLink protocol XML file and generate a python implementation

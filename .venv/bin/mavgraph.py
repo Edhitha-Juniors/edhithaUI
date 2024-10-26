@@ -1,4 +1,4 @@
-#!/Users/aahil/Downloads/edhithaGCS/.venv/bin/python3.12
+#!/Users/aahil/Edhitha/edhithaGCS/.venv/bin/python3.12
 '''
 graph a MAVLink log file
 Andrew Tridgell August 2011
