@@ -3,17 +3,50 @@ from flask import Flask, jsonify, request, send_from_directory
 import threading
 import time
 from modules.drone_status import drone_state
+from modules.logger_config import *
 
 global is_connected
 
 the_connection = None
 is_connected = False
 
+def drop():
+    # Set the system and component ID (replace with your system and component ID)
+    logging.info("dropping")
+    system_id = the_connection.target_system
+    component_id = the_connection.target_component
+    
+    # Set the servo channel to 7
+    channel = 7
+    command = mavutil.mavlink.MAV_CMD_DO_SET_SERVO
+    param3 = 0
+    param4 = 0
+    param5 = 0
+    param6 = 0
+    param7 = 0
+    
+    # Set PWM value for servo 7 (you can adjust the value as needed)
+    pwm_value = 2000  # Example PWM value for dropping
+    
+    logging.info("Dropping at pwm %s on channel %s", pwm_value, channel)
+
+    # Send the MAV_CMD_DO_SET_SERVO command
+    the_connection.mav.command_long_send(
+        system_id, component_id,
+        command,
+        0,  # Confirmation
+        channel, pwm_value, param3, param4, param5, param6, param7
+    )
+
+    msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
+    logging.info("Dropping message: %s", msg)
+
+    # Wait for a short duration
+    time.sleep(2)
+
 
 def toggle_connection():
     global the_connection, is_connected
-    print("meh")
-
     # If already connected, close the connection
     if is_connected:
         if the_connection is not None:
@@ -21,19 +54,22 @@ def toggle_connection():
             the_connection = None
             is_connected = False
             # Return None for the connection
-            print("Disconnected from the drone")
+            logging.info("Disconnected from the drone.")
+            return the_connection, is_connected
 
     # Start a new connection to the drone
     try:
-        the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14551')
-        print("Attempting to connect to the drone...", flush=True)
+        # the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14550')
+        # the_connection = mavutil.mavlink_connection('udp:10.42.0.1:14551')
+        the_connection = mavutil.mavlink_connection('tcp:10.42.0.1:5760')
+        logging.info("Attempting to connect to the drone...")
         the_connection.wait_heartbeat()
-        print("Heartbeat received from system (system %u component %u)" %
-              (the_connection.target_system, the_connection.target_component), flush=True)
+        logging.info("Heartbeat received from system (system %u component %u)" %
+              (the_connection.target_system, the_connection.target_component))
 
         # Set connection status to True only after successful connection
         is_connected = True
-        print("Connected successfully!", flush=True)
+        logging.info("Connected successfully!")
 
         threading.Thread(target=monitor_drone_status, daemon=True).start()
         print("Monitoring thread started.", flush=True)
@@ -43,8 +79,7 @@ def toggle_connection():
         # return the_connection, is_connected  # Return the connection and its status
     except Exception as e:
         print("failed")
-        print(f"Failed to connect to the drone: {
-              str(e)}", flush=True)  # Print the error message
+        logging.info("Failed to connect to the drone: {str(e)}")  # Print the error message
         return None, jsonify({'message': f'Failed to connect to the drone: {str(e)}'}), 500
 
 
@@ -52,15 +87,15 @@ def monitor_drone_status():
     global the_connection, is_connected, drone_state
     while is_connected:
         msg = the_connection.recv_match(
-            type=['HEARTBEAT', 'COMMAND_ACK'], blocking=True)
+            type=['HEARTBEAT', 'COMMAND_ACK'], blocking=False)
 
         if msg:
             if msg.get_type() == 'HEARTBEAT':
                 drone_state.is_armed = bool(
                     msg.base_mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED)
                 drone_state.current_mode = mavutil.mode_string_v10(msg)
-                print(f"Drone Status - Mode: {drone_state.current_mode}, Arm Status: {
-                      'Armed' if drone_state.is_armed else 'Disarmed'}", flush=True)
+                # print(f"Drone Status - Mode: {drone_state.current_mode}, Arm Status: {
+                #       'Armed' if drone_state.is_armed else 'Disarmed'}", flush=True)
 
         time.sleep(0.5)
  # Adjust the frequency of status updates as needed
@@ -95,6 +130,27 @@ def takeoffcommand():
         tkfmsg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
         print(tkfmsg)
         return jsonify({'status': 'success', 'message': str(tkfmsg)}), 200
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+def rtlcommand():
+    global the_connection
+    try:
+        # Send RTL command
+        print("Returning to launch...")
+
+        # Send RTL (Return to Launch) command
+        the_connection.mav.command_long_send(
+            the_connection.target_system, the_connection.target_component,
+            mavutil.mavlink.MAV_CMD_NAV_RETURN_TO_LAUNCH,  # RTL command
+            0, 0, 0, 0, 0, 0, 0, 0
+        )
+
+        # Wait for an acknowledgment
+        rtlmsg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
+        print(rtlmsg)
+        return jsonify({'status': 'success', 'message': str(rtlmsg)}), 200
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
@@ -150,14 +206,16 @@ def guided():
     try:
         the_connection.mav.command_long_send(
             the_connection.target_system, the_connection.target_component, 176, 0, 1, 4, 0, 0, 0, 0, 0)
-        msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
+        msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True, Timeout = 1)
         global guidedmsgs
-        guidedmsgs = "In loiter: " + str(msg)
+        guidedmsgs = "In Guided: " + str(msg)
+        logging.info(guidedmsgs)
         return guidedmsgs
     except Exception as e:
-        guidedmsgs = "Error in loiter: " + str(e)
+        guidedmsgs = "Error in Guided: " + str(e)
+        logging.info(guidedmsgs)
         return guidedmsgs
-        # logging.error("Error in loiter: %s", e)
+        # logging.error("Error in loiter: %s",c e)
 
 
 def stabilize():

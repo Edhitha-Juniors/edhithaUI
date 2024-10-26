@@ -9,23 +9,45 @@ from modules.mavlink_commands import *
 from modules.latlon import *
 from modules.automation import *
 from modules.drone_status import drone_state
+from modules.logger_config import *
+import logging
+from flask_socketio import SocketIO, emit
+
 
 app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins="http://localhost:5173")
+
+# Set the SocketIO instance for logging
+set_socketio_instance(socketio)
+
+# Setup logging
+setup_logging() 
+
+@socketio.on('connect')
+def handle_connect():
+    logging.info('Client connected')
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    logging.info('Client disconnected')
+
 CORS(app)
 
+
 # Directories and File paths
-parent_folder = "../../Data/"
+parent_folder = "../../Data/Test"
 IMAGE_DIRECTORY = parent_folder+"/images"
 CROPPED_IMAGE_DIRECTORY = parent_folder+"/cropped"
 DATA_FILE = '../../Data/details.txt'
 csv_path = parent_folder+'/results.csv'
 pickle_path = parent_folder+'/cam_wps.pickle'
-geo_log_path = parent_folder+"/log/geo_log.txt"
+geo_log_path = parent_folder+"/geo_log.txt"
 geo_path = "./modules/geotag_on_UI_laptop.py"
 
 # Global variables
 global xco, yco, id, lats, longs, connection
 global_count = 0
+connection = None
 is_connected = False
 the_connection = None
 lats = ["null", "null", "null", "null", "null"]
@@ -33,8 +55,10 @@ longs = ["null", "null", "null", "null", "null"]
 
 # Ensure directories exist
 if not os.path.exists(CROPPED_IMAGE_DIRECTORY):
-    os.makedirs(CROPPED_IMAGE_DIRECTORY)
+    os.makedirs(CROPPED_IMAGE_DIRECTORY, exist_ok=True)
 
+if not os.path.exists(IMAGE_DIRECTORY):
+    os.makedirs(IMAGE_DIRECTORY, exist_ok=True)
 
 def crop_image(image_path, x, y):
     global global_count, xco, yco
@@ -53,8 +77,9 @@ def crop_image(image_path, x, y):
 
     crop = image[y_start:y_end, x_start:x_end]
 
-    print(f'Received coordinates: x={xco}, y={yco}', file=sys.stderr)
-    print('Cropping Image...', flush=True)
+    
+    logging.info(f'Received coordinates: x={xco}, y={yco}')
+    logging.info('Cropping Image...')
     cropped_image_filename = f'cropped_image_{global_count}.png'
     cropped_image_path = os.path.join(
         CROPPED_IMAGE_DIRECTORY, cropped_image_filename)
@@ -117,22 +142,21 @@ def save_details():
         id = data.get('id', '')
         label = data.get('label', '')
 
-        # print(f"Received data: {image_name}, {
-        #       shape}, {colour}, {id}, {label}", file=sys.stderr, flush=True)
-        print("Saving Details...")
+        logging.info(f"Received data: {image_name}, {shape}, {colour}, {id}, {label}")
+        logging.info("Saving Details...")
         # print(xco, yco, flush=True)
-        lats, longs = lat_long_calculation(
-            csv_path, image_url, image_name, xco, yco, id)
+        lats, longs = lat_long_calculation(csv_path, image_url, image_name, xco, yco, id)
 
         # Write to file
         with open(DATA_FILE, 'a') as f:
             f.write(f'{image_name}: Shape={shape}, Colour={
                     colour}, id={id}, Label={label}\n')
             f.flush()
-
+        logging.info("Saved Succesfully.")
         return jsonify({'message': 'Details saved successfully'}), 200
     except Exception as e:
-        print(f"Error saving details: {str(e)}", file=sys.stderr)
+        # print(f"Error saving details: {str(e)}", file=sys.stderr)
+        logging.info(f"Error saving details: {str(e)}")
         return jsonify({'message': f'Failed to save details: {str(e)}'}), 500
 
 
@@ -142,19 +166,19 @@ def connectDrone():
     global connection, is_connected
     connection, is_connected = toggle_connection()  # Capture the connection
 
-    if is_connected:  # Check if connection is valid
+    if is_connected: 
+        logging.info("Connection Successfull...") # Check if connection is valid
         return jsonify({'message': 'Connected to the drone',
                         'system': connection.target_system,
                         'component': connection.target_component}), 200
     else:
-        print(f"Failed to connect to the drone",
-              flush=True)  # Print the error message
+        logging.info(f"Failed to connect to the drone")  # Print the error message
         return jsonify({'message': 'Failed to connect to the drone'}), 500
 
 
 @app.route('/drone-status', methods=['GET'])
 def get_drone_status():
-    print("Current Mode: ", drone_state.current_mode, flush=True)
+    # print("Current Mode: ", drone_state.current_mode, flush=True)
     return jsonify({
         'current_mode': drone_state.current_mode,
         'is_armed': drone_state.is_armed
@@ -206,35 +230,57 @@ def takeoffdrone():
     response = takeoffcommand()
     return response
 
+@app.route('/RTL', methods=['POST'])
+def rtl():
+    response = rtlcommand()
+    return response
+
+@app.route('/drop', methods=['POST'])
+def dropPkg():
+    # Call the drop function
+    drop()
+    return "Drop command executed", 200  # Respond with a success message
+
+
+@app.route('/rtl', methods=['GET'])
+def rtl_command():
+    try:
+        # Call the rtl function
+        result = rtl()
+        return jsonify({"status": "success", "message": result}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+    
 
 @app.route('/start_geotagg', methods=['POST'])
 def start_geotagg():
-    print("running geotag", flush=True)
     global process
-    print("running geotag", flush=True)
     process = run_python_file(geo_path)
     global msgs
     msgs = "started geotagg"
-    # logging.info("started geotagg")
+    logging.info("Started geotagg")
     return "", 204
 
 
 @app.route('/reposition', methods=['POST'])
 def repos():
+    print("LALA",flush=True)
     global connection
     # logging.info("bottle drop" )
     # logging.info("Target number bottle is dropping on: %s",target_no )
-    print("Moving towards target...", flush="True")
+    # print("Moving towards target...", flush="True")
     global msg
     target_no = 0
     msg = "Target number bottle is dropping on: %s"+str(target_no)
-    print(lats, longs, id, flush=True)
+    # print(lats, longs, id, flush=True)
     lati = lats[id-1]
     longi = longs[id-1]
     # drop()
+    print(lati, longi, flush=True)
     automation(lati, longi, id, connection)
     return "", 204
 
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True, port=9080)
+    socketio.run(app, debug=True, port=9080, allow_unsafe_werkzeug=True)
+

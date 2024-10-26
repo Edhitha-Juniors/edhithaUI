@@ -7,7 +7,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "dev": "concurrently \"npm run start-react\" \"npm run start-python-server\" ",
+    "dev": "concurrently \"npm run start-react\" \"npm run start-python-server\"",
     "start-react": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
@@ -22,10 +22,12 @@
     "@tsparticles/all": "^3.3.0",
     "@tsparticles/react": "^3.0.0",
     "react": "^18.2.0",
+    "react-console-emulator": "^5.0.2",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.22.3",
-    "socket.io-client": "^4.8.0"
+    "socket.io-client": "^4.8.0",
+    "terminal-in-react": "^4.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

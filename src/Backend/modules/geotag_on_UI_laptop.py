@@ -8,7 +8,8 @@ import signal
 import pandas
 import paramiko
 from folium.features import DivIcon
-
+from modules.logger_config import *
+import logging
 
 def signal_handler(sig, frame):
     print("Stopping execution...")
@@ -196,10 +197,14 @@ if __name__ == '__main__':
         ]
 
         # Folder Paths
-        l_path = "/Users/aahil/Downloads/edhithaGCS/Data/test"
+<<<<<<< HEAD
+        l_path = "/Users/aahil/Edhitha/edhithaGCS/Data/Test"
+=======
+        l_path = "/Users/aahil/Downloads/edhithaGCS/Data/Test"
+>>>>>>> EdhithaRepo/main
         os.makedirs(l_path, exist_ok=True)
         # Parent folder to save there
-        parent_path = '/Users/aahil/Downloads/edhithaGCS/Data'
+        parent_path = '/Users/aahil/Edhitha/edhithaGCS/Data'
         move_and_create_unique_folder(parent_path, l_path)
         os.makedirs(l_path+'/images', exist_ok=True)
         print("made images folder")

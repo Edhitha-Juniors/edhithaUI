@@ -1,0 +1,8 @@
+2024-10-26 18:50:33,374 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-26 18:50:33,850 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-26 18:50:33,862 - WARNING -  * Debugger is active!
+2024-10-26 18:50:36,717 - INFO - Client connected
+2024-10-26 18:50:38,074 - INFO - Client disconnected
+2024-10-26 18:50:38,714 - INFO - Client connected
+2024-10-26 18:50:38,718 - INFO - Client connected
+2024-10-26 18:50:39,859 - INFO - Failed to connect to the drone: {str(e)}

@@ -1,0 +1,15 @@
+2024-10-26 18:53:59,156 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-26 18:53:59,656 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-26 18:53:59,668 - WARNING -  * Debugger is active!
+2024-10-26 18:53:59,715 - INFO - Client connected
+2024-10-26 18:54:01,720 - INFO - Client connected
+2024-10-26 18:54:06,011 - INFO - Client connected
+2024-10-26 18:54:06,021 - INFO - Client disconnected
+2024-10-26 18:54:08,354 - INFO - Attempting to connect to the drone...
+2024-10-26 18:54:09,205 - INFO - Heartbeat received from system (system 1 component 0)
+2024-10-26 18:54:09,206 - INFO - Connected successfully!
+2024-10-26 18:54:09,209 - INFO - Monitoring thread started.
+2024-10-26 18:54:09,209 - INFO - Connection Successfull...
+2024-10-26 18:54:15,027 - INFO - Client connected
+2024-10-26 18:54:48,007 - INFO - Disconnected from the drone.
+2024-10-26 18:54:48,008 - INFO - Failed to connect to the drone

@@ -2,6 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import '../assets/CSS/Manual.css';
 import droneConnectedIcon from '../assets/images/droneConnected.svg';
 import logo from '../assets/images/logo.png';
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:9080'); 
+
+function scrollToBottom() {
+    const terminalBox = document.querySelector('.terminal-box');
+    terminalBox.scrollTop = terminalBox.scrollHeight;
+}
 
 const Manual = () => {
     const [isConnected, setIsConnected] = useState(false); // State for connection status
@@ -11,7 +19,8 @@ const Manual = () => {
     const [imageUrls, setImageUrls] = useState([]);
     const [selectedImageUrl, setSelectedImageUrl] = useState('');
     const [buttons, setButtons] = useState([]);
-    const [selectedMode, setSelectedMode] = useState(null); 
+    const [selectedMode, setSelectedMode] = useState(null);
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0); 
     const [backendData, setBackendData] = useState({
         voltage: '',
         current: '',
@@ -22,6 +31,38 @@ const Manual = () => {
     });
     const [isLive, setIsLive] = useState(true);
     const [intervalId, setIntervalId] = useState(null);
+    const [logs, setLogs] = useState([]); // Add this line
+
+
+    useEffect(() => {
+        // Log when connected
+        socket.on('connect', () => {
+            console.log('Connected to the server');
+            // setIsConnected(true); // Update the connection state
+        });
+    
+        // Log when disconnected
+        socket.on('disconnect', () => {
+            console.log('Disconnected from the server');
+            // setIsConnected(false); // Update the connection state
+        });
+    
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
+
+    useEffect(() => {
+        // Listen for log messages from the server
+        socket.on('log_message', (data) => {
+            setLogs((prevLogs) => [...prevLogs, data.message]); 
+            scrollToBottom()// Append new message to logs
+        });
+
+        return () => {
+            socket.off('log_message'); // Clean up listener on unmount
+        };
+    }, []);
 
     const fetchImageUrls = useCallback(async () => {
         try {
@@ -63,6 +104,32 @@ const Manual = () => {
         };
     }, []);
 
+    const handleKeyPress = useCallback((event) => {
+        if (event.key === 'ArrowLeft') {
+            // Navigate to the previous image
+            setSelectedImageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+        } else if (event.key === 'ArrowRight') {
+            // Navigate to the next image
+            setSelectedImageIndex((prevIndex) => Math.min(prevIndex + 1, imageUrls.length - 1));
+        }
+    }, [imageUrls]);
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyPress); // Add event listener
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress); // Clean up
+        };
+    }, [handleKeyPress]);
+
+    useEffect(() => {
+        // Update selectedImageUrl when selectedImageIndex changes
+        if (imageUrls.length > 0) {
+            setSelectedImageUrl(imageUrls[selectedImageIndex]);
+        }
+    }, [selectedImageIndex, imageUrls]);
+
+
     const handleImageClick = (url) => {
         setSelectedImageUrl(url);
         setIsLive(false);
@@ -77,7 +144,7 @@ const Manual = () => {
     };
 
     const openImage = (event) => {
-        if (event.shiftKey && selectedImageUrl) {
+        if (selectedImageUrl) {
             const modal = document.getElementById('image-modal');
             const modalImg = document.getElementById('modal-image');
             if (modal && modalImg) {
@@ -181,22 +248,22 @@ const Manual = () => {
                 setIsConnected(true); // Assuming the connection is successful
     
             // Start continuous polling for drone status
-            const statusInterval = setInterval(async () => {
-                try {
-                    const statusResponse = await fetch('http://127.0.0.1:9080/drone-status', { method: 'GET' });
-                    if (statusResponse.ok) {
-                        const statusData = await statusResponse.json();
-                        setSelectedMode(statusData.current_mode); // Update the selected mode
-                        setIsArmed(statusData.is_armed); // Update the armed status
-                    } else {
-                        console.error('Failed to get drone status');
-                    }
-                } catch (error) {
-                    console.error('Error fetching drone status:', error);
-                }
-            }, 1000); // Fetch status every 1 second (adjust as needed)
-            // Optionally store the interval ID so you can clear it later
-            return () => clearInterval(statusInterval);
+            // const statusInterval = setInterval(async () => {
+            //     try {
+            //         const statusResponse = await fetch('http://127.0.0.1:9080/drone-status', { method: 'GET' });
+            //         if (statusResponse.ok) {
+            //             const statusData = await statusResponse.json();
+            //             setSelectedMode(statusData.current_mode); // Update the selected mode
+            //             setIsArmed(statusData.is_armed); // Update the armed status
+            //         } else {
+            //             console.error('Failed to get drone status');
+            //         }
+            //     } catch (error) {
+            //         console.error('Error fetching drone status:', error);
+            //     }
+            // }, 1000); // Fetch status every 1 second (adjust as needed)
+            // // Optionally store the interval ID so you can clear it later
+            // return () => clearInterval(statusInterval);
             } else {
                 console.error('Failed to toggle connection');
             }
@@ -240,6 +307,26 @@ const Manual = () => {
         }
     };
 
+    const handleRTL = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/RTL', { method: 'POST' });
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Error taking off:', error);
+        }
+    };
+
+    const handleDrop = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/drop', { method: 'POST' });
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Error dropping:', error);
+        }
+    };
+
     const handleModeChange = async (mode) => {
         try {
             const response = await fetch('http://127.0.0.1:9080/change-mode', {
@@ -264,7 +351,7 @@ const Manual = () => {
 
     const startGeotag = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:9080/start_geotagg', { method: 'POST' });
+            const response = await fetch('http://127.0.0.1:9080/start_geotagg', { method: 'POST', mode: 'no-cors' });
             const data = await response.json();
             console.log(data.message);
         } catch (error) {
@@ -299,8 +386,8 @@ const Manual = () => {
             <div className="content-container">
                 <div className="left-container">
                     <div className="image-box">
-                        <div className="imageGrid">
-                            <div className="grid-container">
+                        {/* <div className="imageGrid">
+                            {/* <div className="grid-container">
                                     {imageUrls.map((url, index) => (
                                         <img
                                             key={index}
@@ -310,7 +397,7 @@ const Manual = () => {
                                             className={selectedImageUrl === url ? 'selected' : ''}
                                         />
                                     ))}
-                            </div>
+                            </div> 
                             <div className="liveButtonContainer">
                                     <button 
                                         className="liveButton"
@@ -319,7 +406,7 @@ const Manual = () => {
                                         Live
                                     </button>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="mainImage">
                             {selectedImageUrl && (
                                     <img
@@ -340,17 +427,30 @@ const Manual = () => {
                                 <input className="inputBox" type="text" placeholder="Colour" />
                                 <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
                                 <button className="saveButton" onClick={handleSaveButtonClick}>Store</button>
+                                <div className="repo-button-grid">
+                                {buttons.map((button) => (
+                                <button className='Repos-Button'
+                                    key={button.id} 
+                                    onClick={() => automationButton(button.id)} // Attach onClick function
+                                >
+                                    <span>{button.label}</span>
+                                </button>
+                                ))}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="terminal-box">
-                        <div className="image_Processing">
-                            {/* Content for Image Processing */}
+                    {/* <div className="terminal-box">
+                    <div className="image_processing" id="image_processing">
+                            {logs.map((log, index) => (
+                                <div key={index}>{log}</div> // Render logs
+                            ))}
                         </div>
+
                         <div className="drone_Status">
-                            {/* Content for Drone Status*/} 
+                            {/* Content for Drone Status*
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="right-container">
                     <div className="top-right-container">
@@ -367,9 +467,11 @@ const Manual = () => {
                             >
                                 Geotag
                             </button>
-                            <button className="Control-Button">Lock Servo</button>
+                            <button className="Control-Button" onClick={handleRTL}>RTL</button>
+                            
+                            <button className="Control-Button" onClick={handleDrop}>Drop</button>
                             <button className="Control-Button">Mission Start</button>
-                            {/* <button className="Control-Button">RTL</button> */}
+                            <button className="Control-Button" onClick={handleRTL}>RTL</button>
                             <button
                                 className={`Control-Button ${selectedMode === 'STABILIZE' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
                                 onClick={() => handleModeChange('stabilize')}
@@ -394,18 +496,18 @@ const Manual = () => {
                             >
                                 Loiter
                             </button>
+                            <button className="Control-Button">Lock Servo</button>
                         </div>
                     </div>
                     <div className="bottom-right-container">
                         <div className="bottom-up-container">
-                            {buttons.map((button) => (
-                                <button className='Repos-Button'
-                                    key={button.id} 
-                                    onClick={() => automationButton(button.id)} // Attach onClick function
-                                >
-                                    <span>{button.label}</span>
-                                </button>
-                                ))}
+                        <div className="terminal-box">
+                            {logs.map((log, index) => (
+                                <div key={index}>{log}</div> // Display each log message
+                            ))}
+                        </div>
+
+                            
                             {/* <div className="data-box">
                                 <input type="text" placeholder="Voltage" value={backendData.voltage} readOnly />
                             </div>
@@ -415,9 +517,10 @@ const Manual = () => {
                             <div className="data-box">
                                 <input type="text" placeholder="Temperature" value={backendData.temperature} readOnly />
                             </div> */}
+                            
                         </div>
                         <div className="bottom-down-container">
-            
+                            
                         </div>
                     </div>
                 </div>
@@ -440,3 +543,5 @@ const Manual = () => {
 };
 
 export default Manual;
+
+

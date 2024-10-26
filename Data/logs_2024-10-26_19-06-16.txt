@@ -1,0 +1,12 @@
+2024-10-26 19:06:16,916 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-26 19:06:16,929 - WARNING -  * Debugger is active!
+2024-10-26 19:06:17,270 - INFO - Client connected
+2024-10-26 19:06:18,252 - INFO - Client connected
+2024-10-26 19:06:18,256 - INFO - Client connected
+2024-10-26 19:08:34,554 - INFO - Client disconnected
+2024-10-26 19:08:34,563 - INFO - Client disconnected
+2024-10-26 19:08:34,564 - INFO - Client disconnected
+2024-10-26 19:08:36,252 - INFO - Client connected
+2024-10-26 19:08:36,253 - INFO - Client connected
+2024-10-26 19:11:34,683 - INFO - Client disconnected
+2024-10-26 19:11:34,684 - INFO - Client disconnected
