@@ -1,0 +1,8 @@
+2024-10-27 11:06:55,480 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-27 11:06:55,494 - WARNING -  * Debugger is active!
+2024-10-27 11:06:55,501 - INFO -  * Debugger PIN: 883-533-741
+2024-10-27 11:06:56,065 - INFO - Client connected
+2024-10-27 11:06:59,423 - INFO - Attempting to connect to the drone...
+2024-10-27 11:07:07,693 - DEBUG - NativeEvent(path="/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py", inode=7086144, flags=11400, id=616110599): is_file, is_inode_meta_mod, is_modified
+2024-10-27 11:07:07,693 - DEBUG - queue_event FileModifiedEvent(src_path='/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2024-10-27 11:07:07,696 - INFO -  * Detected change in '/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', reloading

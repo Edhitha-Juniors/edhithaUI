@@ -4,14 +4,21 @@ import droneConnectedIcon from '../assets/images/droneConnected.svg';
 import logo from '../assets/images/logo.png';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:9080'); 
 
-function scrollToBottom() {
-    const terminalBox = document.querySelector('.terminal-box');
-    terminalBox.scrollTop = terminalBox.scrollHeight;
-}
+
+// const terminalRef = useRef(null);
+// const scrollToBottom = () => {
+//     terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+// };
+
+const socket = io('http://localhost:9080', {
+    transports: ['websocket'], 
+    autoConnect: true, // Automatically connects initially// 2-second delay between reconnections
+});
+
 
 const Manual = () => {
+
     const [isConnected, setIsConnected] = useState(false); // State for connection status
     const [isArmed, setIsArmed] = useState(false); // State to track if the drone is armed
     const [isGeotagging, setIsGeotagging] = useState(false);
@@ -33,63 +40,74 @@ const Manual = () => {
     const [intervalId, setIntervalId] = useState(null);
     const [logs, setLogs] = useState([]); // Add this line
 
-
     useEffect(() => {
-        // Log when connected
-        socket.on('connect', () => {
-            console.log('Connected to the server');
-            // setIsConnected(true); // Update the connection state
-        });
-    
-        // Log when disconnected
-        socket.on('disconnect', () => {
-            console.log('Disconnected from the server');
-            // setIsConnected(false); // Update the connection state
-        });
-    
-        return () => {
-            socket.disconnect();
+        // Event handler for socket connection
+        const handleConnect = () => console.log('Socket connected');
+
+        // Event handler for socket disconnection
+        const handleDisconnect = () => console.log('Socket disconnected');
+
+        // Event handler for reconnect attempts
+        const handleReconnectAttempt = () => console.log('Attempting to reconnect...');
+
+        // Event handler for connection errors
+        const handleConnectError = (error) => console.error('Connection error:', error);
+
+        // Event handler for log messages from the server
+        const handleLogMessage = (data) => {
+            setLogs((prevLogs) => [...prevLogs, data.message]);
+            // scrollToBottom(); // Uncomment if you want to scroll to the bottom when a new message arrives
         };
-    }, []);
 
-    useEffect(() => {
-        // Listen for log messages from the server
-        socket.on('log_message', (data) => {
-            setLogs((prevLogs) => [...prevLogs, data.message]); 
-            scrollToBottom()// Append new message to logs
-        });
+        // Register event listeners
+        socket.on('connect', handleConnect);
+        socket.on('disconnect', handleDisconnect);
+        socket.on('reconnect_attempt', handleReconnectAttempt);
+        socket.on('connect_error', handleConnectError);
+        socket.on('log_message', handleLogMessage);
 
+        // Cleanup function to remove event listeners on unmount
         return () => {
-            socket.off('log_message'); // Clean up listener on unmount
+            socket.off('connect', handleConnect);
+            socket.off('disconnect', handleDisconnect);
+            socket.off('reconnect_attempt', handleReconnectAttempt);
+            socket.off('connect_error', handleConnectError);
+            socket.off('log_message', handleLogMessage);
         };
-    }, []);
+    }, [socket]);
 
-    const fetchImageUrls = useCallback(async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:9080/all-images');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            const formattedUrls = data.imageUrls.map(url => `http://127.0.0.1:9080/images/${url}`);
-            setImageUrls(formattedUrls);
-            if (formattedUrls.length > 0) {
-                if (isLive) {
-                    setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]);
-                }
-            }
-        } catch (error) {
-            console.error('Error fetching image URLs:', error.message);
+    const fetchImageUrls = useCallback((urls) => {
+        const formattedUrls = urls.map(url => `http://127.0.0.1:9080/images/${url}`);
+        
+        // Set image URLs
+        setImageUrls(formattedUrls);
+    
+        // Update selectedImageUrl if isLive and formattedUrls has images
+        if (isLive && formattedUrls.length > 0) {
+            setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]);
         }
     }, [isLive]);
-
+    
     useEffect(() => {
-        fetchImageUrls(); // Fetch images immediately when component mounts
-        const id = setInterval(fetchImageUrls, 2000); // Poll every 2 seconds
-        setIntervalId(id);
-        return () => clearInterval(id); // Clean up on component unmount
+        // Fetch initial image URLs
+        const fetchInitialImages = async () => {
+            const response = await fetch('http://127.0.0.1:9080/all-images');
+            const data = await response.json();
+            fetchImageUrls(data.imageUrls);
+        };
+    
+        fetchInitialImages();
+    
+        // Listen for image updates from the server
+        socket.on('image_update', (data) => {
+            fetchImageUrls(data.imageUrls);
+        });
+    
+        return () => {
+            socket.off('image_update');
+        };
     }, [fetchImageUrls]);
-
+    
     useEffect(() => {
         const handleEscPress = (event) => {
             if (event.key === 'Escape') {
@@ -130,18 +148,18 @@ const Manual = () => {
     }, [selectedImageIndex, imageUrls]);
 
 
-    const handleImageClick = (url) => {
-        setSelectedImageUrl(url);
-        setIsLive(false);
-    };
+    // const handleImageClick = (url) => {
+    //     setSelectedImageUrl(url);
+    //     setIsLive(false);
+    // };
     
 
-    const handleLiveButtonClick = () => {
-        setIsLive(true);
-        if (imageUrls.length > 0) {
-            setSelectedImageUrl(imageUrls[imageUrls.length - 1]);
-        }
-    };
+    // const handleLiveButtonClick = () => {
+    //     setIsLive(true);
+    //     if (imageUrls.length > 0) {
+    //         setSelectedImageUrl(imageUrls[imageUrls.length - 1]);
+    //     }
+    // };
 
     const openImage = (event) => {
         if (selectedImageUrl) {

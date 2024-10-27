@@ -11,16 +11,16 @@ class WebSocketHandler(logging.Handler):
         try:
             if socketio:
                 socketio.emit('log_message', {'message': msg})
-                print("done", flush=True)
+                print("log emitted", flush=True)
             else:
                 print("SocketIO instance not set, cannot emit logs", flush=True)
         except Exception as e:
             print(f"Failed to emit log over WebSocket: {e}")
 
 # Logger configuration
-def setup_logging():
+def setup_logging(sio_instance):
     global socketio
-
+    socketio = sio_instance
     # Get the current date and time for the log filename
     current_datetime = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     output_file = f"../../Data/logs_{current_datetime}.txt"
@@ -47,10 +47,10 @@ def setup_logging():
     root_logger.addHandler(ws_handler)  # Add the WebSocket handler
 
     # Set werkzeug logging level
-    werkzeug_log = logging.getLogger('werkzeug')
-    werkzeug_log.setLevel(logging.WARNING)
+    # werkzeug_log = logging.getLogger('werkzeug')
+    # werkzeug_log.setLevel(logging.WARNING)
 
 # Function to set the SocketIO instance
-def set_socketio_instance(sio_instance):
-    global socketio
-    socketio = sio_instance
+# def set_socketio_instance(sio_instance):
+#     global socketio
+#     socketio = sio_instance

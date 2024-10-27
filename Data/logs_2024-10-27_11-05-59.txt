@@ -1,0 +1,17 @@
+2024-10-27 11:05:59,137 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-27 11:05:59,149 - WARNING -  * Debugger is active!
+2024-10-27 11:05:59,156 - INFO -  * Debugger PIN: 883-533-741
+2024-10-27 11:06:04,755 - INFO - 127.0.0.1 - - [27/Oct/2024 11:06:04] "GET /all-images HTTP/1.1" 200 -
+2024-10-27 11:06:04,757 - INFO - Client connected
+2024-10-27 11:06:04,764 - INFO - 127.0.0.1 - - [27/Oct/2024 11:06:04] "GET /all-images HTTP/1.1" 200 -
+2024-10-27 11:06:04,774 - INFO - 127.0.0.1 - - [27/Oct/2024 11:06:04] "[36mGET /images/nvcamtest_7563_s00_00168%202.jpg HTTP/1.1[0m" 304 -
+2024-10-27 11:06:07,455 - INFO - 127.0.0.1 - - [27/Oct/2024 11:06:07] "[35m[1mPOST /takeoff HTTP/1.1[0m" 500 -
+2024-10-27 11:06:26,863 - DEBUG - NativeEvent(path="/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py", inode=7086144, flags=11400, id=616108920): is_file, is_inode_meta_mod, is_modified
+2024-10-27 11:06:26,863 - DEBUG - queue_event FileModifiedEvent(src_path='/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2024-10-27 11:06:26,864 - INFO -  * Detected change in '/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', reloading
+2024-10-27 11:06:27,081 - DEBUG - NativeEvent(path="/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py", inode=7086144, flags=11400, id=616108952): is_file, is_inode_meta_mod, is_modified
+2024-10-27 11:06:27,081 - DEBUG - queue_event FileModifiedEvent(src_path='/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2024-10-27 11:06:27,082 - INFO -  * Detected change in '/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', reloading
+2024-10-27 11:06:27,255 - DEBUG - NativeEvent(path="/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py", inode=7086144, flags=11400, id=616108961): is_file, is_inode_meta_mod, is_modified
+2024-10-27 11:06:27,256 - DEBUG - queue_event FileModifiedEvent(src_path='/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2024-10-27 11:06:27,256 - INFO -  * Detected change in '/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', reloading

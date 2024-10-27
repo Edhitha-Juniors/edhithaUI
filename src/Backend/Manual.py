@@ -4,6 +4,8 @@ from flask_cors import CORS
 import os
 import cv2
 import sys
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 from pymavlink import mavutil
 from modules.mavlink_commands import *
 from modules.latlon import *
@@ -17,11 +19,11 @@ from flask_socketio import SocketIO, emit
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="http://localhost:5173")
 
-# Set the SocketIO instance for logging
-set_socketio_instance(socketio)
+# # Set the SocketIO instance for logging
+# set_socketio_instance(socketio)
 
 # Setup logging
-setup_logging() 
+setup_logging(socketio) 
 
 @socketio.on('connect')
 def handle_connect():
@@ -29,7 +31,10 @@ def handle_connect():
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    logging.info('Client disconnected')
+    reason = request.args.get('reason', 'unknown')  # Retrieve the reason for disconnection
+    logging.info(f'Client disconnected. Reason: {reason}')
+
+
 
 CORS(app)
 
@@ -59,6 +64,42 @@ if not os.path.exists(CROPPED_IMAGE_DIRECTORY):
 
 if not os.path.exists(IMAGE_DIRECTORY):
     os.makedirs(IMAGE_DIRECTORY, exist_ok=True)
+
+class ImageEventHandler(FileSystemEventHandler):
+    """Handles file system events for the image directory."""
+    
+    def on_created(self, event):
+        if event.is_directory:
+            return
+        self.emit_image_update()
+
+    def on_deleted(self, event):
+        if event.is_directory:
+            return
+        self.emit_image_update()
+
+    def on_modified(self, event):
+        if event.is_directory:
+            return
+        self.emit_image_update()
+
+    def emit_image_update(self):
+        """Emit updated image URLs to connected clients."""
+        images = os.listdir(IMAGE_DIRECTORY)
+        socketio.emit('image_update', {'imageUrls': images})
+
+def start_watching():
+    """Start watching the image directory for changes."""
+    event_handler = ImageEventHandler()
+    observer = Observer()
+    observer.schedule(event_handler, IMAGE_DIRECTORY, recursive=False)
+    observer.start()
+    try:
+        while True:
+            time.sleep(1)  # Keep the main thread alive
+    except KeyboardInterrupt:
+        observer.stop()
+    observer.join()
 
 def crop_image(image_path, x, y):
     global global_count, xco, yco
@@ -100,7 +141,10 @@ def run_python_file(file_path):
 
 @app.route('/all-images', methods=['GET'])
 def all_images():
-    images = os.listdir(IMAGE_DIRECTORY)
+    with os.scandir(IMAGE_DIRECTORY) as entries:
+        # Filter to include only files (skip directories) and sort by name if desired
+        images = [entry.name for entry in entries if entry.is_file()]
+        images.sort()
     return jsonify({'imageUrls': images})
 
 
@@ -282,5 +326,6 @@ def repos():
 
 
 if __name__ == '__main__':
+    socketio.start_background_task(target=start_watching)
     socketio.run(app, debug=True, port=9080, allow_unsafe_werkzeug=True)
 

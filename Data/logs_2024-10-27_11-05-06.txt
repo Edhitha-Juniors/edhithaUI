@@ -1,0 +1,7 @@
+2024-10-27 11:05:06,990 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-27 11:05:07,003 - WARNING -  * Debugger is active!
+2024-10-27 11:05:07,011 - INFO -  * Debugger PIN: 883-533-741
+2024-10-27 11:05:08,071 - INFO - Client connected
+2024-10-27 11:05:22,906 - DEBUG - NativeEvent(path="/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py", inode=7086144, flags=11400, id=616106342): is_file, is_inode_meta_mod, is_modified
+2024-10-27 11:05:22,907 - DEBUG - queue_event FileModifiedEvent(src_path='/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2024-10-27 11:05:22,908 - INFO -  * Detected change in '/Users/aahil/Edhitha/edhithaGCS/src/Backend/modules/mavlink_commands.py', reloading

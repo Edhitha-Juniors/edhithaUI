@@ -47,6 +47,7 @@ def drop():
 
 def toggle_connection():
     global the_connection, is_connected
+    
     # If already connected, close the connection
     if is_connected:
         if the_connection is not None:
@@ -59,6 +60,7 @@ def toggle_connection():
 
     # Start a new connection to the drone
     try:
+        # logging.info("Attempting to connect to the drone...")
         # the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14550')
         # the_connection = mavutil.mavlink_connection('udp:10.42.0.1:14551')
         the_connection = mavutil.mavlink_connection('tcp:10.42.0.1:5760')

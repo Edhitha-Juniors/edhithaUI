@@ -342,8 +342,7 @@ Terminal */
     background-color: #1e1e1e; /* Darker background for contrast */
     font-family: "Courier New", Courier, monospace; /* Monospace font */
     font-size: 14px; /* Adjust for readability */
-    padding: 10px 15px; /* Adjusted padding */
-    border-radius: 5px; /* Softened corners */
+    padding: 10px 15px; /* Adjusted padding *//* Softened corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow for depth */
 }
 
@@ -378,7 +377,7 @@ Terminal */
 /* ---------------------------------------------------------------------------------------------------------------
 Right side */
 .right-container {
-    flex-basis: 25%;
+    flex-basis: 28%;
     display: flex;
     flex-direction: column;
     width: 10%;
