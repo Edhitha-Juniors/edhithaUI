@@ -10,39 +10,39 @@ global is_connected
 the_connection = None
 is_connected = False
 
-def drop():
-    # Set the system and component ID (replace with your system and component ID)
-    logging.info("dropping")
-    system_id = the_connection.target_system
-    component_id = the_connection.target_component
+# def drop():
+    # # Set the system and component ID (replace with your system and component ID)
+    # logging.getLogger().status("dropping")
+    # system_id = the_connection.target_system
+    # component_id = the_connection.target_component
     
-    # Set the servo channel to 7
-    channel = 7
-    command = mavutil.mavlink.MAV_CMD_DO_SET_SERVO
-    param3 = 0
-    param4 = 0
-    param5 = 0
-    param6 = 0
-    param7 = 0
+    # # Set the servo channel to 7
+    # channel = 7
+    # command = mavutil.mavlink.MAV_CMD_DO_SET_SERVO
+    # param3 = 0
+    # param4 = 0
+    # param5 = 0
+    # param6 = 0
+    # param7 = 0
     
-    # Set PWM value for servo 7 (you can adjust the value as needed)
-    pwm_value = 2000  # Example PWM value for dropping
+    # # Set PWM value for servo 7 (you can adjust the value as needed)
+    # pwm_value = 2000  # Example PWM value for dropping
     
-    logging.info("Dropping at pwm %s on channel %s", pwm_value, channel)
+    # logging.getLogger().status("Dropping at pwm %s on channel %s", pwm_value, channel)
 
-    # Send the MAV_CMD_DO_SET_SERVO command
-    the_connection.mav.command_long_send(
-        system_id, component_id,
-        command,
-        0,  # Confirmation
-        channel, pwm_value, param3, param4, param5, param6, param7
-    )
+    # # Send the MAV_CMD_DO_SET_SERVO command
+    # the_connection.mav.command_long_send(
+    #     system_id, component_id,
+    #     command,
+    #     0,  # Confirmation
+    #     channel, pwm_value, param3, param4, param5, param6, param7
+    # )
 
-    msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
-    logging.info("Dropping message: %s", msg)
+    # msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
+    # logging.getLogger().status("Dropping message: %s", msg)
 
-    # Wait for a short duration
-    time.sleep(2)
+    # # Wait for a short duration
+    # time.sleep(2)
 
 
 def toggle_connection():
@@ -55,23 +55,23 @@ def toggle_connection():
             the_connection = None
             is_connected = False
             # Return None for the connection
-            logging.info("Disconnected from the drone.")
+            logging.getLogger().status("Disconnected from the drone.")
             return the_connection, is_connected
 
     # Start a new connection to the drone
     try:
-        # logging.info("Attempting to connect to the drone...")
-        # the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14550')
+        # logging.getLogger().status("Attempting to connect to the drone...")
+        the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14550')
         # the_connection = mavutil.mavlink_connection('udp:10.42.0.1:14551')
-        the_connection = mavutil.mavlink_connection('tcp:10.42.0.1:5760')
-        logging.info("Attempting to connect to the drone...")
+        # the_connection = mavutil.mavlink_connection('tcp:10.42.0.1:5760')
+        logging.getLogger().status("Attempting to connect to the drone...")
         the_connection.wait_heartbeat()
-        logging.info("Heartbeat received from system (system %u component %u)" %
+        logging.getLogger().status("Heartbeat received from system (system %u component %u)" %
               (the_connection.target_system, the_connection.target_component))
 
         # Set connection status to True only after successful connection
         is_connected = True
-        logging.info("Connected successfully!")
+        logging.getLogger().status("Connected successfully!")
 
         threading.Thread(target=monitor_drone_status, daemon=True).start()
         print("Monitoring thread started.", flush=True)
@@ -81,7 +81,7 @@ def toggle_connection():
         # return the_connection, is_connected  # Return the connection and its status
     except Exception as e:
         print("failed")
-        logging.info("Failed to connect to the drone: {str(e)}")  # Print the error message
+        logging.getLogger().status("Failed to connect to the drone: {str(e)}")  # Print the error message
         return None, jsonify({'message': f'Failed to connect to the drone: {str(e)}'}), 500
 
 
@@ -208,14 +208,15 @@ def guided():
     try:
         the_connection.mav.command_long_send(
             the_connection.target_system, the_connection.target_component, 176, 0, 1, 4, 0, 0, 0, 0, 0)
-        msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True, Timeout = 1)
+        msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
         global guidedmsgs
-        guidedmsgs = "In Guided: " + str(msg)
-        logging.info(guidedmsgs)
-        return guidedmsgs
+        logging.getLogger().status("Guided...")
+        # guidedmsgs = "In Guided: " + str(msg)
+        # logging.getLogger().status(guidedmsgs)
+        # return guidedmsgs
     except Exception as e:
         guidedmsgs = "Error in Guided: " + str(e)
-        logging.info(guidedmsgs)
+        logging.getLogger().status(guidedmsgs)
         return guidedmsgs
         # logging.error("Error in loiter: %s",c e)
 

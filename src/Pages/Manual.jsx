@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import '../assets/CSS/Manual.css';
 import droneConnectedIcon from '../assets/images/droneConnected.svg';
 import logo from '../assets/images/logo.png';
@@ -6,16 +6,11 @@ import { io } from 'socket.io-client';
 
 
 
-// const terminalRef = useRef(null);
-// const scrollToBottom = () => {
-//     terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-// };
 
 const socket = io('http://localhost:9080', {
     transports: ['websocket'], 
     autoConnect: true, // Automatically connects initially// 2-second delay between reconnections
 });
-
 
 const Manual = () => {
 
@@ -38,7 +33,15 @@ const Manual = () => {
     });
     const [isLive, setIsLive] = useState(true);
     const [intervalId, setIntervalId] = useState(null);
-    const [logs, setLogs] = useState([]); // Add this line
+    const [logs, setLogs] = useState([]); 
+    const logContainerRef = useRef(null);// Add this line
+
+    useEffect(() => {
+        if (logContainerRef.current) {
+            logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+        }
+    }, [logs]);
+
 
     useEffect(() => {
         // Event handler for socket connection
@@ -56,7 +59,6 @@ const Manual = () => {
         // Event handler for log messages from the server
         const handleLogMessage = (data) => {
             setLogs((prevLogs) => [...prevLogs, data.message]);
-            // scrollToBottom(); // Uncomment if you want to scroll to the bottom when a new message arrives
         };
 
         // Register event listeners
@@ -85,6 +87,7 @@ const Manual = () => {
         // Update selectedImageUrl if isLive and formattedUrls has images
         if (isLive && formattedUrls.length > 0) {
             setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]);
+            console.log(selectedImageUrl)
         }
     }, [isLive]);
     
@@ -484,11 +487,8 @@ const Manual = () => {
                                 onClick={startGeotag}
                             >
                                 Geotag
-                            </button>
-                            <button className="Control-Button" onClick={handleRTL}>RTL</button>
-                            
+                            </button>  
                             <button className="Control-Button" onClick={handleDrop}>Drop</button>
-                            <button className="Control-Button">Mission Start</button>
                             <button className="Control-Button" onClick={handleRTL}>RTL</button>
                             <button
                                 className={`Control-Button ${selectedMode === 'STABILIZE' ? 'active-mode' : ''}`}  // Apply 'active-mode' class if selected
@@ -519,7 +519,7 @@ const Manual = () => {
                     </div>
                     <div className="bottom-right-container">
                         <div className="bottom-up-container">
-                        <div className="terminal-box">
+                        <div className="terminal-box" ref={logContainerRef}>
                             {logs.map((log, index) => (
                                 <div key={index}>{log}</div> // Display each log message
                             ))}

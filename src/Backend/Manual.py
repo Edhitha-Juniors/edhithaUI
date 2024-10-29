@@ -27,12 +27,12 @@ setup_logging(socketio)
 
 @socketio.on('connect')
 def handle_connect():
-    logging.info('Client connected')
+    logging.getLogger().status('Client connected')
 
 @socketio.on('disconnect')
 def handle_disconnect():
     reason = request.args.get('reason', 'unknown')  # Retrieve the reason for disconnection
-    logging.info(f'Client disconnected. Reason: {reason}')
+    logging.getLogger().status(f'Client disconnected. Reason: {reason}')
 
 
 
@@ -119,8 +119,8 @@ def crop_image(image_path, x, y):
     crop = image[y_start:y_end, x_start:x_end]
 
     
-    logging.info(f'Received coordinates: x={xco}, y={yco}')
-    logging.info('Cropping Image...')
+    logging.getLogger().status(f'Received coordinates: x={xco}, y={yco}')
+    logging.getLogger().status('Cropping Image...')
     cropped_image_filename = f'cropped_image_{global_count}.png'
     cropped_image_path = os.path.join(
         CROPPED_IMAGE_DIRECTORY, cropped_image_filename)
@@ -162,8 +162,7 @@ def crop_image_endpoint():
 
     image_path = os.path.join(IMAGE_DIRECTORY, image_url)
     cropped_image_filename = crop_image(image_path, x, y)
-    cropped_image_url = f'http://127.0.0.1:9080/cropped-images/{
-        cropped_image_filename}'
+    cropped_image_url = f'http://127.0.0.1:9080/cropped-images/{cropped_image_filename}'
 
     return jsonify({'croppedImageUrl': cropped_image_url})
 
@@ -186,21 +185,20 @@ def save_details():
         id = data.get('id', '')
         label = data.get('label', '')
 
-        logging.info(f"Received data: {image_name}, {shape}, {colour}, {id}, {label}")
-        logging.info("Saving Details...")
+        logging.getLogger().status(f"Received data: {image_name}, {shape}, {colour}, {id}, {label}")
+        logging.getLogger().status("Saving Details...")
         # print(xco, yco, flush=True)
         lats, longs = lat_long_calculation(csv_path, image_url, image_name, xco, yco, id)
 
         # Write to file
         with open(DATA_FILE, 'a') as f:
-            f.write(f'{image_name}: Shape={shape}, Colour={
-                    colour}, id={id}, Label={label}\n')
+            f.write(f'{image_name}: Shape={shape}, Colour={ colour}, id={id}, Label={label}\n')
             f.flush()
-        logging.info("Saved Succesfully.")
+        logging.getLogger().status("Saved Succesfully.")
         return jsonify({'message': 'Details saved successfully'}), 200
     except Exception as e:
         # print(f"Error saving details: {str(e)}", file=sys.stderr)
-        logging.info(f"Error saving details: {str(e)}")
+        logging.getLogger().status(f"Error saving details: {str(e)}")
         return jsonify({'message': f'Failed to save details: {str(e)}'}), 500
 
 
@@ -211,12 +209,12 @@ def connectDrone():
     connection, is_connected = toggle_connection()  # Capture the connection
 
     if is_connected: 
-        logging.info("Connection Successfull...") # Check if connection is valid
+        logging.getLogger().status("Connection Successfull...") # Check if connection is valid
         return jsonify({'message': 'Connected to the drone',
                         'system': connection.target_system,
                         'component': connection.target_component}), 200
     else:
-        logging.info(f"Failed to connect to the drone")  # Print the error message
+        logging.getLogger().status(f"Failed to connect to the drone")  # Print the error message
         return jsonify({'message': 'Failed to connect to the drone'}), 500
 
 
@@ -282,7 +280,7 @@ def rtl():
 @app.route('/drop', methods=['POST'])
 def dropPkg():
     # Call the drop function
-    drop()
+    # drop()
     return "Drop command executed", 200  # Respond with a success message
 
 
@@ -302,7 +300,7 @@ def start_geotagg():
     process = run_python_file(geo_path)
     global msgs
     msgs = "started geotagg"
-    logging.info("Started geotagg")
+    logging.getLogger().status("Started geotagg")
     return "", 204
 
 
@@ -320,7 +318,7 @@ def repos():
     lati = lats[id-1]
     longi = longs[id-1]
     # drop()
-    print(lati, longi, flush=True)
+    logging.getLogger().status(lati)
     automation(lati, longi, id, connection)
     return "", 204
 

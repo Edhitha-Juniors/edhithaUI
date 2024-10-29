@@ -197,11 +197,7 @@ if __name__ == '__main__':
         ]
 
         # Folder Paths
-<<<<<<< HEAD
-        l_path = "/Users/aahil/Edhitha/edhithaGCS/Data/Test"
-=======
         l_path = "/Users/aahil/Downloads/edhithaGCS/Data/Test"
->>>>>>> EdhithaRepo/main
         os.makedirs(l_path, exist_ok=True)
         # Parent folder to save there
         parent_path = '/Users/aahil/Edhitha/edhithaGCS/Data'
