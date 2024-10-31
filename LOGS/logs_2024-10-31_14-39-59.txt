@@ -1,0 +1,47 @@
+2024-10-31 14:39:59,736 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-31 14:39:59,740 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9080
+2024-10-31 14:39:59,740 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-31 14:39:59,955 - INFO - 127.0.0.1 - - [31/Oct/2024 14:39:59] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:40:00,528 - STATUS - Client connected
+2024-10-31 14:40:01,090 - STATUS - Client disconnected. Reason: unknown
+2024-10-31 14:40:01,373 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:01] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:40:01,376 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:01] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:40:01,384 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:01] "[36mGET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1[0m" 304 -
+2024-10-31 14:40:03,139 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:03] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 14:40:03,245 - STATUS - Received coordinates: x=2999, y=2226
+2024-10-31 14:40:03,245 - STATUS - Cropping Image...
+2024-10-31 14:40:03,250 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:03] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 14:40:03,255 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:03] "GET /cropped-images/cropped_image_0.png HTTP/1.1" 200 -
+2024-10-31 14:40:04,206 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:04] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 14:40:04,210 - STATUS - Received data: nvcamtest_11456_s00_00000.jpg, , , 1, 
+2024-10-31 14:40:04,210 - STATUS - Saving Details...
+2024-10-31 14:40:04,220 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 14:40:04,222 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:04] "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1" 200 -
+2024-10-31 14:40:04,223 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/11" 200 1456811
+2024-10-31 14:40:04,243 - INFO - Real distance GSD: 0.6683717902485112
+2024-10-31 14:40:04,251 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 14:40:04,251 - INFO - Pixel distance: 215.60380330597138
+2024-10-31 14:40:04,251 - INFO - Angle: -238.07912378006682
+2024-10-31 14:40:04,251 - INFO - Calculated Real-life distance: 0.6683717902485112
+2024-10-31 14:40:04,251 - INFO - saved target lat and long: 130311445, 775653416
+2024-10-31 14:40:04,251 - STATUS - Saved Succesfully.
+2024-10-31 14:40:04,251 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:04] "POST /save-details HTTP/1.1" 200 -
+2024-10-31 14:40:04,952 - STATUS - Client connected
+2024-10-31 14:40:05,761 - STATUS - Client connected
+2024-10-31 14:40:06,381 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:06] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:40:07,601 - STATUS - Received data: nvcamtest_11456_s00_00000.jpg, sdd, , 2, sdd
+2024-10-31 14:40:07,601 - STATUS - Saving Details...
+2024-10-31 14:40:07,604 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 14:40:07,607 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:07] "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1" 200 -
+2024-10-31 14:40:07,608 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/11" 200 1456811
+2024-10-31 14:40:07,615 - INFO - Real distance GSD: 0.6683717902485112
+2024-10-31 14:40:07,617 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 14:40:07,618 - INFO - Pixel distance: 215.60380330597138
+2024-10-31 14:40:07,618 - INFO - Angle: -238.07912378006682
+2024-10-31 14:40:07,618 - INFO - Calculated Real-life distance: 0.6683717902485112
+2024-10-31 14:40:07,618 - INFO - saved target lat and long: 130311445, 775653416
+2024-10-31 14:40:07,618 - STATUS - Saved Succesfully.
+2024-10-31 14:40:07,619 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:07] "POST /save-details HTTP/1.1" 200 -
+2024-10-31 14:40:11,376 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:40:16,374 - INFO - 127.0.0.1 - - [31/Oct/2024 14:40:16] "GET /all-images HTTP/1.1" 200 -

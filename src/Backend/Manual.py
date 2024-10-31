@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import os
 import cv2
+import signal
 import sys
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
@@ -50,7 +51,7 @@ geo_log_path = parent_folder+"/geo_log.txt"
 geo_path = "./modules/geotag_on_UI_laptop.py"
 
 # Global variables
-global xco, yco, id, lats, longs, connection
+global xco, yco, id, lats, longs, connection, process
 global_count = 0
 connection = None
 is_connected = False
@@ -138,6 +139,14 @@ def run_python_file(file_path):
         process = subprocess.Popen(["python", file_path], stdout=f)
     return process
 
+def stop_python_file():
+    global process
+    try:
+        os.kill(process.pid, signal.SIGTERM)  # Send SIGTERM signal to the process
+        logging.info("Python file stopped successfully.")
+    except ProcessLookupError:
+        logging.info("Process not found. It may have already stopped.")
+
 
 @app.route('/all-images', methods=['GET'])
 def all_images():
@@ -189,13 +198,13 @@ def save_details():
         logging.getLogger().status("Saving Details...")
         # print(xco, yco, flush=True)
         lats, longs = lat_long_calculation(csv_path, image_url, image_name, xco, yco, id)
-
+        latz, longz = lats[id-1], longs[id-1]
         # Write to file
         with open(DATA_FILE, 'a') as f:
-            f.write(f'{image_name}: Shape={shape}, Colour={ colour}, id={id}, Label={label}\n')
+            f.write(f'{image_name}: Lat={latz}, Long={longz}, id={id}, Label={label}\n')
             f.flush()
         logging.getLogger().status("Saved Succesfully.")
-        return jsonify({'message': 'Details saved successfully'}), 200
+        return jsonify({'message': 'Details saved successfully', 'latitude': latz, 'longitude': longz}), 200
     except Exception as e:
         # print(f"Error saving details: {str(e)}", file=sys.stderr)
         logging.getLogger().status(f"Error saving details: {str(e)}")
@@ -280,7 +289,13 @@ def rtl():
 @app.route('/drop', methods=['POST'])
 def dropPkg():
     # Call the drop function
-    # drop()
+    drop()
+    return "Drop command executed", 200  # Respond with a success message
+
+@app.route('/lock-servo', methods=['POST'])
+def lockservo():
+    # Call the drop function
+    lock()
     return "Drop command executed", 200  # Respond with a success message
 
 
@@ -301,6 +316,14 @@ def start_geotagg():
     global msgs
     msgs = "started geotagg"
     logging.getLogger().status("Started geotagg")
+    return "", 204
+
+@app.route('/stop_geotagg', methods=['POST'])
+def stop_geotagg():
+    stop_python_file()
+    global msgs
+    msgs="stopped geotagg"
+    logging.info("stopped geotagg")
     return "", 204
 
 
@@ -325,5 +348,4 @@ def repos():
 
 if __name__ == '__main__':
     socketio.start_background_task(target=start_watching)
-    socketio.run(app, debug=True, port=9080, allow_unsafe_werkzeug=True)
-
+    socketio.run(app, debug=False, port=9080, allow_unsafe_werkzeug=True)

@@ -1,0 +1,46 @@
+2024-10-31 15:19:32,502 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-31 15:19:32,505 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9080
+2024-10-31 15:19:32,506 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-31 15:19:33,135 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:33] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:33,666 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:33] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:33,673 - STATUS - Client connected
+2024-10-31 15:19:33,677 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:33] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:33,683 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:33] "[36mGET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1[0m" 304 -
+2024-10-31 15:19:34,953 - STATUS - Client connected
+2024-10-31 15:19:35,643 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:35] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 15:19:35,728 - STATUS - Received coordinates: x=3089, y=2214
+2024-10-31 15:19:35,729 - STATUS - Cropping Image...
+2024-10-31 15:19:35,733 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:35] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 15:19:35,742 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:35] "GET /cropped-images/cropped_image_0.png HTTP/1.1" 200 -
+2024-10-31 15:19:38,948 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:38] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:43,942 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:43] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:45,301 - STATUS - Client connected
+2024-10-31 15:19:45,825 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:45] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:47,930 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:47] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 15:19:48,010 - STATUS - Received coordinates: x=3065, y=2274
+2024-10-31 15:19:48,010 - STATUS - Cropping Image...
+2024-10-31 15:19:48,013 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:48] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 15:19:48,025 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:48] "GET /cropped-images/cropped_image_1.png HTTP/1.1" 200 -
+2024-10-31 15:19:49,418 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:49] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 15:19:49,421 - STATUS - Received data: nvcamtest_11456_s00_00000.jpg, , , , 
+2024-10-31 15:19:49,422 - STATUS - Saving Details...
+2024-10-31 15:19:49,437 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 15:19:49,442 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:49] "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1" 200 -
+2024-10-31 15:19:49,442 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/11" 200 1456811
+2024-10-31 15:19:49,459 - INFO - Real distance GSD: 0.9208878596224408
+2024-10-31 15:19:49,468 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 15:19:49,468 - INFO - Pixel distance: 297.0605998782067
+2024-10-31 15:19:49,468 - INFO - Angle: -236.95187513002477
+2024-10-31 15:19:49,468 - INFO - Calculated Real-life distance: 0.9208878596224408
+2024-10-31 15:19:49,468 - STATUS - Error saving details: unsupported operand type(s) for -: 'str' and 'int'
+2024-10-31 15:19:49,468 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:49] "[35m[1mPOST /save-details HTTP/1.1[0m" 500 -
+2024-10-31 15:19:50,828 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:50] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:55,828 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:55] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:20:00,945 - INFO - 127.0.0.1 - - [31/Oct/2024 15:20:00] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:20:05,944 - INFO - 127.0.0.1 - - [31/Oct/2024 15:20:05] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:20:10,943 - INFO - 127.0.0.1 - - [31/Oct/2024 15:20:10] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:20:12,204 - STATUS - Client connected
+2024-10-31 15:20:12,288 - STATUS - Client connected
+2024-10-31 15:20:12,466 - STATUS - Client connected
+2024-10-31 15:20:12,947 - INFO - 127.0.0.1 - - [31/Oct/2024 15:20:12] "GET /all-images HTTP/1.1" 200 -

@@ -1,0 +1,64 @@
+Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+Client connected
+Client connected
+Attempting to connect to the drone...
+Heartbeat received from system (system 1 component 0)
+Connected successfully!
+Connection Successfull...
+Started geotagg
+Client disconnected. Reason: unknown
+Client connected
+Disconnected from the drone.
+Failed to connect to the drone
+Attempting to connect to the drone...
+Heartbeat received from system (system 0 component 0)
+Connected successfully!
+Connection Successfull...
+Received coordinates: x=3578, y=585
+Cropping Image...
+Received data: nvcamtest_11456_s00_00014.jpg, , , 1, Target 1
+Saving Details...
+Saved Succesfully.
+Received coordinates: x=4211, y=1369
+Cropping Image...
+Received data: nvcamtest_11456_s00_00047.jpg, , , 2, Target 2
+Saving Details...
+Received coordinates: x=4061, y=2914
+Cropping Image...
+Received data: nvcamtest_11456_s00_00027.jpg, , , 3, Target 3
+Saving Details...
+Saved Succesfully.
+130310203
+Automation
+alti: 30.598
+Guided
+Guided...
+Real_distance between lats and lons: 11.384302222980931
+DESIRED LAT = 13.0310203
+DESIRED LONG = 77.5653376
+Started Dropping ...
+Dropping Bottle...
+COMMAND_ACK {command : 183, result : 0, progress : 0, result_param2 : 0, target_system : 255, target_component : 0}
+dropped
+Current drop loc latitude: 13.0310203
+Current drop loc longtitude: 77.5653381
+Accuracy: 12874837.758436473
+130310203
+Automation
+alti: 30.657
+Guided
+130310203
+Automation
+alti: 30.086
+Guided
+Guided...
+Real_distance between lats and lons: 0.06833841008827658
+DESIRED LAT = 13.0310203
+DESIRED LONG = 77.5653376
+Started Dropping ...
+Dropping Bottle...
+COMMAND_ACK {command : 183, result : 0, progress : 0, result_param2 : 0, target_system : 255, target_component : 0}
+dropped
+Current drop loc latitude: 13.0310196
+Current drop loc longtitude: 77.5653373
+Accuracy: 12874837.682172833

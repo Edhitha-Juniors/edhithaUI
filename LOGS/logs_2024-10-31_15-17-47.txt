@@ -1,0 +1,80 @@
+2024-10-31 15:17:47,545 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-31 15:17:47,549 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9080
+2024-10-31 15:17:47,549 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-31 15:17:47,940 - STATUS - Client connected
+2024-10-31 15:17:47,942 - INFO - 127.0.0.1 - - [31/Oct/2024 15:17:47] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:17:47,963 - STATUS - Client connected
+2024-10-31 15:17:47,966 - STATUS - Client disconnected. Reason: unknown
+2024-10-31 15:17:48,425 - STATUS - Client connected
+2024-10-31 15:17:48,426 - INFO - 127.0.0.1 - - [31/Oct/2024 15:17:48] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:17:48,429 - INFO - 127.0.0.1 - - [31/Oct/2024 15:17:48] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:17:48,435 - INFO - 127.0.0.1 - - [31/Oct/2024 15:17:48] "[36mGET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1[0m" 304 -
+2024-10-31 15:17:51,985 - INFO - 127.0.0.1 - - [31/Oct/2024 15:17:51] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 15:17:51,990 - STATUS - Received data: nvcamtest_11456_s00_00000.jpg, BAl, , , 
+2024-10-31 15:17:51,991 - STATUS - Saving Details...
+2024-10-31 15:17:51,991 - STATUS - Error saving details: name 'xco' is not defined
+2024-10-31 15:17:51,991 - INFO - 127.0.0.1 - - [31/Oct/2024 15:17:51] "[35m[1mPOST /save-details HTTP/1.1[0m" 500 -
+2024-10-31 15:17:53,430 - INFO - 127.0.0.1 - - [31/Oct/2024 15:17:53] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:17:58,430 - INFO - 127.0.0.1 - - [31/Oct/2024 15:17:58] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:00,076 - STATUS - Client disconnected. Reason: unknown
+2024-10-31 15:18:00,143 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:00] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:00,145 - STATUS - Client connected
+2024-10-31 15:18:00,147 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:00] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:00,170 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:00] "[36mGET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1[0m" 304 -
+2024-10-31 15:18:02,928 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:02] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 15:18:03,014 - STATUS - Received coordinates: x=3119, y=2244
+2024-10-31 15:18:03,014 - STATUS - Cropping Image...
+2024-10-31 15:18:03,017 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:03] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 15:18:03,027 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:03] "GET /cropped-images/cropped_image_0.png HTTP/1.1" 200 -
+2024-10-31 15:18:05,149 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:05] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:06,125 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:06] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 15:18:06,130 - STATUS - Received data: nvcamtest_11456_s00_00000.jpg, asd, , , 
+2024-10-31 15:18:06,131 - STATUS - Saving Details...
+2024-10-31 15:18:06,142 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 15:18:06,144 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:06] "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1" 200 -
+2024-10-31 15:18:06,145 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/11" 200 1456811
+2024-10-31 15:18:06,162 - INFO - Real distance GSD: 1.0245628970443932
+2024-10-31 15:18:06,165 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 15:18:06,165 - INFO - Pixel distance: 330.50416033690107
+2024-10-31 15:18:06,165 - INFO - Angle: -246.4599607304857
+2024-10-31 15:18:06,165 - INFO - Calculated Real-life distance: 1.0245628970443932
+2024-10-31 15:18:06,165 - STATUS - Error saving details: unsupported operand type(s) for -: 'str' and 'int'
+2024-10-31 15:18:06,166 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:06] "[35m[1mPOST /save-details HTTP/1.1[0m" 500 -
+2024-10-31 15:18:10,146 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:10] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:14,739 - STATUS - Client disconnected. Reason: unknown
+2024-10-31 15:18:14,815 - STATUS - Client connected
+2024-10-31 15:18:14,829 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:14] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:14,831 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:14] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:14,834 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:14] "[36mGET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1[0m" 304 -
+2024-10-31 15:18:16,776 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:16] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 15:18:16,858 - STATUS - Received coordinates: x=3101, y=2262
+2024-10-31 15:18:16,858 - STATUS - Cropping Image...
+2024-10-31 15:18:16,862 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:16] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 15:18:16,869 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:16] "GET /cropped-images/cropped_image_1.png HTTP/1.1" 200 -
+2024-10-31 15:18:19,196 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:19] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 15:18:19,199 - STATUS - Received data: nvcamtest_11456_s00_00000.jpg, , , , 
+2024-10-31 15:18:19,199 - STATUS - Saving Details...
+2024-10-31 15:18:19,204 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 15:18:19,209 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:19] "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1" 200 -
+2024-10-31 15:18:19,210 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/11" 200 1456811
+2024-10-31 15:18:19,216 - INFO - Real distance GSD: 0.9983973407416508
+2024-10-31 15:18:19,219 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 15:18:19,219 - INFO - Pixel distance: 322.0636583037583
+2024-10-31 15:18:19,219 - INFO - Angle: -242.24145939893998
+2024-10-31 15:18:19,219 - INFO - Calculated Real-life distance: 0.9983973407416508
+2024-10-31 15:18:19,219 - STATUS - Error saving details: unsupported operand type(s) for -: 'str' and 'int'
+2024-10-31 15:18:19,220 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:19] "[35m[1mPOST /save-details HTTP/1.1[0m" 500 -
+2024-10-31 15:18:19,817 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:19] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:24,946 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:24] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:29,943 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:29] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:34,944 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:34] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:39,943 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:39] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:44,942 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:44] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:49,944 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:49] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:54,942 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:54] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:18:59,944 - INFO - 127.0.0.1 - - [31/Oct/2024 15:18:59] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:04,943 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:04] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:09,941 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:09] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:14,944 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:14] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:19:19,943 - INFO - 127.0.0.1 - - [31/Oct/2024 15:19:19] "GET /all-images HTTP/1.1" 200 -

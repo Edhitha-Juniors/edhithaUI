@@ -2,9 +2,10 @@ import time
 from pymavlink import mavutil
 import math
 from modules.mavlink_commands import *
+from modules.distcalc import *
 
-alti = 3
-drop_time = 10
+alti = 21
+drop_time = 15
 
 def distance_lat_lon(lat1, lon1, lat2, lon2):
     '''distance between two points'''
@@ -63,22 +64,18 @@ def inf_drop():
 def automation(lati, longi, target_no, the_connection):
 
     logging.getLogger().status("Automation")
-    # logging.getLogger().status(the_connection)
     gps = the_connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
     # logging.getLogger().status("GPS during calculation: %s", gps)
 
 
-    calculated_distance = distance_lat_lon(
-        lati/1e7, longi/1e7, gps.lat/1e7, gps.lon/1e7)
-    gps = the_connection.recv_match(
-        type='GLOBAL_POSITION_INT', blocking=True)
+    calculated_distance = distance_lat_lon(lati/1e7, longi/1e7, gps.lat/1e7, gps.lon/1e7)
+    gps = the_connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
     # logging.getLogger().status("GPS before shifting to guided: %s", gps)
-
     kurrentalti = gps.relative_alt/1000
     accuracy = 0.1
 
-    # logging.getLogger().status("alti: %s", kurrentalti)
-    # logging.getLogger().status('Guided')
+    logging.getLogger().status("alti: %s", kurrentalti)
+    logging.getLogger().status('Guided')
     guided()
     # drop()
     time.sleep(1.5)
@@ -97,21 +94,18 @@ def automation(lati, longi, target_no, the_connection):
 # Wait until the the_connection reaches the target location
     try:
         while True:
-            msg = the_connection.recv_match(
-                type=['GLOBAL_POSITION_INT'], blocking=True)
+            msg = the_connection.recv_match(type=['GLOBAL_POSITION_INT'], blocking=True)
             current_lat = msg.lat / 1e7
             current_lon = msg.lon / 1e7
-            distance = distance_lat_lon(
-                current_lat, current_lon, lati/1e7, longi/1e7)
-            # logging.getLogger().status(
-            #     'distance between the_connection and target: %s', distance)
+            distance = distance_lat_lon(current_lat, current_lon, lati/1e7, longi/1e7)
+            logging.getLogger().status('distance between the_connection and target: %s', distance)
             global target_dist
             target_dist = "distance = "+str(distance)
             if distance <= accuracy:
                 logging.getLogger().status('Started Dropping ...')
                 msgs = "starting drop"
                 time.sleep(1)
-                # drop()
+                drop()
 
                 # the_connection.mav.command_long_send(the_connection.target_system, the_connection.target_component,181, 0, 0, 1, 0, 0, 0, 0, 0)
                 time.sleep(drop_time)
@@ -121,6 +115,9 @@ def automation(lati, longi, target_no, the_connection):
                     'Current drop loc latitude: %s', msg.lat / 1e7)
                 logging.getLogger().status(
                     'Current drop loc longtitude: %s', msg.lon / 1e7)
+
+                accuracy = haversine_distance(lati, longi, msg.lat/1e7, msg.lon/1e7)
+                logging.getLogger().status('Accuracy: %s', accuracy)
 
                 # loiter()
                 # the_connection.mav.set_mode_send(the_connection.target_system,mavutil.mavlink.MAV_MODE_FLAG_CUSTOM_MODE_ENABLED,17)

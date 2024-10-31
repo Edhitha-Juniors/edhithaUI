@@ -1,0 +1,29 @@
+2024-10-31 15:03:18,197 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-31 15:03:18,201 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9080
+2024-10-31 15:03:18,201 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-31 15:03:20,067 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:20] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:03:20,071 - STATUS - Client connected
+2024-10-31 15:03:20,076 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:20] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 15:03:20,083 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:20] "[36mGET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1[0m" 304 -
+2024-10-31 15:03:22,415 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:22] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 15:03:22,499 - STATUS - Received coordinates: x=3077, y=2262
+2024-10-31 15:03:22,499 - STATUS - Cropping Image...
+2024-10-31 15:03:22,503 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:22] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 15:03:22,514 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:22] "GET /cropped-images/cropped_image_0.png HTTP/1.1" 200 -
+2024-10-31 15:03:22,937 - STATUS - Client connected
+2024-10-31 15:03:23,512 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:23] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 15:03:23,516 - STATUS - Received data: nvcamtest_11456_s00_00000.jpg, , , 1, 
+2024-10-31 15:03:23,516 - STATUS - Saving Details...
+2024-10-31 15:03:23,525 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 15:03:23,527 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:23] "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1" 200 -
+2024-10-31 15:03:23,527 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_11456_s00_00000.jpg HTTP/11" 200 1456811
+2024-10-31 15:03:23,549 - INFO - Real distance GSD: 0.9332029843501359
+2024-10-31 15:03:23,556 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 15:03:23,556 - INFO - Pixel distance: 301.03322075810837
+2024-10-31 15:03:23,556 - INFO - Angle: -240.113473059576
+2024-10-31 15:03:23,556 - INFO - Calculated Real-life distance: 0.9332029843501359
+2024-10-31 15:03:23,556 - INFO - saved target lat and long: 130311466, 775653427
+2024-10-31 15:03:23,556 - STATUS - Saved Succesfully.
+2024-10-31 15:03:23,557 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:23] "POST /save-details HTTP/1.1" 200 -
+2024-10-31 15:03:25,049 - INFO - 127.0.0.1 - - [31/Oct/2024 15:03:25] "GET /all-images HTTP/1.1" 200 -

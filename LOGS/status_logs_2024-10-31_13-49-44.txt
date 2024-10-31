@@ -1,0 +1,8 @@
+Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+Client connected
+Client connected
+Attempting to connect to the drone...
+Heartbeat received from system (system 1 component 0)
+Connected successfully!
+Connection Successfull...
+Started geotagg

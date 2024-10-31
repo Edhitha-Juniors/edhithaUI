@@ -1,0 +1,22 @@
+Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+Client connected
+Client connected
+Client disconnected. Reason: unknown
+Client connected
+Received data: nvcamtest_11456_s00_00000.jpg, BAl, , , 
+Saving Details...
+Error saving details: name 'xco' is not defined
+Client disconnected. Reason: unknown
+Client connected
+Received coordinates: x=3119, y=2244
+Cropping Image...
+Received data: nvcamtest_11456_s00_00000.jpg, asd, , , 
+Saving Details...
+Error saving details: unsupported operand type(s) for -: 'str' and 'int'
+Client disconnected. Reason: unknown
+Client connected
+Received coordinates: x=3101, y=2262
+Cropping Image...
+Received data: nvcamtest_11456_s00_00000.jpg, , , , 
+Saving Details...
+Error saving details: unsupported operand type(s) for -: 'str' and 'int'

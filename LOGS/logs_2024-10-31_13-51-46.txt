@@ -1,0 +1,28 @@
+2024-10-31 13:51:46,405 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-31 13:51:46,408 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9080
+2024-10-31 13:51:46,408 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-31 13:51:50,198 - INFO - 127.0.0.1 - - [31/Oct/2024 13:51:50] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:51:50,201 - STATUS - Client connected
+2024-10-31 13:51:50,202 - INFO - 127.0.0.1 - - [31/Oct/2024 13:51:50] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:51:51,781 - STATUS - Client connected
+2024-10-31 13:51:52,895 - STATUS - Attempting to connect to the drone...
+2024-10-31 13:51:53,036 - STATUS - Heartbeat received from system (system 0 component 0)
+2024-10-31 13:51:53,037 - STATUS - Connected successfully!
+2024-10-31 13:51:53,038 - STATUS - Connection Successfull...
+2024-10-31 13:51:53,040 - INFO - 127.0.0.1 - - [31/Oct/2024 13:51:53] "POST /toggle-connection HTTP/1.1" 200 -
+2024-10-31 13:51:55,201 - INFO - 127.0.0.1 - - [31/Oct/2024 13:51:55] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:51:56,870 - STATUS - Started geotagg
+2024-10-31 13:51:56,872 - INFO - 127.0.0.1 - - [31/Oct/2024 13:51:56] "[35m[1mPOST /start_geotagg HTTP/1.1[0m" 204 -
+2024-10-31 13:51:57,527 - DEBUG - NativeEvent(path="/Users/aahil/Edhitha/edhithaGCS/Data/Test/images", inode=None, flags=20, id=0): is_root_changed
+2024-10-31 13:51:57,527 - DEBUG - drop event DirDeletedEvent(src_path='../../Data/Test/images', dest_path='', event_type='deleted', is_directory=True, is_synthetic=False)
+2024-10-31 13:51:57,528 - DEBUG - Stopping because root path was changed
+2024-10-31 13:52:00,199 - INFO - 127.0.0.1 - - [31/Oct/2024 13:52:00] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:52:05,552 - INFO - 127.0.0.1 - - [31/Oct/2024 13:52:05] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:52:10,553 - INFO - 127.0.0.1 - - [31/Oct/2024 13:52:10] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:52:10,566 - INFO - 127.0.0.1 - - [31/Oct/2024 13:52:10] "GET /images/nvcamtest_8038_s00_00000.jpg HTTP/1.1" 200 -
+2024-10-31 13:52:15,551 - INFO - 127.0.0.1 - - [31/Oct/2024 13:52:15] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:52:17,187 - INFO - Python file stopped successfully.
+2024-10-31 13:52:17,187 - INFO - stopped geotagg
+2024-10-31 13:52:17,188 - INFO - 127.0.0.1 - - [31/Oct/2024 13:52:17] "[35m[1mPOST /stop_geotagg HTTP/1.1[0m" 204 -
+2024-10-31 13:52:20,552 - INFO - 127.0.0.1 - - [31/Oct/2024 13:52:20] "GET /all-images HTTP/1.1" 200 -

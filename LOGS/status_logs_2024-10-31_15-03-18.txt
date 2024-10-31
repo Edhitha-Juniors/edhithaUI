@@ -1,0 +1,8 @@
+Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+Client connected
+Received coordinates: x=3077, y=2262
+Cropping Image...
+Client connected
+Received data: nvcamtest_11456_s00_00000.jpg, , , 1, 
+Saving Details...
+Saved Succesfully.

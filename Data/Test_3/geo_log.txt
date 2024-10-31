@@ -1,0 +1,3262 @@
+['Test', 'Test_2']
+Test
+/Users/aahil/Edhitha/edhithaGCS/Data/Test_3
+Created a new folder: /Users/aahil/Edhitha/edhithaGCS/Data/Test_3
+Moved contents of /Users/aahil/Edhitha/edhithaGCS/Data/Test to /Users/aahil/Edhitha/edhithaGCS/Data/Test_3
+made images folder
+made cropped folder
+Connected to host ...
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.9.253-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Infrastructure is not enabled.
+
+1 update can be applied immediately.
+1 of these updates is a standard security update.
+To see these additional updates run: apt list --upgradable
+
+235 additional security updates can be applied with ESM Infra.
+Learn more about enabling ESM Infra service for Ubuntu 18.04 at
+https://ubuntu.com/18-04
+
+Last login: Wed Oct 30 16:05:41 2024 from 192.168.1.49
+
+Ran all the commands ..
+./geotag.sh
+edhitha@edhitha:~$ ./geotag.sh
+['test_cam', 'test_cam_1']
+test_cam_1
+Created a new folder: /home/edhitha/DCIM/test_cam_2
+Moved contents of /home/edhitha/DCIM/test_cam to /home/edhitha/DCIM/test_cam_2
+Directory '/home/edhitha/DCIM/test_cam/Tagged_img' created successfully.
+Directory '/home/edhitha/DCIM/test_cam/images' created successfully.
+camera_image_path: /home/edhitha/DCIM/test_cam/images ,Tagged image directory: /home/edhitha/DCIM/test_cam/Tagged_img
+[91mTo run the mavlink command:
+Copy & Paste this in Jetson terminal or in the SSH terminal and authenticate with the password.
+Change the laptop ip and UDP port for external mavlink connection
+If you are using telem connection to Jetson you might also want change the Pixhawk port and buad ...
+[94msudo mavlink-routerd -e 127.0.0.1:14569 -e 127.0.0.1:14550 /dev/ttyUSB0:57600 -e <laptop_ip>:<udp_port>[0m
+[91mServer is not enabled, if you want the server initiate to get GPS Data, close this script and run the following command:
+[94mpython3 <this_script_name>.py --socket[0m
+[91m Waiting for Mavlink Stream [0m
+[91m Waiting for Heartbeat .... [0m
+[92mHeartBeat in-sync ...[0m
+[93mb'SR2'_POSITION and b'SR2'_EXTRA1 set to 10Hz[0m
+Receiving GPS Stream ...
+[93m (13.0310593, 77.5653424, 30.984, 147.82, 147.82, 1730285062.831447) [0m
+[94m Check TCP port: 127.0.0.1:5760 [0m
+[95m Encoder null, cannot set bitrate!
+ [0m[95m Encoder Profile = High
+[93m (13.0310701, 77.565335, 31.025, 148.01999999999998, 148.01999999999998, 1730285063.3313885) [0m
+[93m (13.0310812, 77.5653276, 30.911, 148.14, 148.14, 1730285063.8311703) [0m
+[93m (13.0310927, 77.5653203, 30.828, 148.29000000000002, 148.29000000000002, 1730285064.3313637) [0m
+[93m (13.0311042, 77.5653134, 30.767, 149.18, 149.18, 1730285064.8315947) [0m
+[93m (13.0311152, 77.5653077, 30.72, 155.30999999999995, 155.30999999999995, 1730285065.3313565) [0m
+ [0m[95m bitrate = 4000000
+ [0m[95m Encoder Profile = High
+ [0m[95m Encoder control-rate = 1
+ [0m[95m Encoder EnableTwopassCBR = 0
+ [0m[95m Opening in BLOCKING MODE 
+ [0m[95m GST_ARGUS: Creating output stream
+ [0m[95m CONSUMER: Waiting until producer is connected...
+ [0m[95m GST_ARGUS: Available Sensor modes :
+ [0m[95m GST_ARGUS: 3840 x 2160 FR = 29.999999 fps Duration = 33333334 ; Analog Gain range min 1.000000, max 22.250000; Exposure Range min 13000, max 683709000;
+ [0m[95m 
+ [0m[95m GST_ARGUS: 1920 x 1080 FR = 59.999999 fps Duration = 16666667 ; Analog Gain range min 1.000000, max 22.250000; Exposure Range min 13000, max 683709000;
+ [0m[95m 
+ [0m[95m GST_ARGUS: Running with following settings:
+ [0m[95m    Camera index = 0 
+ [0m[95m    Camera mode  = 0 
+ [0m[95m    Output Stream W = 3840 H = 2160 
+ [0m[95m    seconds to Run    = 0 
+ [0m[95m    Frame Rate = 29.999999 
+ [0m[95m GST_ARGUS: Setup Complete, Starting captures for 0 seconds
+ [0m[95m GST_ARGUS: Starting repeat capture requests.
+ [0m[95m CONSUMER: Producer has connected; continuing.
+[93m (13.0311251, 77.565305, 30.67, 170.66000000000008, 170.66000000000008, 1730285065.8312094) [0m
+[93m (13.0311329, 77.5653069, 30.56, 201.62, 201.62, 1730285066.3314497) [0m
+[93m (13.0311379, 77.565314, 30.395, 233.11, 233.11, 1730285066.8314216) [0m
+[93m (13.0311402, 77.5653253, 30.305, 263.2, 263.2, 1730285067.331359) [0m
+[93m (13.0311408, 77.5653382, 30.312, 274.9, 274.9, 1730285067.8314261) [0m
+[93m (13.0311405, 77.5653508, 30.332, 273.18, 273.18, 1730285068.3314216) [0m
+ [0m[95m 
+ [0m[95m Starting automation...
+ [0mImage Captured 1730285068.7512538
+[95m Image Captured 
+File Prefix: nvcamtest_28827_s00_
+nvcamtest_28827_s00_
+[93m (13.0311404, 77.5653635, 30.356, 272.52, 272.52, 1730285068.8315673) [0m
+Initial skips count: -2.0
+[0m Started Geotagging for  nvcamtest_28827_s00_00000.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 12 [0m  Data length: [94m 13 [0m
+Interpolating_GPS_Data for the index: 12  Data length: 13
+Interpolating GPS Data for the index (inside function): 12  Data length: 13
+file_open ...
+Current file size: [94m 72 [0m
+File: nvcamtest_28827_s00_00000.jpg Latitude: 13.0311404 Longitude: 77.5653635 Altitude: 30.356 Head: 272.52 Yaw: 272.52 Time: 1730285068.8315673
+$' nvcamtest_28827_s00_00000.jpg 13.0311404 77.5653635 30.356 272.52 272.52 1730285068.8315673 '$
+Avg time differences: [94m 80.98340034484863 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0311401, 77.5653767, 30.408, 272.61, 272.61, 1730285069.332163) [0m
+ [0mImage Captured 1730285069.8268423
+[95m Image Captured 
+[93m (13.0311396, 77.5653906, 30.453, 272.59000000000003, 272.59000000000003, 1730285069.8320935) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00001.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 14 [0m  Data length: [94m 15 [0m
+Interpolating_GPS_Data for the index: 14  Data length: 15
+Interpolating GPS Data for the index (inside function): 14  Data length: 15
+File: nvcamtest_28827_s00_00001.jpg Latitude: 13.0311396 Longitude: 77.5653906 Altitude: 30.453 Head: 272.59000000000003 Yaw: 272.59000000000003 Time: 1730285069.8320935
+file_open ...
+Current file size: [94m 130 [0m
+$' nvcamtest_28827_s00_00001.jpg 13.0311396 77.5653906 30.453 272.59000000000003 272.59000000000003 1730285069.8320935 '$
+Avg time differences: [94m 81.2464952468872 [0m ms
+Updated skips count in the else condition: -1
+File: nvcamtest_28827_s00_00002.jpg Latitude: 13.0311382 Longitude: 77.5654187 Altitude: 30.59 Head: 273.01 Yaw: 273.01 Time: 1730285070.831751
+[93m (13.031139, 77.5654046, 30.526, 272.76, 272.76, 1730285070.3315747) [0m
+[93m (13.0311382, 77.5654187, 30.59, 273.01, 273.01, 1730285070.831751) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00002.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 16 [0m  Data length: [94m 17 [0m
+Interpolating_GPS_Data for the index: 16  Data length: 17
+Interpolating GPS Data for the index (inside function): 16  Data length: 17
+file_open ...
+Current file size: [94m 187 [0m
+$' nvcamtest_28827_s00_00002.jpg 13.0311382 77.5654187 30.59 273.01 273.01 1730285070.831751 '$
+Avg time differences: [94m 81.22007052103679 [0m ms
+Updated skips count in the else condition: -1
+ [0m[95m Image Captured 
+[93m (13.0311372, 77.5654326, 30.641, 272.74, 272.74, 1730285071.3318224) [0m
+[93m (13.0311361, 77.5654466, 30.674, 272.57, 272.57, 1730285071.8316178) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00003.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 18 [0m  Data length: [94m 19 [0m
+Interpolating_GPS_Data for the index: 18  Data length: 19
+Interpolating GPS Data for the index (inside function): 18  Data length: 19
+file_open ...
+Current file size: [94m 244 [0m
+File: nvcamtest_28827_s00_00003.jpg Latitude: 13.0311361 Longitude: 77.5654466 Altitude: 30.674 Head: 272.57 Yaw: 272.57 Time: 1730285071.8316178
+$' nvcamtest_28827_s00_00003.jpg 13.0311361 77.5654466 30.674 272.57 272.57 1730285071.8316178 '$
+Avg time differences: [94m 81.17353916168213 [0m ms
+Updated skips count in the else condition: -1
+ [0m[95m Image Captured 
+[93m (13.0311352, 77.5654606, 30.691, 272.59000000000003, 272.59000000000003, 1730285072.3323119) [0m
+[93m (13.0311345, 77.5654747, 30.661, 272.71, 272.71, 1730285072.833622) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00004.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 20 [0m  Data length: [94m 21 [0m
+Interpolating_GPS_Data for the index: 20  Data length: 21
+Interpolating GPS Data for the index (inside function): 20  Data length: 21
+file_open ...
+Current file size: [94m 301 [0m
+File: nvcamtest_28827_s00_00004.jpg Latitude: 13.0311345 Longitude: 77.5654747 Altitude: 30.661 Head: 272.71 Yaw: 272.71 Time: 1730285072.833622
+$' nvcamtest_28827_s00_00004.jpg 13.0311345 77.5654747 30.661 272.71 272.71 1730285072.833622 '$
+Avg time differences: [94m 81.54644966125488 [0m ms
+Updated skips count in the else condition: -1
+ [0m[95m Image Captured 
+[93m (13.0311338, 77.5654888, 30.627, 272.57, 272.57, 1730285073.3313997) [0m
+[93m (13.0311331, 77.5655027, 30.591, 272.56, 272.56, 1730285073.8319647) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00005.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 22 [0m  Data length: [94m 23 [0m
+Interpolating_GPS_Data for the index: 22  Data length: 23
+Interpolating GPS Data for the index (inside function): 22  Data length: 23
+file_open ...
+Current file size: [94m 358 [0mFile: nvcamtest_28827_s00_00005.jpg Latitude: 13.0311331 Longitude: 77.5655027 Altitude: 30.591 Head: 272.56 Yaw: 272.56 Time: 1730285073.8319647
+
+$' nvcamtest_28827_s00_00005.jpg 13.0311331 77.5655027 30.591 272.56 272.56 1730285073.8319647 '$
+Avg time differences: [94m 81.51884873708089 [0m ms
+Updated skips count in the else condition: -1
+ [0m[95m Image Captured 
+[93m (13.0311327, 77.5655165, 30.523, 272.65, 272.65, 1730285074.331438) [0m
+[93m (13.0311321, 77.56553, 30.48, 272.63, 272.63, 1730285074.8316364) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00006.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 24 [0m  Data length: [94m 25 [0m
+Interpolating_GPS_Data for the index: 24  Data length: 25
+Interpolating GPS Data for the index (inside function): 24  Data length: 25
+file_open ...
+Current file size: [94m 415 [0m
+File: nvcamtest_28827_s00_00006.jpg Latitude: 13.0311321 Longitude: 77.56553 Altitude: 30.48 Head: 272.63 Yaw: 272.63 Time: 1730285074.8316364
+$' nvcamtest_28827_s00_00006.jpg 13.0311321 77.56553 30.48 272.63 272.63 1730285074.8316364 '$
+Avg time differences: [94m 81.45223345075335 [0m ms
+Updated skips count in the else condition: -1
+ [0m[95m Image Captured 
+[93m (13.0311315, 77.5655436, 30.415, 272.59000000000003, 272.59000000000003, 1730285075.3316455) [0m
+[93m (13.0311307, 77.5655564, 30.376, 274.49, 274.49, 1730285075.8314562) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00007.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 26 [0m  Data length: [94m 27 [0m
+Interpolating_GPS_Data for the index: 26  Data length: 27
+Interpolating GPS Data for the index (inside function): 26  Data length: 27
+file_open ...
+Current file size: [94m 472 [0m
+File: nvcamtest_28827_s00_00007.jpg Latitude: 13.0311307 Longitude: 77.5655564 Altitude: 30.376 Head: 274.49 Yaw: 274.49 Time: 1730285075.8314562
+$' nvcamtest_28827_s00_00007.jpg 13.0311307 77.5655564 30.376 274.49 274.49 1730285075.8314562 '$
+Avg time differences: [94m 81.37974143028259 [0m ms
+Updated skips count in the else condition: -1
+ [0m[95m Image Captured 
+[93m (13.0311289, 77.565567, 30.356, 284.28, 284.28, 1730285076.3320405) [0m
+[93m (13.0311248, 77.5655745, 30.337, 308.62, 308.62, 1730285076.8315556) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00008.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 28 [0m  Data length: [94m 29 [0m
+Interpolating_GPS_Data for the index: 28  Data length: 29
+Interpolating GPS Data for the index (inside function): 28  Data length: 29
+File: nvcamtest_28827_s00_00008.jpg Latitude: 13.0311248 Longitude: 77.5655745 Altitude: 30.337 Head: 308.62 Yaw: 308.62 Time: 1730285076.8315556
+file_open ...
+Current file size: [94m 529 [0m
+$' nvcamtest_28827_s00_00008.jpg 13.0311248 77.5655745 30.337 308.62 308.62 1730285076.8315556 '$
+Avg time differences: [94m 81.3344054751926 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0311173, 77.5655788, 30.29, 340.95, 340.95, 1730285077.3319035) [0m
+ [0m[95m Image Captured 
+[93m (13.0311075, 77.5655808, 30.266, 357.56, 357.56, 1730285077.8314795) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00009.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 30 [0m  Data length: [94m 31 [0m
+Interpolating_GPS_Data for the index: 30  Data length: 31
+Interpolating GPS Data for the index (inside function): 30  Data length: 31
+File: nvcamtest_28827_s00_00009.jpg Latitude: 13.0311075 Longitude: 77.5655808 Altitude: 30.266 Head: 357.56 Yaw: 357.56 Time: 1730285077.8314795
+file_open ...
+Current file size: [94m 586 [0m
+$' nvcamtest_28827_s00_00009.jpg 13.0311075 77.5655808 30.266 357.56 357.56 1730285077.8314795 '$
+Avg time differences: [94m 81.29053115844727 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310972, 77.5655814, 30.267, 1.0199999999999818, 1.0199999999999818, 1730285078.3313656) [0m
+ [0m[95m Image Captured 
+[93m (13.0310871, 77.5655817, 30.304, 0.35000000000002274, 0.35000000000002274, 1730285078.8314173) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00010.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 32 [0m  Data length: [94m 33 [0m
+Interpolating_GPS_Data for the index: 32  Data length: 33
+Interpolating GPS Data for the index (inside function): 32  Data length: 33
+file_open ...
+File: nvcamtest_28827_s00_00010.jpg Latitude: 13.0310871 Longitude: 77.5655817 Altitude: 30.304 Head: 0.35000000000002274 Yaw: 0.35000000000002274 Time: 1730285078.8314173
+Current file size: [94m 643 [0m
+$' nvcamtest_28827_s00_00010.jpg 13.0310871 77.5655817 30.304 0.35000000000002274 0.35000000000002274 1730285078.8314173 '$
+Avg time differences: [94m 81.24897696755149 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310773, 77.565582, 30.357, 3.2100000000000364, 3.2100000000000364, 1730285079.3314276) [0m
+ [0m[95m Image Captured 
+[93m (13.0310686, 77.5655806, 30.4, 15.699999999999989, 15.699999999999989, 1730285079.8315105) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00011.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 34 [0m  Data length: [94m 35 [0m
+Interpolating_GPS_Data for the index: 34  Data length: 35
+Interpolating GPS Data for the index (inside function): 34  Data length: 35
+file_open ...
+Current file size: [94m 700 [0m
+File: nvcamtest_28827_s00_00011.jpg Latitude: 13.0310686 Longitude: 77.5655806 Altitude: 30.4 Head: 15.699999999999989 Yaw: 15.699999999999989 Time: 1730285079.8315105
+$' nvcamtest_28827_s00_00011.jpg 13.0310686 77.5655806 30.4 15.699999999999989 15.699999999999989 1730285079.8315105 '$
+Avg time differences: [94m 81.22211694717407 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310621, 77.5655764, 30.434, 42.91999999999996, 42.91999999999996, 1730285080.3332326) [0m
+ [0m[95m Image Captured 
+[93m (13.0310583, 77.5655684, 30.443, 74.69999999999999, 74.69999999999999, 1730285080.8319924) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00012.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 36 [0m  Data length: [94m 37 [0m
+Interpolating_GPS_Data for the index: 36  Data length: 37
+Interpolating GPS Data for the index (inside function): 36  Data length: 37
+file_open ...
+Current file size: [94m 757 [0m
+File: nvcamtest_28827_s00_00012.jpg Latitude: 13.0310583 Longitude: 77.5655684 Altitude: 30.443 Head: 74.69999999999999 Yaw: 74.69999999999999 Time: 1730285080.8319924
+$' nvcamtest_28827_s00_00012.jpg 13.0310583 77.5655684 30.443 74.69999999999999 74.69999999999999 1730285080.8319924 '$
+Avg time differences: [94m 81.2364541567289 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310568, 77.5655571, 30.448, 91.19999999999999, 91.19999999999999, 1730285081.331701) [0m
+ [0m[95m Image Captured 
+[93m (13.0310565, 77.5655443, 30.43, 93.07, 93.07, 1730285081.8315432) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00013.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 38 [0m  Data length: [94m 39 [0m
+Interpolating_GPS_Data for the index: 38  Data length: 39
+Interpolating GPS Data for the index (inside function): 38  Data length: 39
+file_open ...
+Current file size: [94m 814 [0m
+File: nvcamtest_28827_s00_00013.jpg Latitude: 13.0310565 Longitude: 77.5655443 Altitude: 30.43 Head: 93.07 Yaw: 93.07 Time: 1730285081.8315432
+$' nvcamtest_28827_s00_00013.jpg 13.0310565 77.5655443 30.43 93.07 93.07 1730285081.8315432 '$
+Avg time differences: [94m 81.2166588647025 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310564, 77.5655311, 30.442, 92.26999999999998, 92.26999999999998, 1730285082.3318038) [0m
+ [0m[95m Image Captured 
+[93m (13.0310563, 77.5655178, 30.494, 91.88, 91.88, 1730285082.8323414) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00014.jpg
+File: nvcamtest_28827_s00_00014.jpg Latitude: 13.0310563 Longitude: 77.5655178 Altitude: 30.494 Head: 91.88 Yaw: 91.88 Time: 1730285082.8323414
+Getting the actual gps entry...
+Image index for the image time: [94m 40 [0m  Data length: [94m 41 [0m
+Interpolating_GPS_Data for the index: 40  Data length: 41
+Interpolating GPS Data for the index (inside function): 40  Data length: 41
+file_open ...
+Current file size: [94m 871 [0m
+$' nvcamtest_28827_s00_00014.jpg 13.0310563 77.5655178 30.494 91.88 91.88 1730285082.8323414 '$
+Avg time differences: [94m 81.25271797180176 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310564, 77.5655045, 30.564, 91.82, 91.82, 1730285083.3315978) [0m
+ [0m[95m Image Captured 
+[93m (13.0310567, 77.5654908, 30.624, 91.85000000000002, 91.85000000000002, 1730285083.8316343) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00015.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 42 [0m  Data length: [94m 43 [0m
+Interpolating_GPS_Data for the index: 42  Data length: 43
+Interpolating GPS Data for the index (inside function): 42  Data length: 43
+file_open ...
+Current file size: [94m 928 [0m
+File: nvcamtest_28827_s00_00015.jpg Latitude: 13.0310567 Longitude: 77.5654908 Altitude: 30.624 Head: 91.85000000000002 Yaw: 91.85000000000002 Time: 1730285083.8316343
+$' nvcamtest_28827_s00_00015.jpg 13.0310567 77.5654908 30.624 91.85000000000002 91.85000000000002 1730285083.8316343 '$
+Avg time differences: [94m 81.24007284641266 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310573, 77.5654769, 30.642, 91.88, 91.88, 1730285084.331364) [0m
+ [0m[95m Image Captured 
+[93m (13.031058, 77.565463, 30.686, 91.68, 91.68, 1730285084.831981) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00016.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 44 [0m  Data length: [94m 45 [0m
+Interpolating_GPS_Data for the index: 44  Data length: 45
+Interpolating GPS Data for the index (inside function): 44  Data length: 45
+File: nvcamtest_28827_s00_00016.jpg Latitude: 13.031058 Longitude: 77.565463 Altitude: 30.686 Head: 91.68 Yaw: 91.68 Time: 1730285084.831981
+file_open ...
+Current file size: [94m 985 [0m
+$' nvcamtest_28827_s00_00016.jpg 13.031058 77.565463 30.686 91.68 91.68 1730285084.831981 '$
+Avg time differences: [94m 81.24930718365837 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310588, 77.5654491, 30.731, 91.61000000000001, 91.61000000000001, 1730285085.3314233) [0m
+[93m (13.0310595, 77.5654352, 30.755, 91.57999999999998, 91.57999999999998, 1730285085.8323123) [0m
+ [0m[95m Image Captured 
+[0m Started Geotagging for  nvcamtest_28827_s00_00017.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 46 [0m  Data length: [94m 47 [0m
+Interpolating_GPS_Data for the index: 46  Data length: 47
+Interpolating GPS Data for the index (inside function): 46  Data length: 47
+file_open ...
+Current file size: [94m 1042 [0m
+File: nvcamtest_28827_s00_00017.jpg Latitude: 13.0310595 Longitude: 77.5654352 Altitude: 30.755 Head: 91.57999999999998 Yaw: 91.57999999999998 Time: 1730285085.8323123
+$' nvcamtest_28827_s00_00017.jpg 13.0310595 77.5654352 30.755 91.57999999999998 91.57999999999998 1730285085.8323123 '$
+Avg time differences: [94m 81.27592669592963 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310601, 77.5654214, 30.718, 91.50999999999999, 91.50999999999999, 1730285086.3322787) [0m
+[93m (13.0310607, 77.5654074, 30.64, 91.51999999999998, 91.51999999999998, 1730285086.831399) [0m
+ [0m[95m Image Captured 
+[0m Started Geotagging for  nvcamtest_28827_s00_00018.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 48 [0m  Data length: [94m 49 [0m
+Interpolating_GPS_Data for the index: 48  Data length: 49
+Interpolating GPS Data for the index (inside function): 48  Data length: 49
+file_open ...
+File: nvcamtest_28827_s00_00018.jpg Latitude: 13.0310607 Longitude: 77.5654074 Altitude: 30.64 Head: 91.51999999999998 Yaw: 91.51999999999998 Time: 1730285086.831399
+Current file size: [94m 1099 [0m
+$' nvcamtest_28827_s00_00018.jpg 13.0310607 77.5654074 30.64 91.51999999999998 91.51999999999998 1730285086.831399 '$
+Avg time differences: [94m 81.25167143972297 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310612, 77.5653936, 30.619, 91.68, 91.68, 1730285087.331468) [0m
+[93m (13.0310617, 77.5653796, 30.505, 91.92000000000002, 91.92000000000002, 1730285087.8316753) [0m
+ [0m[95m Image Captured 
+[0m Started Geotagging for  nvcamtest_28827_s00_00019.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 50 [0m  Data length: [94m 51 [0m
+Interpolating_GPS_Data for the index: 50  Data length: 51
+Interpolating GPS Data for the index (inside function): 50  Data length: 51
+file_open ...
+File: nvcamtest_28827_s00_00019.jpg Latitude: 13.0310617 Longitude: 77.5653796 Altitude: 30.505 Head: 91.92000000000002 Yaw: 91.92000000000002 Time: 1730285087.8316753
+Current file size: [94m 1156 [0m
+$' nvcamtest_28827_s00_00019.jpg 13.0310617 77.5653796 30.505 91.92000000000002 91.92000000000002 1730285087.8316753 '$
+Avg time differences: [94m 81.2436580657959 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310621, 77.5653659, 30.38, 91.85000000000002, 91.85000000000002, 1730285088.3314981) [0m
+[93m (13.0310624, 77.5653522, 30.324, 91.99000000000001, 91.99000000000001, 1730285088.831481) [0m
+ [0m[95m Image Captured 
+[0m Started Geotagging for  nvcamtest_28827_s00_00020.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 52 [0m  Data length: [94m 53 [0m
+Interpolating_GPS_Data for the index: 52  Data length: 53
+Interpolating GPS Data for the index (inside function): 52  Data length: 53
+file_open ...
+Current file size: [94m 1213 [0m
+File: nvcamtest_28827_s00_00020.jpg Latitude: 13.0310624 Longitude: 77.5653522 Altitude: 30.324 Head: 91.99000000000001 Yaw: 91.99000000000001 Time: 1730285088.831481
+$' nvcamtest_28827_s00_00020.jpg 13.0310624 77.5653522 30.324 91.99000000000001 91.99000000000001 1730285088.831481 '$
+Avg time differences: [94m 81.2271549588158 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310629, 77.5653384, 30.312, 91.94, 91.94, 1730285089.3313282) [0m
+[93m (13.0310634, 77.5653252, 30.285, 91.92000000000002, 91.92000000000002, 1730285089.8316853) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00021.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 54 [0m  Data length: [94m 55 [0m
+Interpolating_GPS_Data for the index: 54  Data length: 55
+Interpolating GPS Data for the index (inside function): 54  Data length: 55
+file_open ...
+Current file size: [94m 1270 [0m
+File: nvcamtest_28827_s00_00021.jpg Latitude: 13.0310634 Longitude: 77.5653252 Altitude: 30.285 Head: 91.92000000000002 Yaw: 91.92000000000002 Time: 1730285089.8316853
+$' nvcamtest_28827_s00_00021.jpg 13.0310634 77.5653252 30.285 91.92000000000002 91.92000000000002 1730285089.8316853 '$
+Avg time differences: [94m 81.22143962166525 [0m ms
+Updated skips count in the else condition: -1
+ [0m[95m Image Captured 
+[93m (13.0310635, 77.5653137, 30.275, 87.95999999999998, 87.95999999999998, 1730285090.3315501) [0m
+[93m (13.0310621, 77.5653047, 30.269, 72.94999999999999, 72.94999999999999, 1730285090.8316164) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00022.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 56 [0m  Data length: [94m 57 [0m
+Interpolating_GPS_Data for the index: 56  Data length: 57
+Interpolating GPS Data for the index (inside function): 56  Data length: 57
+file_open ...
+Current file size: [94m 1327 [0m
+File: nvcamtest_28827_s00_00022.jpg Latitude: 13.0310621 Longitude: 77.5653047 Altitude: 30.269 Head: 72.94999999999999 Yaw: 72.94999999999999 Time: 1730285090.8316164
+$' nvcamtest_28827_s00_00022.jpg 13.0310621 77.5653047 30.269 72.94999999999999 72.94999999999999 1730285090.8316164 '$
+Avg time differences: [94m 81.21322548907736 [0m ms
+Updated skips count in the else condition: -1
+ [0m[95m Image Captured 
+[93m (13.0310578, 77.5652992, 30.254, 41.98000000000002, 41.98000000000002, 1730285091.3318837) [0m
+[93m (13.0310507, 77.5652963, 30.248, 12.009999999999991, 12.009999999999991, 1730285091.8317795) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00023.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 58 [0m  Data length: [94m 59 [0m
+Interpolating_GPS_Data for the index: 58  Data length: 59
+Interpolating GPS Data for the index (inside function): 58  Data length: 59
+file_open ...
+Current file size: [94m 1384 [0m
+File: nvcamtest_28827_s00_00023.jpg Latitude: 13.0310507 Longitude: 77.5652963 Altitude: 30.248 Head: 12.009999999999991 Yaw: 12.009999999999991 Time: 1730285091.8317795
+$' nvcamtest_28827_s00_00023.jpg 13.0310507 77.5652963 30.248 12.009999999999991 12.009999999999991 1730285091.8317795 '$
+Avg time differences: [94m 81.21249079704285 [0m ms
+Updated skips count in the else condition: -1
+ [0m[95m Image Captured 
+[93m (13.0310418, 77.5652947, 30.285, 2.5299999999999727, 2.5299999999999727, 1730285092.331554) [0m
+[93m (13.0310321, 77.5652934, 30.325, 2.6999999999999886, 2.6999999999999886, 1730285092.8314319) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00024.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 60 [0m  Data length: [94m 61 [0m
+Interpolating_GPS_Data for the index: 60  Data length: 61
+Interpolating GPS Data for the index (inside function): 60  Data length: 61
+file_open ...
+File: nvcamtest_28827_s00_00024.jpg Latitude: 13.0310321 Longitude: 77.5652934 Altitude: 30.325 Head: 2.6999999999999886 Yaw: 2.6999999999999886 Time: 1730285092.8314319
+Current file size: [94m 1441 [0m
+$' nvcamtest_28827_s00_00024.jpg 13.0310321 77.5652934 30.325 2.6999999999999886 2.6999999999999886 1730285092.8314319 '$
+Avg time differences: [94m 81.19791030883789 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310225, 77.5652922, 30.369, 2.569999999999993, 2.569999999999993, 1730285093.3316433) [0m
+ [0m[95m Image Captured 
+[93m (13.0310138, 77.5652922, 30.396, 353.78, 353.78, 1730285093.8316398) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00025.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 62 [0m  Data length: [94m 63 [0m
+Interpolating_GPS_Data for the index: 62  Data length: 63
+Interpolating GPS Data for the index (inside function): 62  Data length: 63
+file_open ...
+Current file size: [94m 1498 [0m
+File: nvcamtest_28827_s00_00025.jpg Latitude: 13.0310138 Longitude: 77.5652922 Altitude: 30.396 Head: 353.78 Yaw: 353.78 Time: 1730285093.8316398
+$' nvcamtest_28827_s00_00025.jpg 13.0310138 77.5652922 30.396 353.78 353.78 1730285093.8316398 '$
+Avg time differences: [94m 81.19244758899396 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310069, 77.5652945, 30.39, 330.53, 330.53, 1730285094.3313353) [0m
+ [0m[95m Image Captured 
+[93m (13.0310027, 77.5653, 30.361, 298.38, 298.38, 1730285094.8315866) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00026.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 64 [0m  Data length: [94m 65 [0m
+Interpolating_GPS_Data for the index: 64  Data length: 65
+Interpolating GPS Data for the index (inside function): 64  Data length: 65
+file_open ...
+File: nvcamtest_28827_s00_00026.jpg Latitude: 13.0310027 Longitude: 77.5653 Altitude: 30.361 Head: 298.38 Yaw: 298.38 Time: 1730285094.8315866
+Current file size: [94m 1555 [0m
+$' nvcamtest_28827_s00_00026.jpg 13.0310027 77.5653 30.361 298.38 298.38 1730285094.8315866 '$
+Avg time differences: [94m 81.18542035420735 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0310004, 77.5653096, 30.356, 274.28, 274.28, 1730285095.3318677) [0m
+ [0m[95m Image Captured 
+[93m (13.0309988, 77.5653221, 30.371, 271.76, 271.76, 1730285095.831719) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00027.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 66 [0m  Data length: [94m 67 [0m
+Interpolating_GPS_Data for the index: 66  Data length: 67
+Interpolating GPS Data for the index (inside function): 66  Data length: 67
+file_open ...
+Current file size: [94m 1612 [0m
+File: nvcamtest_28827_s00_00027.jpg Latitude: 13.0309988 Longitude: 77.5653221 Altitude: 30.371 Head: 271.76 Yaw: 271.76 Time: 1730285095.831719
+$' nvcamtest_28827_s00_00027.jpg 13.0309988 77.5653221 30.371 271.76 271.76 1730285095.831719 '$
+Avg time differences: [94m 81.18362086159843 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0309974, 77.5653357, 30.395, 272.74, 272.74, 1730285096.3314168) [0m
+ [0m[95m Image Captured 
+[93m (13.0309962, 77.5653491, 30.415, 272.90999999999997, 272.90999999999997, 1730285096.8314116) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00028.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 68 [0m  Data length: [94m 69 [0m
+Interpolating_GPS_Data for the index: 68  Data length: 69
+Interpolating GPS Data for the index (inside function): 68  Data length: 69
+file_open ...
+File: nvcamtest_28827_s00_00028.jpg Latitude: 13.0309962 Longitude: 77.5653491 Altitude: 30.415 Head: 272.90999999999997 Yaw: 272.90999999999997 Time: 1730285096.8314116
+Current file size: [94m 1669 [0m
+$' nvcamtest_28827_s00_00028.jpg 13.0309962 77.5653491 30.415 272.90999999999997 272.90999999999997 1730285096.8314116 '$
+Avg time differences: [94m 81.17134817715349 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0309952, 77.5653622, 30.42, 272.8, 272.8, 1730285097.3318763) [0m
+ [0m[95m Image Captured 
+[93m (13.0309945, 77.5653757, 30.424, 272.76, 272.76, 1730285097.8315158) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00029.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 70 [0m  Data length: [94m 71 [0m
+Interpolating_GPS_Data for the index: 70  Data length: 71
+Interpolating GPS Data for the index (inside function): 70  Data length: 71
+file_open ...
+Current file size: [94m 1726 [0m
+File: nvcamtest_28827_s00_00029.jpg Latitude: 13.0309945 Longitude: 77.5653757 Altitude: 30.424 Head: 272.76 Yaw: 272.76 Time: 1730285097.8315158
+$' nvcamtest_28827_s00_00029.jpg 13.0309945 77.5653757 30.424 272.76 272.76 1730285097.8315158 '$
+Avg time differences: [94m 81.16336663564046 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0309939, 77.5653894, 30.438, 272.74, 272.74, 1730285098.331462) [0m
+ [0m[95m Image Captured 
+[93m (13.0309934, 77.5654032, 30.44, 272.64, 272.64, 1730285098.8317163) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00030.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 72 [0m  Data length: [94m 73 [0m
+Interpolating_GPS_Data for the index: 72  Data length: 73
+Interpolating GPS Data for the index (inside function): 72  Data length: 73
+file_open ...
+Current file size: [94m 1783 [0m
+File: nvcamtest_28827_s00_00030.jpg Latitude: 13.0309934 Longitude: 77.5654032 Altitude: 30.44 Head: 272.64 Yaw: 272.64 Time: 1730285098.8317163
+$' nvcamtest_28827_s00_00030.jpg 13.0309934 77.5654032 30.44 272.64 272.64 1730285098.8317163 '$
+Avg time differences: [94m 81.16236809761294 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0309929, 77.5654171, 30.441, 272.73, 272.73, 1730285099.3314607) [0m
+ [0m[95m Image Captured 
+[93m (13.0309923, 77.5654311, 30.45, 272.85, 272.85, 1730285099.831604) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00031.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 74 [0m  Data length: [94m 75 [0m
+Interpolating_GPS_Data for the index: 74  Data length: 75
+Interpolating GPS Data for the index (inside function): 74  Data length: 75
+file_open ...
+Current file size: [94m 1840 [0m
+File: nvcamtest_28827_s00_00031.jpg Latitude: 13.0309923 Longitude: 77.5654311 Altitude: 30.45 Head: 272.85 Yaw: 272.85 Time: 1730285099.831604
+$' nvcamtest_28827_s00_00031.jpg 13.0309923 77.5654311 30.45 272.85 272.85 1730285099.831604 '$
+Avg time differences: [94m 81.15792274475098 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0309916, 77.565445, 30.468, 272.88, 272.88, 1730285100.3315008) [0m
+ [0m[95m Image Captured 
+[93m (13.030991, 77.565459, 30.489, 272.96, 272.96, 1730285100.8317668) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00032.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 76 [0m  Data length: [94m 77 [0m
+Interpolating_GPS_Data for the index: 76  Data length: 77
+Interpolating GPS Data for the index (inside function): 76  Data length: 77
+file_open ...
+File: nvcamtest_28827_s00_00032.jpg Latitude: 13.030991 Longitude: 77.565459 Altitude: 30.489 Head: 272.96 Yaw: 272.96 Time: 1730285100.8317668
+Current file size: [94m 1897 [0m
+$' nvcamtest_28827_s00_00032.jpg 13.030991 77.565459 30.489 272.96 272.96 1730285100.8317668 '$
+Avg time differences: [94m 81.15868134932084 [0m ms
+Updated skips count in the else condition: -1
+[93m (13.0309903, 77.565473, 30.497, 272.97, 272.97, 1730285101.3315434) [0m
+[93m (13.0309896, 77.5654869, 30.506, 272.85, 272.85, 1730285101.8321187) [0m
+ [0m[95m Image Captured 
+[93m (13.0309889, 77.5655006, 30.512, 272.96, 272.96, 1730285102.3313782) [0m
+[0m Started Geotagging for  nvcamtest_28827_s00_00033.jpg
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 80 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 80
+Interpolating GPS Data for the index (inside function): 78  Data length: 80
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 80 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 80
+Interpolating GPS Data for the index (inside function): 78  Data length: 80
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 80 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 80
+Interpolating GPS Data for the index (inside function): 78  Data length: 80
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 80 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 80
+Interpolating GPS Data for the index (inside function): 78  Data length: 80
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 80 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 80
+Interpolating GPS Data for the index (inside function): 78  Data length: 80
+list index out of range
+[93m (13.0309881, 77.5655142, 30.516, 273.05, 273.05, 1730285102.8318753) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 81 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 81
+Interpolating GPS Data for the index (inside function): 78  Data length: 81
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 81 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 81
+Interpolating GPS Data for the index (inside function): 78  Data length: 81
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 81 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 81
+Interpolating GPS Data for the index (inside function): 78  Data length: 81
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 81 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 81
+Interpolating GPS Data for the index (inside function): 78  Data length: 81
+list index out of range
+[93m (13.0309873, 77.5655279, 30.504, 273.02, 273.02, 1730285103.332263) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 82 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 82
+Interpolating GPS Data for the index (inside function): 78  Data length: 82
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 82 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 82
+Interpolating GPS Data for the index (inside function): 78  Data length: 82
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 82 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 82
+Interpolating GPS Data for the index (inside function): 78  Data length: 82
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 82 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 82
+Interpolating GPS Data for the index (inside function): 78  Data length: 82
+list index out of range
+[93m (13.0309866, 77.5655416, 30.487, 272.92, 272.92, 1730285103.8319335) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 83 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 83
+Interpolating GPS Data for the index (inside function): 78  Data length: 83
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 83 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 83
+Interpolating GPS Data for the index (inside function): 78  Data length: 83
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 83 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 83
+Interpolating GPS Data for the index (inside function): 78  Data length: 83
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 83 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 83
+Interpolating GPS Data for the index (inside function): 78  Data length: 83
+list index out of range
+[93m (13.0309857, 77.5655546, 30.474, 274.17, 274.17, 1730285104.3322647) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 84 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 84
+Interpolating GPS Data for the index (inside function): 78  Data length: 84
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 84 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 84
+Interpolating GPS Data for the index (inside function): 78  Data length: 84
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 84 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 84
+Interpolating GPS Data for the index (inside function): 78  Data length: 84
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 84 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 84
+Interpolating GPS Data for the index (inside function): 78  Data length: 84
+list index out of range
+[93m (13.030984, 77.5655656, 30.475, 282.78, 282.78, 1730285104.8327565) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 85 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 85
+Interpolating GPS Data for the index (inside function): 78  Data length: 85
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 85 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 85
+Interpolating GPS Data for the index (inside function): 78  Data length: 85
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 85 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 85
+Interpolating GPS Data for the index (inside function): 78  Data length: 85
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 85 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 85
+Interpolating GPS Data for the index (inside function): 78  Data length: 85
+list index out of range
+[93m (13.0309803, 77.565574, 30.479, 304.83, 304.83, 1730285105.3313968) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 86 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 86
+Interpolating GPS Data for the index (inside function): 78  Data length: 86
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 86 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 86
+Interpolating GPS Data for the index (inside function): 78  Data length: 86
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 86 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 86
+Interpolating GPS Data for the index (inside function): 78  Data length: 86
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 86 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 86
+Interpolating GPS Data for the index (inside function): 78  Data length: 86
+list index out of range
+[93m (13.0309734, 77.5655792, 30.487, 336.95, 336.95, 1730285105.831582) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 87 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 87
+Interpolating GPS Data for the index (inside function): 78  Data length: 87
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 87 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 87
+Interpolating GPS Data for the index (inside function): 78  Data length: 87
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 87 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 87
+Interpolating GPS Data for the index (inside function): 78  Data length: 87
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 87 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 87
+Interpolating GPS Data for the index (inside function): 78  Data length: 87
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 87 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 87
+Interpolating GPS Data for the index (inside function): 78  Data length: 87
+list index out of range
+[93m (13.030964, 77.5655817, 30.513, 354.61, 354.61, 1730285106.3319666) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 88 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 88
+Interpolating GPS Data for the index (inside function): 78  Data length: 88
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 88 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 88
+Interpolating GPS Data for the index (inside function): 78  Data length: 88
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 88 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 88
+Interpolating GPS Data for the index (inside function): 78  Data length: 88
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 88 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 88
+Interpolating GPS Data for the index (inside function): 78  Data length: 88
+list index out of range
+[93m (13.0309538, 77.5655825, 30.538, 359.0, 359.0, 1730285106.8314788) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 89 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 89
+Interpolating GPS Data for the index (inside function): 78  Data length: 89
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 89 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 89
+Interpolating GPS Data for the index (inside function): 78  Data length: 89
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 89 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 89
+Interpolating GPS Data for the index (inside function): 78  Data length: 89
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 89 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 89
+Interpolating GPS Data for the index (inside function): 78  Data length: 89
+list index out of range
+[93m (13.0309437, 77.565583, 30.572, 358.45, 358.45, 1730285107.3317556) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 90 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 90
+Interpolating GPS Data for the index (inside function): 78  Data length: 90
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 90 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 90
+Interpolating GPS Data for the index (inside function): 78  Data length: 90
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 90 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 90
+Interpolating GPS Data for the index (inside function): 78  Data length: 90
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 90 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 90
+Interpolating GPS Data for the index (inside function): 78  Data length: 90
+list index out of range
+[93m (13.0309338, 77.5655833, 30.597, 0.8000000000000114, 0.8000000000000114, 1730285107.831681) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 91 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 91
+Interpolating GPS Data for the index (inside function): 78  Data length: 91
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 91 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 91
+Interpolating GPS Data for the index (inside function): 78  Data length: 91
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 91 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 91
+Interpolating GPS Data for the index (inside function): 78  Data length: 91
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 91 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 91
+Interpolating GPS Data for the index (inside function): 78  Data length: 91
+list index out of range
+[93m (13.0309248, 77.5655823, 30.604, 12.310000000000002, 12.310000000000002, 1730285108.3314753) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 92 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 92
+Interpolating GPS Data for the index (inside function): 78  Data length: 92
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 92 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 92
+Interpolating GPS Data for the index (inside function): 78  Data length: 92
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 92 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 92
+Interpolating GPS Data for the index (inside function): 78  Data length: 92
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 92 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 92
+Interpolating GPS Data for the index (inside function): 78  Data length: 92
+list index out of range
+[93m (13.0309179, 77.5655786, 30.601, 39.360000000000014, 39.360000000000014, 1730285108.8314273) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 93 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 93
+Interpolating GPS Data for the index (inside function): 78  Data length: 93
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 93 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 93
+Interpolating GPS Data for the index (inside function): 78  Data length: 93
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 93 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 93
+Interpolating GPS Data for the index (inside function): 78  Data length: 93
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 93 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 93
+Interpolating GPS Data for the index (inside function): 78  Data length: 93
+list index out of range
+[93m (13.0309141, 77.5655713, 30.605, 71.0, 71.0, 1730285109.3325772) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 94 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 94
+Interpolating GPS Data for the index (inside function): 78  Data length: 94
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 94 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 94
+Interpolating GPS Data for the index (inside function): 78  Data length: 94
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 94 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 94
+Interpolating GPS Data for the index (inside function): 78  Data length: 94
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 94 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 94
+Interpolating GPS Data for the index (inside function): 78  Data length: 94
+list index out of range
+[93m (13.0309128, 77.5655605, 30.606, 93.13, 93.13, 1730285109.831392) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 95 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 95
+Interpolating GPS Data for the index (inside function): 78  Data length: 95
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 95 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 95
+Interpolating GPS Data for the index (inside function): 78  Data length: 95
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 95 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 95
+Interpolating GPS Data for the index (inside function): 78  Data length: 95
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 95 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 95
+Interpolating GPS Data for the index (inside function): 78  Data length: 95
+list index out of range
+[93m (13.030913, 77.565548, 30.56, 94.93, 94.93, 1730285110.3314207) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 96 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 96
+Interpolating GPS Data for the index (inside function): 78  Data length: 96
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 96 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 96
+Interpolating GPS Data for the index (inside function): 78  Data length: 96
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 96 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 96
+Interpolating GPS Data for the index (inside function): 78  Data length: 96
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 96 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 96
+Interpolating GPS Data for the index (inside function): 78  Data length: 96
+list index out of range
+[93m (13.0309134, 77.5655349, 30.541, 93.68, 93.68, 1730285110.83134) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 97 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 97
+Interpolating GPS Data for the index (inside function): 78  Data length: 97
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 97 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 97
+Interpolating GPS Data for the index (inside function): 78  Data length: 97
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 97 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 97
+Interpolating GPS Data for the index (inside function): 78  Data length: 97
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 97 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 97
+Interpolating GPS Data for the index (inside function): 78  Data length: 97
+list index out of range
+[93m (13.0309137, 77.5655217, 30.58, 93.44999999999999, 93.44999999999999, 1730285111.330453) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 98 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 98
+Interpolating GPS Data for the index (inside function): 78  Data length: 98
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 98 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 98
+Interpolating GPS Data for the index (inside function): 78  Data length: 98
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 98 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 98
+Interpolating GPS Data for the index (inside function): 78  Data length: 98
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 98 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 98
+Interpolating GPS Data for the index (inside function): 78  Data length: 98
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 98 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 98
+Interpolating GPS Data for the index (inside function): 78  Data length: 98
+list index out of range
+[93m (13.0309141, 77.5655082, 30.603, 93.50999999999999, 93.50999999999999, 1730285111.8316014) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 99 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 99
+Interpolating GPS Data for the index (inside function): 78  Data length: 99
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 99 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 99
+Interpolating GPS Data for the index (inside function): 78  Data length: 99
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 99 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 99
+Interpolating GPS Data for the index (inside function): 78  Data length: 99
+list index out of range
+[93m (13.0309149, 77.5654944, 30.598, 93.48000000000002, 93.48000000000002, 1730285112.3314834) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 100 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 100
+Interpolating GPS Data for the index (inside function): 78  Data length: 100
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 100 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 100
+Interpolating GPS Data for the index (inside function): 78  Data length: 100
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 100 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 100
+Interpolating GPS Data for the index (inside function): 78  Data length: 100
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 100 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 100
+Interpolating GPS Data for the index (inside function): 78  Data length: 100
+list index out of range
+[93m (13.0309159, 77.5654804, 30.601, 93.47000000000003, 93.47000000000003, 1730285112.831776) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 101 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 101
+Interpolating GPS Data for the index (inside function): 78  Data length: 101
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 101 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 101
+Interpolating GPS Data for the index (inside function): 78  Data length: 101
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 101 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 101
+Interpolating GPS Data for the index (inside function): 78  Data length: 101
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 101 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 101
+Interpolating GPS Data for the index (inside function): 78  Data length: 101
+list index out of range
+[93m (13.0309169, 77.5654664, 30.578, 93.63999999999999, 93.63999999999999, 1730285113.331478) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 102 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 102
+Interpolating GPS Data for the index (inside function): 78  Data length: 102
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 102 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 102
+Interpolating GPS Data for the index (inside function): 78  Data length: 102
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 102 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 102
+Interpolating GPS Data for the index (inside function): 78  Data length: 102
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 102 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 102
+Interpolating GPS Data for the index (inside function): 78  Data length: 102
+list index out of range
+[93m (13.030918, 77.5654523, 30.549, 93.56, 93.56, 1730285113.831998) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 103 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 103
+Interpolating GPS Data for the index (inside function): 78  Data length: 103
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 103 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 103
+Interpolating GPS Data for the index (inside function): 78  Data length: 103
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 103 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 103
+Interpolating GPS Data for the index (inside function): 78  Data length: 103
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 103 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 103
+Interpolating GPS Data for the index (inside function): 78  Data length: 103
+list index out of range
+[93m (13.030919, 77.5654384, 30.545, 93.41000000000003, 93.41000000000003, 1730285114.330712) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 104 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 104
+Interpolating GPS Data for the index (inside function): 78  Data length: 104
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 104 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 104
+Interpolating GPS Data for the index (inside function): 78  Data length: 104
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 104 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 104
+Interpolating GPS Data for the index (inside function): 78  Data length: 104
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 104 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 104
+Interpolating GPS Data for the index (inside function): 78  Data length: 104
+list index out of range
+[93m (13.03092, 77.5654243, 30.545, 93.25, 93.25, 1730285114.83059) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 105 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 105
+Interpolating GPS Data for the index (inside function): 78  Data length: 105
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 105 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 105
+Interpolating GPS Data for the index (inside function): 78  Data length: 105
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 105 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 105
+Interpolating GPS Data for the index (inside function): 78  Data length: 105
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 105 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 105
+Interpolating GPS Data for the index (inside function): 78  Data length: 105
+list index out of range
+[93m (13.0309208, 77.5654105, 30.62, 93.17000000000002, 93.17000000000002, 1730285115.3303273) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 106 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 106
+Interpolating GPS Data for the index (inside function): 78  Data length: 106
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 106 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 106
+Interpolating GPS Data for the index (inside function): 78  Data length: 106
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 106 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 106
+Interpolating GPS Data for the index (inside function): 78  Data length: 106
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 106 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 106
+Interpolating GPS Data for the index (inside function): 78  Data length: 106
+list index out of range
+[93m (13.0309217, 77.5653966, 30.672, 93.56, 93.56, 1730285115.8308005) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 107 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 107
+Interpolating GPS Data for the index (inside function): 78  Data length: 107
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 107 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 107
+Interpolating GPS Data for the index (inside function): 78  Data length: 107
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 107 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 107
+Interpolating GPS Data for the index (inside function): 78  Data length: 107
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 107 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 107
+Interpolating GPS Data for the index (inside function): 78  Data length: 107
+list index out of range
+[93m (13.0309225, 77.5653829, 30.586, 93.57999999999998, 93.57999999999998, 1730285116.330436) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 108 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 108
+Interpolating GPS Data for the index (inside function): 78  Data length: 108
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 108 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 108
+Interpolating GPS Data for the index (inside function): 78  Data length: 108
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 108 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 108
+Interpolating GPS Data for the index (inside function): 78  Data length: 108
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 108 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 108
+Interpolating GPS Data for the index (inside function): 78  Data length: 108
+list index out of range
+ [0m[95m Image Captured 
+[93m (13.0309235, 77.5653692, 30.529, 93.55000000000001, 93.55000000000001, 1730285116.8303778) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 109 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 109
+Interpolating GPS Data for the index (inside function): 78  Data length: 109
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 109 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 109
+Interpolating GPS Data for the index (inside function): 78  Data length: 109
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 109 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 109
+Interpolating GPS Data for the index (inside function): 78  Data length: 109
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 109 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 109
+Interpolating GPS Data for the index (inside function): 78  Data length: 109
+list index out of range
+[93m (13.0309244, 77.5653555, 30.522, 93.42000000000002, 93.42000000000002, 1730285117.3306372) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 110 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 110
+Interpolating GPS Data for the index (inside function): 78  Data length: 110
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 110 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 110
+Interpolating GPS Data for the index (inside function): 78  Data length: 110
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 110 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 110
+Interpolating GPS Data for the index (inside function): 78  Data length: 110
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 110 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 110
+Interpolating GPS Data for the index (inside function): 78  Data length: 110
+list index out of range
+[93m (13.0309252, 77.5653418, 30.516, 93.52999999999997, 93.52999999999997, 1730285117.8311892) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 111 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 111
+Interpolating GPS Data for the index (inside function): 78  Data length: 111
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 111 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 111
+Interpolating GPS Data for the index (inside function): 78  Data length: 111
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 111 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 111
+Interpolating GPS Data for the index (inside function): 78  Data length: 111
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 111 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 111
+Interpolating GPS Data for the index (inside function): 78  Data length: 111
+list index out of range
+[93m (13.030926, 77.5653281, 30.455, 93.64999999999998, 93.64999999999998, 1730285118.3302886) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 112 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 112
+Interpolating GPS Data for the index (inside function): 78  Data length: 112
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 112 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 112
+Interpolating GPS Data for the index (inside function): 78  Data length: 112
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 112 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 112
+Interpolating GPS Data for the index (inside function): 78  Data length: 112
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 112 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 112
+Interpolating GPS Data for the index (inside function): 78  Data length: 112
+list index out of range
+[93m (13.0309268, 77.5653151, 30.423, 93.43, 93.43, 1730285118.830365) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 113 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 113
+Interpolating GPS Data for the index (inside function): 78  Data length: 113
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 113 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 113
+Interpolating GPS Data for the index (inside function): 78  Data length: 113
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 113 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 113
+Interpolating GPS Data for the index (inside function): 78  Data length: 113
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 113 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 113
+Interpolating GPS Data for the index (inside function): 78  Data length: 113
+list index out of range
+[93m (13.0309276, 77.5653039, 30.458, 93.30000000000001, 93.30000000000001, 1730285119.3303409) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 114 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 114
+Interpolating GPS Data for the index (inside function): 78  Data length: 114
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 114 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 114
+Interpolating GPS Data for the index (inside function): 78  Data length: 114
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 114 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 114
+Interpolating GPS Data for the index (inside function): 78  Data length: 114
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 114 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 114
+Interpolating GPS Data for the index (inside function): 78  Data length: 114
+list index out of range
+[93m (13.030928, 77.5652954, 30.495, 93.41000000000003, 93.41000000000003, 1730285119.8304863) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 115 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 115
+Interpolating GPS Data for the index (inside function): 78  Data length: 115
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 115 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 115
+Interpolating GPS Data for the index (inside function): 78  Data length: 115
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 115 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 115
+Interpolating GPS Data for the index (inside function): 78  Data length: 115
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 115 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 115
+Interpolating GPS Data for the index (inside function): 78  Data length: 115
+list index out of range
+[93m (13.0309283, 77.5652903, 30.454, 93.18, 93.18, 1730285120.3305144) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 116 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 116
+Interpolating GPS Data for the index (inside function): 78  Data length: 116
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 116 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 116
+Interpolating GPS Data for the index (inside function): 78  Data length: 116
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 116 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 116
+Interpolating GPS Data for the index (inside function): 78  Data length: 116
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 116 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 116
+Interpolating GPS Data for the index (inside function): 78  Data length: 116
+list index out of range
+[93m (13.0309285, 77.5652878, 30.317, 93.32, 93.32, 1730285120.8306072) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 117 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 117
+Interpolating GPS Data for the index (inside function): 78  Data length: 117
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 117 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 117
+Interpolating GPS Data for the index (inside function): 78  Data length: 117
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 117 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 117
+Interpolating GPS Data for the index (inside function): 78  Data length: 117
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 117 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 117
+Interpolating GPS Data for the index (inside function): 78  Data length: 117
+list index out of range
+[93m (13.0309285, 77.5652868, 30.188, 93.81, 93.81, 1730285121.3303359) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 118 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 118
+Interpolating GPS Data for the index (inside function): 78  Data length: 118
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 118 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 118
+Interpolating GPS Data for the index (inside function): 78  Data length: 118
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 118 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 118
+Interpolating GPS Data for the index (inside function): 78  Data length: 118
+list index out of range
+[93m (13.0309287, 77.5652861, 30.152, 93.54000000000002, 93.54000000000002, 1730285121.8305993) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 119 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 119
+Interpolating GPS Data for the index (inside function): 78  Data length: 119
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 119 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 119
+Interpolating GPS Data for the index (inside function): 78  Data length: 119
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 119 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 119
+Interpolating GPS Data for the index (inside function): 78  Data length: 119
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 119 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 119
+Interpolating GPS Data for the index (inside function): 78  Data length: 119
+list index out of range
+[93m (13.030929, 77.5652854, 30.269, 93.25, 93.25, 1730285122.330592) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 120 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 120
+Interpolating GPS Data for the index (inside function): 78  Data length: 120
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 120 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 120
+Interpolating GPS Data for the index (inside function): 78  Data length: 120
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 120 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 120
+Interpolating GPS Data for the index (inside function): 78  Data length: 120
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 120 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 120
+Interpolating GPS Data for the index (inside function): 78  Data length: 120
+list index out of range
+[93m (13.0309291, 77.5652846, 30.355, 93.38999999999999, 93.38999999999999, 1730285122.8305652) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 121 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 121
+Interpolating GPS Data for the index (inside function): 78  Data length: 121
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 121 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 121
+Interpolating GPS Data for the index (inside function): 78  Data length: 121
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 121 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 121
+Interpolating GPS Data for the index (inside function): 78  Data length: 121
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 121 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 121
+Interpolating GPS Data for the index (inside function): 78  Data length: 121
+list index out of range
+[93m (13.0309291, 77.5652842, 30.383, 93.29000000000002, 93.29000000000002, 1730285123.3306284) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 122 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 122
+Interpolating GPS Data for the index (inside function): 78  Data length: 122
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 122 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 122
+Interpolating GPS Data for the index (inside function): 78  Data length: 122
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 122 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 122
+Interpolating GPS Data for the index (inside function): 78  Data length: 122
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 122 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 122
+Interpolating GPS Data for the index (inside function): 78  Data length: 122
+list index out of range
+[93m (13.0309291, 77.5652845, 30.389, 93.25, 93.25, 1730285123.8304336) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 123 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 123
+Interpolating GPS Data for the index (inside function): 78  Data length: 123
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 123 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 123
+Interpolating GPS Data for the index (inside function): 78  Data length: 123
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 123 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 123
+Interpolating GPS Data for the index (inside function): 78  Data length: 123
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 123 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 123
+Interpolating GPS Data for the index (inside function): 78  Data length: 123
+list index out of range
+[93m (13.0309291, 77.565285, 30.28, 93.27999999999997, 93.27999999999997, 1730285124.3311157) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 124 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 124
+Interpolating GPS Data for the index (inside function): 78  Data length: 124
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 124 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 124
+Interpolating GPS Data for the index (inside function): 78  Data length: 124
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 124 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 124
+Interpolating GPS Data for the index (inside function): 78  Data length: 124
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 124 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 124
+Interpolating GPS Data for the index (inside function): 78  Data length: 124
+list index out of range
+[93m (13.0309292, 77.5652854, 30.142, 93.20999999999998, 93.20999999999998, 1730285124.8307889) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 125 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 125
+Interpolating GPS Data for the index (inside function): 78  Data length: 125
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 125 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 125
+Interpolating GPS Data for the index (inside function): 78  Data length: 125
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 125 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 125
+Interpolating GPS Data for the index (inside function): 78  Data length: 125
+list index out of range
+[93m (13.0309292, 77.5652857, 30.13, 93.51999999999998, 93.51999999999998, 1730285125.3313177) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 126 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 126
+Interpolating GPS Data for the index (inside function): 78  Data length: 126
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 126 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 126
+Interpolating GPS Data for the index (inside function): 78  Data length: 126
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 126 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 126
+Interpolating GPS Data for the index (inside function): 78  Data length: 126
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 126 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 126
+Interpolating GPS Data for the index (inside function): 78  Data length: 126
+list index out of range
+[93m (13.0309292, 77.5652858, 30.15, 93.38, 93.38, 1730285125.8304563) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 127 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 127
+Interpolating GPS Data for the index (inside function): 78  Data length: 127
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 127 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 127
+Interpolating GPS Data for the index (inside function): 78  Data length: 127
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 127 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 127
+Interpolating GPS Data for the index (inside function): 78  Data length: 127
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 127 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 127
+Interpolating GPS Data for the index (inside function): 78  Data length: 127
+list index out of range
+[93m (13.0309292, 77.5652857, 30.178, 93.50999999999999, 93.50999999999999, 1730285126.3303907) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 128 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 128
+Interpolating GPS Data for the index (inside function): 78  Data length: 128
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 128 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 128
+Interpolating GPS Data for the index (inside function): 78  Data length: 128
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 128 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 128
+Interpolating GPS Data for the index (inside function): 78  Data length: 128
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 128 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 128
+Interpolating GPS Data for the index (inside function): 78  Data length: 128
+list index out of range
+[93m (13.0309291, 77.5652857, 30.209, 93.37, 93.37, 1730285126.8304365) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 129 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 129
+Interpolating GPS Data for the index (inside function): 78  Data length: 129
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 129 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 129
+Interpolating GPS Data for the index (inside function): 78  Data length: 129
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 129 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 129
+Interpolating GPS Data for the index (inside function): 78  Data length: 129
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 129 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 129
+Interpolating GPS Data for the index (inside function): 78  Data length: 129
+list index out of range
+[93m (13.030929, 77.5652857, 30.255, 93.42000000000002, 93.42000000000002, 1730285127.330572) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 130 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 130
+Interpolating GPS Data for the index (inside function): 78  Data length: 130
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 130 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 130
+Interpolating GPS Data for the index (inside function): 78  Data length: 130
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 130 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 130
+Interpolating GPS Data for the index (inside function): 78  Data length: 130
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 130 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 130
+Interpolating GPS Data for the index (inside function): 78  Data length: 130
+list index out of range
+[93m (13.0309288, 77.5652859, 30.303, 93.32999999999998, 93.32999999999998, 1730285127.830452) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 131 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 131
+Interpolating GPS Data for the index (inside function): 78  Data length: 131
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 131 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 131
+Interpolating GPS Data for the index (inside function): 78  Data length: 131
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 131 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 131
+Interpolating GPS Data for the index (inside function): 78  Data length: 131
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 131 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 131
+Interpolating GPS Data for the index (inside function): 78  Data length: 131
+list index out of range
+[93m (13.0309287, 77.565286, 30.339, 93.41000000000003, 93.41000000000003, 1730285128.330311) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 132 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 132
+Interpolating GPS Data for the index (inside function): 78  Data length: 132
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 132 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 132
+Interpolating GPS Data for the index (inside function): 78  Data length: 132
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 132 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 132
+Interpolating GPS Data for the index (inside function): 78  Data length: 132
+list index out of range
+[93m (13.0309287, 77.5652861, 30.381, 93.57, 93.57, 1730285128.8312736) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 133 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 133
+Interpolating GPS Data for the index (inside function): 78  Data length: 133
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 133 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 133
+Interpolating GPS Data for the index (inside function): 78  Data length: 133
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 133 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 133
+Interpolating GPS Data for the index (inside function): 78  Data length: 133
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 133 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 133
+Interpolating GPS Data for the index (inside function): 78  Data length: 133
+list index out of range
+[93m (13.0309287, 77.5652861, 30.413, 93.67000000000002, 93.67000000000002, 1730285129.3308623) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 134 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 134
+Interpolating GPS Data for the index (inside function): 78  Data length: 134
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 134 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 134
+Interpolating GPS Data for the index (inside function): 78  Data length: 134
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 134 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 134
+Interpolating GPS Data for the index (inside function): 78  Data length: 134
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 134 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 134
+Interpolating GPS Data for the index (inside function): 78  Data length: 134
+list index out of range
+[93m (13.0309288, 77.5652862, 30.445, 93.67000000000002, 93.67000000000002, 1730285129.8304126) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 135 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 135
+Interpolating GPS Data for the index (inside function): 78  Data length: 135
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 135 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 135
+Interpolating GPS Data for the index (inside function): 78  Data length: 135
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 135 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 135
+Interpolating GPS Data for the index (inside function): 78  Data length: 135
+list index out of range
+[93m (13.0309288, 77.5652861, 30.46, 93.69, 93.69, 1730285130.3303416) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 136 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 136
+Interpolating GPS Data for the index (inside function): 78  Data length: 136
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 136 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 136
+Interpolating GPS Data for the index (inside function): 78  Data length: 136
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 136 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 136
+Interpolating GPS Data for the index (inside function): 78  Data length: 136
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 136 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 136
+Interpolating GPS Data for the index (inside function): 78  Data length: 136
+list index out of range
+[93m (13.0309287, 77.565286, 30.462, 93.61000000000001, 93.61000000000001, 1730285130.8310742) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 137 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 137
+Interpolating GPS Data for the index (inside function): 78  Data length: 137
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 137 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 137
+Interpolating GPS Data for the index (inside function): 78  Data length: 137
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 137 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 137
+Interpolating GPS Data for the index (inside function): 78  Data length: 137
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 137 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 137
+Interpolating GPS Data for the index (inside function): 78  Data length: 137
+list index out of range
+[93m (13.0309286, 77.5652858, 30.474, 93.69999999999999, 93.69999999999999, 1730285131.3304124) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 138 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 138
+Interpolating GPS Data for the index (inside function): 78  Data length: 138
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 138 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 138
+Interpolating GPS Data for the index (inside function): 78  Data length: 138
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 138 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 138
+Interpolating GPS Data for the index (inside function): 78  Data length: 138
+list index out of range
+ [0m[95m Image Captured 
+[93m (13.0309286, 77.5652859, 30.493, 93.57999999999998, 93.57999999999998, 1730285131.8306293) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 139 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 139
+Interpolating GPS Data for the index (inside function): 78  Data length: 139
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 139 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 139
+Interpolating GPS Data for the index (inside function): 78  Data length: 139
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 139 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 139
+Interpolating GPS Data for the index (inside function): 78  Data length: 139
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 139 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 139
+Interpolating GPS Data for the index (inside function): 78  Data length: 139
+list index out of range
+[93m (13.0309287, 77.5652859, 30.504, 93.38, 93.38, 1730285132.330415) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 140 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 140
+Interpolating GPS Data for the index (inside function): 78  Data length: 140
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 140 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 140
+Interpolating GPS Data for the index (inside function): 78  Data length: 140
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 140 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 140
+Interpolating GPS Data for the index (inside function): 78  Data length: 140
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 140 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 140
+Interpolating GPS Data for the index (inside function): 78  Data length: 140
+list index out of range
+ [0m[95m Image Captured 
+[93m (13.0309287, 77.5652859, 30.507, 93.26999999999998, 93.26999999999998, 1730285132.8306072) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 141 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 141
+Interpolating GPS Data for the index (inside function): 78  Data length: 141
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 141 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 141
+Interpolating GPS Data for the index (inside function): 78  Data length: 141
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 141 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 141
+Interpolating GPS Data for the index (inside function): 78  Data length: 141
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 141 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 141
+Interpolating GPS Data for the index (inside function): 78  Data length: 141
+list index out of range
+[93m (13.0309287, 77.5652859, 30.5, 93.67000000000002, 93.67000000000002, 1730285133.3308432) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 142 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 142
+Interpolating GPS Data for the index (inside function): 78  Data length: 142
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 142 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 142
+Interpolating GPS Data for the index (inside function): 78  Data length: 142
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 142 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 142
+Interpolating GPS Data for the index (inside function): 78  Data length: 142
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 142 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 142
+Interpolating GPS Data for the index (inside function): 78  Data length: 142
+list index out of range
+[93m (13.0309288, 77.5652859, 30.509, 93.57, 93.57, 1730285133.8314328) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 143 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 143
+Interpolating GPS Data for the index (inside function): 78  Data length: 143
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 143 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 143
+Interpolating GPS Data for the index (inside function): 78  Data length: 143
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 143 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 143
+Interpolating GPS Data for the index (inside function): 78  Data length: 143
+list index out of range
+[93m (13.0309288, 77.5652859, 30.514, 93.63999999999999, 93.63999999999999, 1730285134.3308132) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 144 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 144
+Interpolating GPS Data for the index (inside function): 78  Data length: 144
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 144 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 144
+Interpolating GPS Data for the index (inside function): 78  Data length: 144
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 144 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 144
+Interpolating GPS Data for the index (inside function): 78  Data length: 144
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 144 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 144
+Interpolating GPS Data for the index (inside function): 78  Data length: 144
+list index out of range
+[93m (13.0309288, 77.5652858, 30.516, 93.54000000000002, 93.54000000000002, 1730285134.8313198) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 145 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 145
+Interpolating GPS Data for the index (inside function): 78  Data length: 145
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 145 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 145
+Interpolating GPS Data for the index (inside function): 78  Data length: 145
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 145 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 145
+Interpolating GPS Data for the index (inside function): 78  Data length: 145
+list index out of range
+[93m (13.0309289, 77.5652859, 30.515, 93.05000000000001, 93.05000000000001, 1730285135.3304455) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 146 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 146
+Interpolating GPS Data for the index (inside function): 78  Data length: 146
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 146 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 146
+Interpolating GPS Data for the index (inside function): 78  Data length: 146
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 146 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 146
+Interpolating GPS Data for the index (inside function): 78  Data length: 146
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 146 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 146
+Interpolating GPS Data for the index (inside function): 78  Data length: 146
+list index out of range
+[93m (13.0309289, 77.5652861, 30.511, 93.10000000000002, 93.10000000000002, 1730285135.8315384) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 147 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 147
+Interpolating GPS Data for the index (inside function): 78  Data length: 147
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 147 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 147
+Interpolating GPS Data for the index (inside function): 78  Data length: 147
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 147 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 147
+Interpolating GPS Data for the index (inside function): 78  Data length: 147
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 147 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 147
+Interpolating GPS Data for the index (inside function): 78  Data length: 147
+list index out of range
+[93m (13.0309306, 77.5652889, 30.339, 94.69999999999999, 94.69999999999999, 1730285136.3304574) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 148 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 148
+Interpolating GPS Data for the index (inside function): 78  Data length: 148
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 148 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 148
+Interpolating GPS Data for the index (inside function): 78  Data length: 148
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 148 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 148
+Interpolating GPS Data for the index (inside function): 78  Data length: 148
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 148 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 148
+Interpolating GPS Data for the index (inside function): 78  Data length: 148
+list index out of range
+[93m (13.0309357, 77.5652968, 29.852, 93.77999999999997, 93.77999999999997, 1730285136.8308306) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 149 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 149
+Interpolating GPS Data for the index (inside function): 78  Data length: 149
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 149 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 149
+Interpolating GPS Data for the index (inside function): 78  Data length: 149
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 149 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 149
+Interpolating GPS Data for the index (inside function): 78  Data length: 149
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 149 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 149
+Interpolating GPS Data for the index (inside function): 78  Data length: 149
+list index out of range
+[93m (13.0309425, 77.5653069, 29.122, 93.48000000000002, 93.48000000000002, 1730285137.331078) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 150 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 150
+Interpolating GPS Data for the index (inside function): 78  Data length: 150
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 150 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 150
+Interpolating GPS Data for the index (inside function): 78  Data length: 150
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 150 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 150
+Interpolating GPS Data for the index (inside function): 78  Data length: 150
+list index out of range
+[93m (13.0309496, 77.5653174, 28.356, 93.99000000000001, 93.99000000000001, 1730285137.830757) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 151 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 151
+Interpolating GPS Data for the index (inside function): 78  Data length: 151
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 151 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 151
+Interpolating GPS Data for the index (inside function): 78  Data length: 151
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 151 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 151
+Interpolating GPS Data for the index (inside function): 78  Data length: 151
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 151 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 151
+Interpolating GPS Data for the index (inside function): 78  Data length: 151
+list index out of range
+[93m (13.0309565, 77.5653283, 27.603, 94.06, 94.06, 1730285138.330447) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 152 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 152
+Interpolating GPS Data for the index (inside function): 78  Data length: 152
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 152 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 152
+Interpolating GPS Data for the index (inside function): 78  Data length: 152
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 152 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 152
+Interpolating GPS Data for the index (inside function): 78  Data length: 152
+list index out of range
+[93m (13.0309634, 77.5653397, 26.865, 93.80000000000001, 93.80000000000001, 1730285138.8306472) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 153 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 153
+Interpolating GPS Data for the index (inside function): 78  Data length: 153
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 153 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 153
+Interpolating GPS Data for the index (inside function): 78  Data length: 153
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 153 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 153
+Interpolating GPS Data for the index (inside function): 78  Data length: 153
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 153 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 153
+Interpolating GPS Data for the index (inside function): 78  Data length: 153
+list index out of range
+[93m (13.0309706, 77.5653514, 26.115, 93.68, 93.68, 1730285139.3305483) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 154 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 154
+Interpolating GPS Data for the index (inside function): 78  Data length: 154
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 154 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 154
+Interpolating GPS Data for the index (inside function): 78  Data length: 154
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 154 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 154
+Interpolating GPS Data for the index (inside function): 78  Data length: 154
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 154 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 154
+Interpolating GPS Data for the index (inside function): 78  Data length: 154
+list index out of range
+[93m (13.030978, 77.5653632, 25.344, 93.57, 93.57, 1730285139.8306644) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 155 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 155
+Interpolating GPS Data for the index (inside function): 78  Data length: 155
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 155 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 155
+Interpolating GPS Data for the index (inside function): 78  Data length: 155
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 155 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 155
+Interpolating GPS Data for the index (inside function): 78  Data length: 155
+list index out of range
+ [0m[95m Image Captured 
+[93m (13.0309856, 77.5653748, 24.576, 93.37, 93.37, 1730285140.3312163) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 156 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 156
+Interpolating GPS Data for the index (inside function): 78  Data length: 156
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 156 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 156
+Interpolating GPS Data for the index (inside function): 78  Data length: 156
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 156 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 156
+Interpolating GPS Data for the index (inside function): 78  Data length: 156
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 156 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 156
+Interpolating GPS Data for the index (inside function): 78  Data length: 156
+list index out of range
+[93m (13.0309932, 77.5653865, 23.822, 93.51999999999998, 93.51999999999998, 1730285140.8304906) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 157 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 157
+Interpolating GPS Data for the index (inside function): 78  Data length: 157
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 157 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 157
+Interpolating GPS Data for the index (inside function): 78  Data length: 157
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 157 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 157
+Interpolating GPS Data for the index (inside function): 78  Data length: 157
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 157 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 157
+Interpolating GPS Data for the index (inside function): 78  Data length: 157
+list index out of range
+ [0m[95m Image Captured 
+[93m (13.0310007, 77.5653982, 23.08, 93.75999999999999, 93.75999999999999, 1730285141.330386) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 158 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 158
+Interpolating GPS Data for the index (inside function): 78  Data length: 158
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 158 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 158
+Interpolating GPS Data for the index (inside function): 78  Data length: 158
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 158 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 158
+Interpolating GPS Data for the index (inside function): 78  Data length: 158
+list index out of range
+[93m (13.0310081, 77.5654101, 22.388, 93.79000000000002, 93.79000000000002, 1730285141.8305125) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 159 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 159
+Interpolating GPS Data for the index (inside function): 78  Data length: 159
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 159 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 159
+Interpolating GPS Data for the index (inside function): 78  Data length: 159
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 159 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 159
+Interpolating GPS Data for the index (inside function): 78  Data length: 159
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 159 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 159
+Interpolating GPS Data for the index (inside function): 78  Data length: 159
+list index out of range
+[93m (13.0310155, 77.5654218, 21.836, 93.69, 93.69, 1730285142.33039) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 160 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 160
+Interpolating GPS Data for the index (inside function): 78  Data length: 160
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 160 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 160
+Interpolating GPS Data for the index (inside function): 78  Data length: 160
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 160 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 160
+Interpolating GPS Data for the index (inside function): 78  Data length: 160
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 160 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 160
+Interpolating GPS Data for the index (inside function): 78  Data length: 160
+list index out of range
+[93m (13.031023, 77.5654335, 21.418, 93.47000000000003, 93.47000000000003, 1730285142.8311086) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 161 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 161
+Interpolating GPS Data for the index (inside function): 78  Data length: 161
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 161 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 161
+Interpolating GPS Data for the index (inside function): 78  Data length: 161
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 161 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 161
+Interpolating GPS Data for the index (inside function): 78  Data length: 161
+list index out of range
+[93m (13.03103, 77.5654443, 21.132, 93.69, 93.69, 1730285143.3304493) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 162 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 162
+Interpolating GPS Data for the index (inside function): 78  Data length: 162
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 162 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 162
+Interpolating GPS Data for the index (inside function): 78  Data length: 162
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 162 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 162
+Interpolating GPS Data for the index (inside function): 78  Data length: 162
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 162 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 162
+Interpolating GPS Data for the index (inside function): 78  Data length: 162
+list index out of range
+[93m (13.0310355, 77.5654529, 21.032, 93.88, 93.88, 1730285143.831369) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 163 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 163
+Interpolating GPS Data for the index (inside function): 78  Data length: 163
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 163 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 163
+Interpolating GPS Data for the index (inside function): 78  Data length: 163
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 163 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 163
+Interpolating GPS Data for the index (inside function): 78  Data length: 163
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 163 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 163
+Interpolating GPS Data for the index (inside function): 78  Data length: 163
+list index out of range
+[93m (13.0310391, 77.5654588, 21.048, 93.98000000000002, 93.98000000000002, 1730285144.3305898) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 164 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 164
+Interpolating GPS Data for the index (inside function): 78  Data length: 164
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 164 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 164
+Interpolating GPS Data for the index (inside function): 78  Data length: 164
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 164 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 164
+Interpolating GPS Data for the index (inside function): 78  Data length: 164
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 164 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 164
+Interpolating GPS Data for the index (inside function): 78  Data length: 164
+list index out of range
+[93m (13.031041, 77.5654622, 21.045, 93.83999999999997, 93.83999999999997, 1730285144.830408) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 165 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 165
+Interpolating GPS Data for the index (inside function): 78  Data length: 165
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 165 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 165
+Interpolating GPS Data for the index (inside function): 78  Data length: 165
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 165 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 165
+Interpolating GPS Data for the index (inside function): 78  Data length: 165
+list index out of range
+[93m (13.031042, 77.5654637, 20.978, 93.80000000000001, 93.80000000000001, 1730285145.3310463) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 166 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 166
+Interpolating GPS Data for the index (inside function): 78  Data length: 166
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 166 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 166
+Interpolating GPS Data for the index (inside function): 78  Data length: 166
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 166 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 166
+Interpolating GPS Data for the index (inside function): 78  Data length: 166
+list index out of range
+[93m (13.0310423, 77.5654642, 20.939, 93.81, 93.81, 1730285145.8304226) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 167 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 167
+Interpolating GPS Data for the index (inside function): 78  Data length: 167
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 167 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 167
+Interpolating GPS Data for the index (inside function): 78  Data length: 167
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 167 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 167
+Interpolating GPS Data for the index (inside function): 78  Data length: 167
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 167 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 167
+Interpolating GPS Data for the index (inside function): 78  Data length: 167
+list index out of range
+[93m (13.0310423, 77.5654642, 20.951, 93.88, 93.88, 1730285146.331281) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 168 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 168
+Interpolating GPS Data for the index (inside function): 78  Data length: 168
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 168 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 168
+Interpolating GPS Data for the index (inside function): 78  Data length: 168
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 168 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 168
+Interpolating GPS Data for the index (inside function): 78  Data length: 168
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 168 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 168
+Interpolating GPS Data for the index (inside function): 78  Data length: 168
+list index out of range
+[93m (13.0310424, 77.5654641, 20.976, 93.77999999999997, 93.77999999999997, 1730285146.8305984) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 169 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 169
+Interpolating GPS Data for the index (inside function): 78  Data length: 169
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 169 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 169
+Interpolating GPS Data for the index (inside function): 78  Data length: 169
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 169 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 169
+Interpolating GPS Data for the index (inside function): 78  Data length: 169
+list index out of range
+[93m (13.0310424, 77.5654637, 20.984, 93.80000000000001, 93.80000000000001, 1730285147.3304324) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 170 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 170
+Interpolating GPS Data for the index (inside function): 78  Data length: 170
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 170 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 170
+Interpolating GPS Data for the index (inside function): 78  Data length: 170
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 170 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 170
+Interpolating GPS Data for the index (inside function): 78  Data length: 170
+list index out of range
+[93m (13.0310423, 77.5654632, 20.974, 93.75999999999999, 93.75999999999999, 1730285147.830387) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 171 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 171
+Interpolating GPS Data for the index (inside function): 78  Data length: 171
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 171 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 171
+Interpolating GPS Data for the index (inside function): 78  Data length: 171
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 171 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 171
+Interpolating GPS Data for the index (inside function): 78  Data length: 171
+list index out of range
+[93m (13.0310422, 77.5654629, 20.972, 93.55000000000001, 93.55000000000001, 1730285148.3305078) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 172 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 172
+Interpolating GPS Data for the index (inside function): 78  Data length: 172
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 172 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 172
+Interpolating GPS Data for the index (inside function): 78  Data length: 172
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 172 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 172
+Interpolating GPS Data for the index (inside function): 78  Data length: 172
+list index out of range
+ [0m[95m Image Captured 
+[93m (13.031042, 77.5654626, 20.989, 93.63, 93.63, 1730285148.8304565) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 173 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 173
+Interpolating GPS Data for the index (inside function): 78  Data length: 173
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 173 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 173
+Interpolating GPS Data for the index (inside function): 78  Data length: 173
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 173 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 173
+Interpolating GPS Data for the index (inside function): 78  Data length: 173
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 173 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 173
+Interpolating GPS Data for the index (inside function): 78  Data length: 173
+list index out of range
+[93m (13.0310419, 77.5654624, 21.001, 93.66000000000003, 93.66000000000003, 1730285149.330384) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 174 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 174
+Interpolating GPS Data for the index (inside function): 78  Data length: 174
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 174 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 174
+Interpolating GPS Data for the index (inside function): 78  Data length: 174
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 174 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 174
+Interpolating GPS Data for the index (inside function): 78  Data length: 174
+list index out of range
+[93m (13.0310417, 77.5654621, 20.993, 93.57, 93.57, 1730285149.8313186) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 175 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 175
+Interpolating GPS Data for the index (inside function): 78  Data length: 175
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 175 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 175
+Interpolating GPS Data for the index (inside function): 78  Data length: 175
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 175 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 175
+Interpolating GPS Data for the index (inside function): 78  Data length: 175
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 175 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 175
+Interpolating GPS Data for the index (inside function): 78  Data length: 175
+list index out of range
+[93m (13.0310416, 77.5654618, 21.035, 93.52999999999997, 93.52999999999997, 1730285150.3312185) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 176 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 176
+Interpolating GPS Data for the index (inside function): 78  Data length: 176
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 176 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 176
+Interpolating GPS Data for the index (inside function): 78  Data length: 176
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 176 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 176
+Interpolating GPS Data for the index (inside function): 78  Data length: 176
+list index out of range
+[93m (13.0310414, 77.5654617, 21.062, 93.52999999999997, 93.52999999999997, 1730285150.8305392) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 177 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 177
+Interpolating GPS Data for the index (inside function): 78  Data length: 177
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 177 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 177
+Interpolating GPS Data for the index (inside function): 78  Data length: 177
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 177 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 177
+Interpolating GPS Data for the index (inside function): 78  Data length: 177
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 177 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 177
+Interpolating GPS Data for the index (inside function): 78  Data length: 177
+list index out of range
+[93m (13.0310413, 77.5654616, 21.066, 93.64999999999998, 93.64999999999998, 1730285151.330463) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 178 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 178
+Interpolating GPS Data for the index (inside function): 78  Data length: 178
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 178 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 178
+Interpolating GPS Data for the index (inside function): 78  Data length: 178
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 178 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 178
+Interpolating GPS Data for the index (inside function): 78  Data length: 178
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 178 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 178
+Interpolating GPS Data for the index (inside function): 78  Data length: 178
+list index out of range
+[93m (13.0310411, 77.5654615, 21.055, 93.75, 93.75, 1730285151.8308506) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 179 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 179
+Interpolating GPS Data for the index (inside function): 78  Data length: 179
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 179 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 179
+Interpolating GPS Data for the index (inside function): 78  Data length: 179
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 179 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 179
+Interpolating GPS Data for the index (inside function): 78  Data length: 179
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 179 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 179
+Interpolating GPS Data for the index (inside function): 78  Data length: 179
+list index out of range
+[93m (13.0310409, 77.5654614, 21.058, 93.88, 93.88, 1730285152.3304389) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 180 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 180
+Interpolating GPS Data for the index (inside function): 78  Data length: 180
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 180 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 180
+Interpolating GPS Data for the index (inside function): 78  Data length: 180
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 180 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 180
+Interpolating GPS Data for the index (inside function): 78  Data length: 180
+list index out of range
+[93m (13.0310409, 77.5654613, 21.045, 93.75999999999999, 93.75999999999999, 1730285152.8304174) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 181 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 181
+Interpolating GPS Data for the index (inside function): 78  Data length: 181
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 181 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 181
+Interpolating GPS Data for the index (inside function): 78  Data length: 181
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 181 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 181
+Interpolating GPS Data for the index (inside function): 78  Data length: 181
+list index out of range
+[93m (13.031041, 77.5654614, 20.984, 93.63999999999999, 93.63999999999999, 1730285153.3310692) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 182 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 182
+Interpolating GPS Data for the index (inside function): 78  Data length: 182
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 182 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 182
+Interpolating GPS Data for the index (inside function): 78  Data length: 182
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 182 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 182
+Interpolating GPS Data for the index (inside function): 78  Data length: 182
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 182 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 182
+Interpolating GPS Data for the index (inside function): 78  Data length: 182
+list index out of range
+[93m (13.031041, 77.5654613, 20.936, 93.64999999999998, 93.64999999999998, 1730285153.8315134) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 183 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 183
+Interpolating GPS Data for the index (inside function): 78  Data length: 183
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 183 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 183
+Interpolating GPS Data for the index (inside function): 78  Data length: 183
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 183 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 183
+Interpolating GPS Data for the index (inside function): 78  Data length: 183
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 183 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 183
+Interpolating GPS Data for the index (inside function): 78  Data length: 183
+list index out of range
+[93m (13.0310411, 77.5654613, 20.923, 93.73000000000002, 93.73000000000002, 1730285154.330389) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 184 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 184
+Interpolating GPS Data for the index (inside function): 78  Data length: 184
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 184 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 184
+Interpolating GPS Data for the index (inside function): 78  Data length: 184
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 184 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 184
+Interpolating GPS Data for the index (inside function): 78  Data length: 184
+list index out of range
+[93m (13.0310413, 77.5654613, 20.935, 93.82999999999998, 93.82999999999998, 1730285154.8305218) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 185 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 185
+Interpolating GPS Data for the index (inside function): 78  Data length: 185
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 185 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 185
+Interpolating GPS Data for the index (inside function): 78  Data length: 185
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 185 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 185
+Interpolating GPS Data for the index (inside function): 78  Data length: 185
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 185 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 185
+Interpolating GPS Data for the index (inside function): 78  Data length: 185
+list index out of range
+[93m (13.0310414, 77.5654614, 20.943, 93.82, 93.82, 1730285155.329597) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 186 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 186
+Interpolating GPS Data for the index (inside function): 78  Data length: 186
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 186 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 186
+Interpolating GPS Data for the index (inside function): 78  Data length: 186
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 186 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 186
+Interpolating GPS Data for the index (inside function): 78  Data length: 186
+list index out of range
+[93m (13.0310415, 77.5654616, 20.96, 93.92000000000002, 93.92000000000002, 1730285155.8304949) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 187 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 187
+Interpolating GPS Data for the index (inside function): 78  Data length: 187
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 187 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 187
+Interpolating GPS Data for the index (inside function): 78  Data length: 187
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 187 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 187
+Interpolating GPS Data for the index (inside function): 78  Data length: 187
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 187 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 187
+Interpolating GPS Data for the index (inside function): 78  Data length: 187
+list index out of range
+[93m (13.0310415, 77.5654617, 20.983, 93.87, 93.87, 1730285156.3303993) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 188 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 188
+Interpolating GPS Data for the index (inside function): 78  Data length: 188
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 188 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 188
+Interpolating GPS Data for the index (inside function): 78  Data length: 188
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 188 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 188
+Interpolating GPS Data for the index (inside function): 78  Data length: 188
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 188 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 188
+Interpolating GPS Data for the index (inside function): 78  Data length: 188
+list index out of range
+[93m (13.0310415, 77.5654617, 21.002, 93.79000000000002, 93.79000000000002, 1730285156.8294022) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 189 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 189
+Interpolating GPS Data for the index (inside function): 78  Data length: 189
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 189 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 189
+Interpolating GPS Data for the index (inside function): 78  Data length: 189
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 189 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 189
+Interpolating GPS Data for the index (inside function): 78  Data length: 189
+list index out of range
+ [0m[95m Image Captured 
+[93m (13.0310414, 77.5654618, 21.006, 93.82999999999998, 93.82999999999998, 1730285157.3298714) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 190 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 190
+Interpolating GPS Data for the index (inside function): 78  Data length: 190
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 190 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 190
+Interpolating GPS Data for the index (inside function): 78  Data length: 190
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 190 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 190
+Interpolating GPS Data for the index (inside function): 78  Data length: 190
+list index out of range
+[93m (13.0310413, 77.5654619, 21.001, 93.87, 93.87, 1730285157.8303688) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 191 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 191
+Interpolating GPS Data for the index (inside function): 78  Data length: 191
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 191 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 191
+Interpolating GPS Data for the index (inside function): 78  Data length: 191
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 191 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 191
+Interpolating GPS Data for the index (inside function): 78  Data length: 191
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 191 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 191
+Interpolating GPS Data for the index (inside function): 78  Data length: 191
+list index out of range
+[93m (13.0310413, 77.5654619, 21.031, 93.85000000000002, 93.85000000000002, 1730285158.3294144) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 192 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 192
+Interpolating GPS Data for the index (inside function): 78  Data length: 192
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 192 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 192
+Interpolating GPS Data for the index (inside function): 78  Data length: 192
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 192 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 192
+Interpolating GPS Data for the index (inside function): 78  Data length: 192
+list index out of range
+[93m (13.0310412, 77.5654619, 21.026, 93.82999999999998, 93.82999999999998, 1730285158.830361) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 193 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 193
+Interpolating GPS Data for the index (inside function): 78  Data length: 193
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 193 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 193
+Interpolating GPS Data for the index (inside function): 78  Data length: 193
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 193 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 193
+Interpolating GPS Data for the index (inside function): 78  Data length: 193
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 193 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 193
+Interpolating GPS Data for the index (inside function): 78  Data length: 193
+list index out of range
+[93m (13.0310412, 77.565462, 21.011, 93.70999999999998, 93.70999999999998, 1730285159.3312232) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 194 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 194
+Interpolating GPS Data for the index (inside function): 78  Data length: 194
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 194 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 194
+Interpolating GPS Data for the index (inside function): 78  Data length: 194
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 194 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 194
+Interpolating GPS Data for the index (inside function): 78  Data length: 194
+list index out of range
+[93m (13.0310412, 77.5654621, 21.003, 93.88, 93.88, 1730285159.8293493) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 195 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 195
+Interpolating GPS Data for the index (inside function): 78  Data length: 195
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 195 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 195
+Interpolating GPS Data for the index (inside function): 78  Data length: 195
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 195 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 195
+Interpolating GPS Data for the index (inside function): 78  Data length: 195
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 195 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 195
+Interpolating GPS Data for the index (inside function): 78  Data length: 195
+list index out of range
+[93m (13.0310413, 77.5654621, 21.018, 93.95999999999998, 93.95999999999998, 1730285160.3312328) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 196 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 196
+Interpolating GPS Data for the index (inside function): 78  Data length: 196
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 196 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 196
+Interpolating GPS Data for the index (inside function): 78  Data length: 196
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 196 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 196
+Interpolating GPS Data for the index (inside function): 78  Data length: 196
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 196 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 196
+Interpolating GPS Data for the index (inside function): 78  Data length: 196
+list index out of range
+[93m (13.0310413, 77.565462, 21.074, 93.79000000000002, 93.79000000000002, 1730285160.8293736) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 197 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 197
+Interpolating GPS Data for the index (inside function): 78  Data length: 197
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 197 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 197
+Interpolating GPS Data for the index (inside function): 78  Data length: 197
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 197 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 197
+Interpolating GPS Data for the index (inside function): 78  Data length: 197
+list index out of range
+[93m (13.0310413, 77.5654618, 21.054, 93.88999999999999, 93.88999999999999, 1730285161.329479) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 198 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 198
+Interpolating GPS Data for the index (inside function): 78  Data length: 198
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 198 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 198
+Interpolating GPS Data for the index (inside function): 78  Data length: 198
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 198 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 198
+Interpolating GPS Data for the index (inside function): 78  Data length: 198
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 198 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 198
+Interpolating GPS Data for the index (inside function): 78  Data length: 198
+list index out of range
+[93m (13.0310414, 77.5654618, 21.01, 93.92000000000002, 93.92000000000002, 1730285161.8294454) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 199 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 199
+Interpolating GPS Data for the index (inside function): 78  Data length: 199
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 199 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 199
+Interpolating GPS Data for the index (inside function): 78  Data length: 199
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 199 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 199
+Interpolating GPS Data for the index (inside function): 78  Data length: 199
+list index out of range
+[93m (13.0310413, 77.5654617, 20.992, 93.92000000000002, 93.92000000000002, 1730285162.3294713) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 200 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 200
+Interpolating GPS Data for the index (inside function): 78  Data length: 200
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 200 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 200
+Interpolating GPS Data for the index (inside function): 78  Data length: 200
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 200 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 200
+Interpolating GPS Data for the index (inside function): 78  Data length: 200
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 200 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 200
+Interpolating GPS Data for the index (inside function): 78  Data length: 200
+list index out of range
+[93m (13.0310412, 77.5654617, 20.98, 93.74000000000001, 93.74000000000001, 1730285162.829447) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 201 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 201
+Interpolating GPS Data for the index (inside function): 78  Data length: 201
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 201 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 201
+Interpolating GPS Data for the index (inside function): 78  Data length: 201
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 201 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 201
+Interpolating GPS Data for the index (inside function): 78  Data length: 201
+list index out of range
+[93m (13.0310411, 77.5654617, 20.991, 93.68, 93.68, 1730285163.3293438) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 202 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 202
+Interpolating GPS Data for the index (inside function): 78  Data length: 202
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 202 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 202
+Interpolating GPS Data for the index (inside function): 78  Data length: 202
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 202 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 202
+Interpolating GPS Data for the index (inside function): 78  Data length: 202
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 202 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 202
+Interpolating GPS Data for the index (inside function): 78  Data length: 202
+list index out of range
+[93m (13.031041, 77.5654618, 21.194, 93.83999999999997, 93.83999999999997, 1730285163.8323603) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 203 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 203
+Interpolating GPS Data for the index (inside function): 78  Data length: 203
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 203 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 203
+Interpolating GPS Data for the index (inside function): 78  Data length: 203
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 203 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 203
+Interpolating GPS Data for the index (inside function): 78  Data length: 203
+list index out of range
+[93m (13.0310411, 77.5654616, 21.694, 94.07999999999998, 94.07999999999998, 1730285164.329783) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 204 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 204
+Interpolating GPS Data for the index (inside function): 78  Data length: 204
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 204 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 204
+Interpolating GPS Data for the index (inside function): 78  Data length: 204
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 204 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 204
+Interpolating GPS Data for the index (inside function): 78  Data length: 204
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 204 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 204
+Interpolating GPS Data for the index (inside function): 78  Data length: 204
+list index out of range
+[93m (13.0310412, 77.5654615, 22.461, 94.14999999999998, 94.14999999999998, 1730285164.8293352) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 205 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 205
+Interpolating GPS Data for the index (inside function): 78  Data length: 205
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 205 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 205
+Interpolating GPS Data for the index (inside function): 78  Data length: 205
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 205 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 205
+Interpolating GPS Data for the index (inside function): 78  Data length: 205
+list index out of range
+[93m (13.0310413, 77.5654617, 23.458, 94.14999999999998, 94.14999999999998, 1730285165.3297217) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 206 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 206
+Interpolating GPS Data for the index (inside function): 78  Data length: 206
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 206 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 206
+Interpolating GPS Data for the index (inside function): 78  Data length: 206
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 206 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 206
+Interpolating GPS Data for the index (inside function): 78  Data length: 206
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 206 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 206
+Interpolating GPS Data for the index (inside function): 78  Data length: 206
+list index out of range
+[93m (13.0310413, 77.5654619, 24.66, 93.99000000000001, 93.99000000000001, 1730285165.8303216) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 207 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 207
+Interpolating GPS Data for the index (inside function): 78  Data length: 207
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 207 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 207
+Interpolating GPS Data for the index (inside function): 78  Data length: 207
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 207 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 207
+Interpolating GPS Data for the index (inside function): 78  Data length: 207
+list index out of range
+[93m (13.0310415, 77.5654621, 25.871, 93.82999999999998, 93.82999999999998, 1730285166.329443) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 208 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 208
+Interpolating GPS Data for the index (inside function): 78  Data length: 208
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 208 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 208
+Interpolating GPS Data for the index (inside function): 78  Data length: 208
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 208 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 208
+Interpolating GPS Data for the index (inside function): 78  Data length: 208
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 208 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 208
+Interpolating GPS Data for the index (inside function): 78  Data length: 208
+list index out of range
+[93m (13.0310417, 77.5654622, 26.665, 93.73000000000002, 93.73000000000002, 1730285166.82938) [0m
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 209 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 209
+Interpolating GPS Data for the index (inside function): 78  Data length: 209
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 209 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 209
+Interpolating GPS Data for the index (inside function): 78  Data length: 209
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 209 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 209
+Interpolating GPS Data for the index (inside function): 78  Data length: 209
+list index out of range
+[93m (13.0310418, 77.565462, 26.822, 93.97000000000003, 93.97000000000003, 1730285167.329415) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 210 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 210
+Interpolating GPS Data for the index (inside function): 78  Data length: 210
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 210 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 210
+Interpolating GPS Data for the index (inside function): 78  Data length: 210
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 210 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 210
+Interpolating GPS Data for the index (inside function): 78  Data length: 210
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 210 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 210
+Interpolating GPS Data for the index (inside function): 78  Data length: 210
+list index out of range
+[93m (13.0310418, 77.5654618, 26.808, 93.94999999999999, 93.94999999999999, 1730285167.8297787) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 211 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 211
+Interpolating GPS Data for the index (inside function): 78  Data length: 211
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 211 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 211
+Interpolating GPS Data for the index (inside function): 78  Data length: 211
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 211 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 211
+Interpolating GPS Data for the index (inside function): 78  Data length: 211
+list index out of range
+[93m (13.0310416, 77.5654616, 26.855, 94.20999999999998, 94.20999999999998, 1730285168.3293474) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 212 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 212
+Interpolating GPS Data for the index (inside function): 78  Data length: 212
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 212 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 212
+Interpolating GPS Data for the index (inside function): 78  Data length: 212
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 212 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 212
+Interpolating GPS Data for the index (inside function): 78  Data length: 212
+list index out of range
+[93m (13.0310416, 77.5654615, 26.91, 93.95999999999998, 93.95999999999998, 1730285168.8295565) [0m
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 213 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 213
+Interpolating GPS Data for the index (inside function): 78  Data length: 213
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 213 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 213
+Interpolating GPS Data for the index (inside function): 78  Data length: 213
+list index out of range
+ [0m[95m Image Captured 
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 213 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 213
+Interpolating GPS Data for the index (inside function): 78  Data length: 213
+list index out of range
+Getting the actual gps entry...
+Image index for the image time: [94m 78 [0m  Data length: [94m 213 [0m
+Interpolating_GPS_Data for the index: 78  Data length: 213
+Interpolating GPS Data for the index (inside function): 78  Data length: 213
+list index out of range
+[93m (13.0310416, 77.5654613, 26.949, 93.72000000000003, 93.72000000000003, 1730285169.3294222) [0m
+Stopping execution...

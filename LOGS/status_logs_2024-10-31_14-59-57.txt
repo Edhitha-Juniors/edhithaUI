@@ -1,0 +1,27 @@
+Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+Client connected
+Client disconnected. Reason: unknown
+Client connected
+Client connected
+Client connected
+Client connected
+Client connected
+Client connected
+Client connected
+Received coordinates: x=669, y=1152
+Cropping Image...
+Received data: nvcamtest_11456_s00_00000.jpg, , , 1, 
+Saving Details...
+Saved Succesfully.
+Client disconnected. Reason: unknown
+Client disconnected. Reason: unknown
+Client disconnected. Reason: unknown
+Client disconnected. Reason: unknown
+Client disconnected. Reason: unknown
+Client disconnected. Reason: unknown
+Client connected
+Received coordinates: x=3083, y=2262
+Cropping Image...
+Received data: nvcamtest_11456_s00_00000.jpg, , , 1, 
+Saving Details...
+Saved Succesfully.

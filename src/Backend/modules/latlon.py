@@ -3,7 +3,6 @@ import math
 import pickle
 import time
 import requests
-import sys
 from io import *
 import pandas
 import os
@@ -79,10 +78,8 @@ def lat_long_calculation(csv_path, img_path, image_name, x_cord, y_cord, target_
     pixel_distance = math.sqrt(
         (point2[0] - point1[0])**2 + (point2[1] - point1[1])**2)
     # calculate the angle between the two points in radians
-    angle = math.degrees(
-        (math.atan2(point2[1] - point1[1], point2[0] - point1[0]))) - 90
-    theta = math.degrees(
-        (math.atan2(point2[1] - point1[1], point2[0] - point1[0])))
+    angle = math.degrees((math.atan2(point2[1] - point1[1], point2[0] - point1[0]))) - 90
+    theta = math.degrees((math.atan2(point2[1] - point1[1], point2[0] - point1[0])))
 
     if theta < 0:
         theta = 360 + theta

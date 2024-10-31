@@ -8,7 +8,7 @@ import signal
 import pandas
 import paramiko
 from folium.features import DivIcon
-from modules.logger_config import *
+from logger_config import *
 import logging
 
 def signal_handler(sig, frame):
@@ -104,6 +104,7 @@ def path_map(waypoints, l_path):
 
 def ssh_and_run_commands(hostname, username, password, commands, l_path, cam_waypoints):
     # Create an SSH client
+    logging.getLogger().status("SSH'ing")
     ssh_client = paramiko.SSHClient()
     # Automatically add the server's host key (this is insecure and should be done with caution)
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -134,6 +135,7 @@ def ssh_and_run_commands(hostname, username, password, commands, l_path, cam_way
                 pass
             # Read and capture the output
             output = ssh_shell.recv(65535).decode('utf-8')
+            
             print(output)  # Print the output of the command
 
         print('Ran all the commands ..')
@@ -177,8 +179,8 @@ def ssh_and_run_commands(hostname, username, password, commands, l_path, cam_way
                 if prev_file == None:
                     sys.stdout.write(line)
             sys.stdout.write(output)
-            if cam_waypoints:
-                path_map(cam_waypoints, l_path)
+            # if cam_waypoints:
+            #     path_map(cam_waypoints, l_path)
 
     except Exception as e:
         print(f"Error: {e}")
@@ -197,10 +199,10 @@ if __name__ == '__main__':
         ]
 
         # Folder Paths
-        l_path = "/Users/aahil/Downloads/edhithaGCS/Data/Test"
+        l_path = "/Users/aahil/Edhitha/edhithaGCS/Data/Test"
         os.makedirs(l_path, exist_ok=True)
         # Parent folder to save there
-        parent_path = '/Users/aahil/Edhitha/edhithaGCS/Data'
+        parent_path = '/Users/aahil/Edhitha/edhithaGCS/Data/'
         move_and_create_unique_folder(parent_path, l_path)
         os.makedirs(l_path+'/images', exist_ok=True)
         print("made images folder")

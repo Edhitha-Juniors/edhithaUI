@@ -1,0 +1,406 @@
+2024-10-31 13:27:08,372 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-31 13:27:08,375 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9080
+2024-10-31 13:27:08,376 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-31 13:27:11,849 - STATUS - Client connected
+2024-10-31 13:27:11,850 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:11,853 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:11,862 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:11] "[36mGET /images/nvcamtest_18433_s00_00000.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:27:13,325 - STATUS - Client connected
+2024-10-31 13:27:16,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:16] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:21,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:21] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:26,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:26] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:30,773 - STATUS - Attempting to connect to the drone...
+2024-10-31 13:27:31,036 - STATUS - Heartbeat received from system (system 0 component 0)
+2024-10-31 13:27:31,037 - STATUS - Connected successfully!
+2024-10-31 13:27:31,038 - STATUS - Connection Successfull...
+2024-10-31 13:27:31,040 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:31] "POST /toggle-connection HTTP/1.1" 200 -
+2024-10-31 13:27:31,843 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:31] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:36,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:36] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:41,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:41] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:46,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:46] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:51,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:51] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:27:56,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:27:56] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:01,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:01] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:06,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:06] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:11,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:16,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:16] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:21,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:21] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:26,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:26] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:31,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:31] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:36,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:36] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:41,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:41] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:43,956 - STATUS - Started geotagg
+2024-10-31 13:28:43,959 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:43] "[35m[1mPOST /start_geotagg HTTP/1.1[0m" 204 -
+2024-10-31 13:28:44,601 - DEBUG - NativeEvent(path="/Users/aahil/Edhitha/edhithaGCS/Data/Test/images", inode=None, flags=20, id=0): is_root_changed
+2024-10-31 13:28:44,601 - DEBUG - drop event DirDeletedEvent(src_path='../../Data/Test/images', dest_path='', event_type='deleted', is_directory=True, is_synthetic=False)
+2024-10-31 13:28:44,602 - DEBUG - Stopping because root path was changed
+2024-10-31 13:28:46,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:46] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:46,847 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:46] "GET /images/.nvcamtest_18433_s00_00003.jpg.7DXODO HTTP/1.1" 200 -
+2024-10-31 13:28:52,297 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:52] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:56,979 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:56] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:28:58,158 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:58] "[36mGET /images/nvcamtest_18433_s00_00001.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:28:58,574 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:58] "[36mGET /images/nvcamtest_18433_s00_00002.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:28:59,000 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:59] "[36mGET /images/nvcamtest_18433_s00_00003.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:28:59,274 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:59] "[36mGET /images/nvcamtest_18433_s00_00004.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:28:59,514 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:59] "[36mGET /images/nvcamtest_18433_s00_00005.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:28:59,760 - INFO - 127.0.0.1 - - [31/Oct/2024 13:28:59] "[36mGET /images/nvcamtest_18433_s00_00006.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:29:00,020 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:00] "[36mGET /images/nvcamtest_18433_s00_00007.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:29:00,207 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:00] "GET /images/nvcamtest_28827_s00_00000.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:01,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:01] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:01,859 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:01] "[36mGET /images/nvcamtest_18433_s00_00007.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:29:02,169 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:02] "GET /images/nvcamtest_28827_s00_00001.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:02,545 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:02] "GET /images/nvcamtest_28827_s00_00002.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:02,865 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:02] "GET /images/nvcamtest_28827_s00_00003.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:03,266 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:03] "GET /images/nvcamtest_28827_s00_00004.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:06,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:06] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:07,660 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:07] "[36mGET /images/nvcamtest_18433_s00_00006.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:29:09,518 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:09] "GET /images/nvcamtest_28827_s00_00005.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:09,711 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:09] "GET /images/nvcamtest_28827_s00_00006.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:09,899 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:09] "GET /images/nvcamtest_28827_s00_00007.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:10,064 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:10] "GET /images/nvcamtest_28827_s00_00008.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:10,250 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:10] "GET /images/nvcamtest_28827_s00_00009.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:11,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:11,848 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:11] "GET /images/nvcamtest_28827_s00_00010.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:13,320 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:13] "GET /images/nvcamtest_28827_s00_00011.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:13,577 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:13] "GET /images/nvcamtest_28827_s00_00012.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:13,792 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:13] "GET /images/nvcamtest_28827_s00_00013.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:13,983 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:13] "GET /images/nvcamtest_28827_s00_00014.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:16,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:16] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:17,658 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:17] "GET /images/nvcamtest_28827_s00_00015.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:17,901 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:17] "GET /images/nvcamtest_28827_s00_00016.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:21,303 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:21] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 13:29:21,378 - STATUS - Received coordinates: x=2576, y=2323
+2024-10-31 13:29:21,378 - STATUS - Cropping Image...
+2024-10-31 13:29:21,383 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:21] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 13:29:21,390 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:21] "GET /cropped-images/cropped_image_0.png HTTP/1.1" 200 -
+2024-10-31 13:29:21,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:21] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:21,853 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:21] "GET /images/nvcamtest_28827_s00_00017.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:23,795 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:23] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 13:29:23,799 - STATUS - Received data: nvcamtest_28827_s00_00017.jpg, s, , 1, Target 1
+2024-10-31 13:29:23,799 - STATUS - Saving Details...
+2024-10-31 13:29:23,809 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 13:29:23,811 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:23] "GET /images/nvcamtest_28827_s00_00017.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:23,811 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_28827_s00_00017.jpg HTTP/11" 200 1555212
+2024-10-31 13:29:23,830 - INFO - Real distance GSD: 0.9906476719803059
+2024-10-31 13:29:23,836 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 13:29:23,836 - INFO - Pixel distance: 319.5637651549374
+2024-10-31 13:29:23,836 - INFO - Angle: -131.32085757334096
+2024-10-31 13:29:23,836 - INFO - Calculated Real-life distance: 0.9906476719803059
+2024-10-31 13:29:23,836 - INFO - saved target lat and long: 130310664, 775654294
+2024-10-31 13:29:23,837 - STATUS - Saved Succesfully.
+2024-10-31 13:29:23,837 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:23] "POST /save-details HTTP/1.1" 200 -
+2024-10-31 13:29:25,893 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:25] "GET /images/nvcamtest_28827_s00_00018.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:26,196 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:26] "GET /images/nvcamtest_28827_s00_00019.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:26,493 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:26] "GET /images/nvcamtest_28827_s00_00020.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:26,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:26] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:26,893 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:26] "GET /images/nvcamtest_28827_s00_00021.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:27,138 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:27] "GET /images/nvcamtest_28827_s00_00022.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:27,422 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:27] "GET /images/nvcamtest_28827_s00_00023.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:27,811 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:27] "GET /images/nvcamtest_28827_s00_00024.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:31,567 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:31] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 13:29:31,641 - STATUS - Received coordinates: x=2781, y=917
+2024-10-31 13:29:31,642 - STATUS - Cropping Image...
+2024-10-31 13:29:31,645 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:31] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 13:29:31,651 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:31] "GET /cropped-images/cropped_image_1.png HTTP/1.1" 200 -
+2024-10-31 13:29:31,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:31] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:35,119 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:35] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 13:29:35,123 - STATUS - Received data: nvcamtest_28827_s00_00022.jpg, p, , 2, Target 2
+2024-10-31 13:29:35,124 - STATUS - Saving Details...
+2024-10-31 13:29:35,131 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 13:29:35,132 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:35] "GET /images/nvcamtest_28827_s00_00022.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:35,133 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_28827_s00_00022.jpg HTTP/11" 200 1502954
+2024-10-31 13:29:35,137 - INFO - Real distance GSD: 3.70608857152659
+2024-10-31 13:29:35,139 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 13:29:35,139 - INFO - Pixel distance: 1195.5124424279322
+2024-10-31 13:29:35,139 - INFO - Angle: -1.6776394661534653
+2024-10-31 13:29:35,139 - INFO - Calculated Real-life distance: 3.70608857152659
+2024-10-31 13:29:35,139 - INFO - saved target lat and long: 130310728, 775653371
+2024-10-31 13:29:35,139 - STATUS - Saved Succesfully.
+2024-10-31 13:29:35,140 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:35] "POST /save-details HTTP/1.1" 200 -
+2024-10-31 13:29:36,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:36] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:36,850 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:36] "GET /images/nvcamtest_28827_s00_00025.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:36,985 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:36] "GET /images/nvcamtest_28827_s00_00026.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:37,400 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:37] "GET /images/nvcamtest_28827_s00_00027.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:40,821 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:40] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 13:29:40,897 - STATUS - Received coordinates: x=3964, y=1713
+2024-10-31 13:29:40,898 - STATUS - Cropping Image...
+2024-10-31 13:29:40,901 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:40] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 13:29:40,908 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:40] "GET /cropped-images/cropped_image_2.png HTTP/1.1" 200 -
+2024-10-31 13:29:41,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:41] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:41,880 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:41] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 13:29:41,882 - STATUS - Received data: nvcamtest_28827_s00_00025.jpg, p, , 3, Target 3
+2024-10-31 13:29:41,882 - STATUS - Saving Details...
+2024-10-31 13:29:41,884 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 13:29:41,885 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:41] "GET /images/nvcamtest_28827_s00_00025.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:41,886 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_28827_s00_00025.jpg HTTP/11" 200 1543961
+2024-10-31 13:29:41,894 - INFO - Real distance GSD: 3.7676224664899745
+2024-10-31 13:29:41,896 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 13:29:41,896 - INFO - Pixel distance: 1215.362085964508
+2024-10-31 13:29:41,896 - INFO - Angle: 70.83454348280912
+2024-10-31 13:29:41,896 - INFO - Calculated Real-life distance: 3.7676224664899745
+2024-10-31 13:29:41,896 - INFO - saved target lat and long: 130310283, 775653236
+2024-10-31 13:29:41,896 - STATUS - Saved Succesfully.
+2024-10-31 13:29:41,896 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:41] "POST /save-details HTTP/1.1" 200 -
+2024-10-31 13:29:44,365 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:44] "[36mGET /images/nvcamtest_28827_s00_00026.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:29:45,054 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:45] "[36mGET /images/nvcamtest_28827_s00_00027.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:29:45,803 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:45] "GET /images/nvcamtest_28827_s00_00028.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:46,396 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:46] "GET /images/nvcamtest_28827_s00_00029.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:46,704 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:46] "GET /images/nvcamtest_28827_s00_00030.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:46,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:46] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:47,079 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:47] "GET /images/nvcamtest_28827_s00_00031.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:47,333 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:47] "GET /images/nvcamtest_28827_s00_00032.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:48,225 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:48] "GET /images/nvcamtest_28827_s00_00033.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:49,938 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:49] "GET /images/nvcamtest_28827_s00_00034.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:51,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:51] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:53,670 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:53] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 13:29:53,745 - STATUS - Received coordinates: x=4616, y=2112
+2024-10-31 13:29:53,745 - STATUS - Cropping Image...
+2024-10-31 13:29:53,748 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:53] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 13:29:53,754 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:53] "GET /cropped-images/cropped_image_3.png HTTP/1.1" 200 -
+2024-10-31 13:29:54,758 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:54] "OPTIONS /save-details HTTP/1.1" 200 -
+2024-10-31 13:29:54,763 - STATUS - Received data: nvcamtest_28827_s00_00032.jpg, p, , 4, Target 4
+2024-10-31 13:29:54,763 - STATUS - Saving Details...
+2024-10-31 13:29:54,766 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:9080
+2024-10-31 13:29:54,769 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:54] "GET /images/nvcamtest_28827_s00_00032.jpg HTTP/1.1" 200 -
+2024-10-31 13:29:54,770 - DEBUG - http://127.0.0.1:9080 "GET /images/nvcamtest_28827_s00_00032.jpg HTTP/11" 200 1584164
+2024-10-31 13:29:54,775 - INFO - Real distance GSD: 5.58
+2024-10-31 13:29:54,777 - INFO - Desired Latitude and Longitude sent ....
+2024-10-31 13:29:54,777 - INFO - Pixel distance: 1800.0
+2024-10-31 13:29:54,777 - INFO - Angle: 90.0
+2024-10-31 13:29:54,777 - INFO - Calculated Real-life distance: 5.58
+2024-10-31 13:29:54,777 - INFO - saved target lat and long: 130310411, 775654617
+2024-10-31 13:29:54,777 - STATUS - Saved Succesfully.
+2024-10-31 13:29:54,777 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:54] "POST /save-details HTTP/1.1" 200 -
+2024-10-31 13:29:56,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:29:56] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:29:59,108 - STATUS - 130310411
+2024-10-31 13:29:59,109 - STATUS - Automation
+2024-10-31 13:29:59,114 - STATUS - alti: 30.642
+2024-10-31 13:29:59,115 - STATUS - Guided
+2024-10-31 13:29:59,277 - STATUS - Guided...
+2024-10-31 13:30:00,783 - STATUS - Real_distance between lats and lons: 3.372909329567411
+2024-10-31 13:30:00,784 - STATUS - DESIRED LAT = 13.0310411
+2024-10-31 13:30:00,786 - STATUS - DESIRED LONG = 77.5654617
+2024-10-31 13:30:01,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:01] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:01,853 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:01] "[36mGET /images/nvcamtest_28827_s00_00033.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:30:06,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:06] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:10,130 - STATUS - Started Dropping ...
+2024-10-31 13:30:11,134 - STATUS - Dropping Bottle...
+2024-10-31 13:30:11,318 - STATUS - COMMAND_ACK {command : 183, result : 0, progress : 0, result_param2 : 0, target_system : 255, target_component : 0}
+2024-10-31 13:30:11,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:16,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:16] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:21,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:21] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:26,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:26] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:28,326 - STATUS - dropped
+2024-10-31 13:30:28,327 - STATUS - Current drop loc latitude: 13.031041
+2024-10-31 13:30:28,327 - STATUS - Current drop loc longtitude: 77.5654622
+2024-10-31 13:30:28,327 - STATUS - Accuracy: 12817069.189916542
+2024-10-31 13:30:28,357 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:28] "[35m[1mPOST /reposition HTTP/1.1[0m" 204 -
+2024-10-31 13:30:31,844 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:31] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:34,696 - INFO - Python file stopped successfully.
+2024-10-31 13:30:34,696 - INFO - stopped geotagg
+2024-10-31 13:30:34,697 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:34] "[35m[1mPOST /stop_geotagg HTTP/1.1[0m" 204 -
+2024-10-31 13:30:36,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:36] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:40,148 - STATUS - 130310411
+2024-10-31 13:30:40,148 - STATUS - Automation
+2024-10-31 13:30:40,150 - STATUS - alti: 26.949
+2024-10-31 13:30:40,150 - STATUS - Guided
+2024-10-31 13:30:40,281 - STATUS - Guided...
+2024-10-31 13:30:41,785 - STATUS - Real_distance between lats and lons: 0.05904515875051751
+2024-10-31 13:30:41,786 - STATUS - DESIRED LAT = 13.0310411
+2024-10-31 13:30:41,787 - STATUS - DESIRED LONG = 77.5654617
+2024-10-31 13:30:41,789 - STATUS - Started Dropping ...
+2024-10-31 13:30:41,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:41] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:42,794 - STATUS - Dropping Bottle...
+2024-10-31 13:30:42,817 - STATUS - COMMAND_ACK {command : 183, result : 0, progress : 0, result_param2 : 0, target_system : 255, target_component : 0}
+2024-10-31 13:30:46,843 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:46] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:51,838 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:51] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:56,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:56] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:30:59,824 - STATUS - dropped
+2024-10-31 13:30:59,825 - STATUS - Current drop loc latitude: 13.0310411
+2024-10-31 13:30:59,826 - STATUS - Current drop loc longtitude: 77.5654614
+2024-10-31 13:30:59,827 - STATUS - Accuracy: 12817069.202012533
+2024-10-31 13:30:59,859 - INFO - 127.0.0.1 - - [31/Oct/2024 13:30:59] "[35m[1mPOST /reposition HTTP/1.1[0m" 204 -
+2024-10-31 13:31:01,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:01] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:06,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:06] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:11,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:16,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:16] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:17,350 - STATUS - 130310411
+2024-10-31 13:31:17,350 - STATUS - Automation
+2024-10-31 13:31:17,355 - STATUS - alti: 26.42
+2024-10-31 13:31:17,356 - STATUS - Guided
+2024-10-31 13:31:17,380 - STATUS - Guided...
+2024-10-31 13:31:18,885 - STATUS - Real_distance between lats and lons: 0.0815374478384941
+2024-10-31 13:31:18,886 - STATUS - DESIRED LAT = 13.0310411
+2024-10-31 13:31:18,887 - STATUS - DESIRED LONG = 77.5654617
+2024-10-31 13:31:18,888 - STATUS - Started Dropping ...
+2024-10-31 13:31:19,893 - STATUS - Dropping Bottle...
+2024-10-31 13:31:19,914 - STATUS - COMMAND_ACK {command : 183, result : 0, progress : 0, result_param2 : 0, target_system : 255, target_component : 0}
+2024-10-31 13:31:21,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:21] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:26,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:26] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:31,843 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:31] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:36,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:36] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:36,921 - STATUS - dropped
+2024-10-31 13:31:36,922 - STATUS - Current drop loc latitude: 13.0310407
+2024-10-31 13:31:36,923 - STATUS - Current drop loc longtitude: 77.565461
+2024-10-31 13:31:36,924 - STATUS - Accuracy: 12817069.253846912
+2024-10-31 13:31:36,959 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:36] "[35m[1mPOST /reposition HTTP/1.1[0m" 204 -
+2024-10-31 13:31:41,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:41] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:46,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:46] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:51,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:51] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:56,067 - STATUS - 130310411
+2024-10-31 13:31:56,068 - STATUS - Automation
+2024-10-31 13:31:56,073 - STATUS - alti: 30.686
+2024-10-31 13:31:56,075 - STATUS - Guided
+2024-10-31 13:31:56,104 - STATUS - Guided...
+2024-10-31 13:31:56,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:31:56] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:31:57,609 - STATUS - Real_distance between lats and lons: 1.0787684431008724
+2024-10-31 13:31:57,610 - STATUS - DESIRED LAT = 13.0310411
+2024-10-31 13:31:57,611 - STATUS - DESIRED LONG = 77.5654617
+2024-10-31 13:32:01,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:01] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:03,631 - STATUS - Started Dropping ...
+2024-10-31 13:32:04,637 - STATUS - Dropping Bottle...
+2024-10-31 13:32:04,778 - STATUS - COMMAND_ACK {command : 183, result : 0, progress : 0, result_param2 : 0, target_system : 255, target_component : 0}
+2024-10-31 13:32:06,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:06] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:11,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:16,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:16] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:21,781 - STATUS - dropped
+2024-10-31 13:32:21,782 - STATUS - Current drop loc latitude: 13.0310416
+2024-10-31 13:32:21,782 - STATUS - Current drop loc longtitude: 77.565461
+2024-10-31 13:32:21,783 - STATUS - Accuracy: 12817069.15927912
+2024-10-31 13:32:21,809 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:21] "[35m[1mPOST /reposition HTTP/1.1[0m" 204 -
+2024-10-31 13:32:21,839 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:21] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:26,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:26] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:31,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:31] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:37,296 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:37] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:41,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:41] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:46,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:46] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:51,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:51] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:32:56,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:32:56] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:01,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:01] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:06,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:06] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:11,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:16,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:16] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:21,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:21] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:26,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:26] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:31,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:31] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:36,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:36] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:41,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:41] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:47,299 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:47] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:51,843 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:51] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:56,840 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:56] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:33:57,207 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:57] "[36mGET /images/nvcamtest_28827_s00_00034.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:33:57,704 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:57] "GET /images/nvcamtest_28827_s00_00035.jpg HTTP/1.1" 200 -
+2024-10-31 13:33:57,974 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:57] "GET /images/nvcamtest_28827_s00_00036.jpg HTTP/1.1" 200 -
+2024-10-31 13:33:58,159 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:58] "GET /images/nvcamtest_28827_s00_00037.jpg HTTP/1.1" 200 -
+2024-10-31 13:33:58,309 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:58] "GET /images/nvcamtest_28827_s00_00038.jpg HTTP/1.1" 200 -
+2024-10-31 13:33:58,415 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:58] "GET /images/nvcamtest_28827_s00_00039.jpg HTTP/1.1" 200 -
+2024-10-31 13:33:58,565 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:58] "GET /images/nvcamtest_28827_s00_00040.jpg HTTP/1.1" 200 -
+2024-10-31 13:33:58,745 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:58] "GET /images/nvcamtest_28827_s00_00041.jpg HTTP/1.1" 200 -
+2024-10-31 13:33:58,929 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:58] "GET /images/nvcamtest_28827_s00_00042.jpg HTTP/1.1" 200 -
+2024-10-31 13:33:59,084 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:59] "GET /images/nvcamtest_28827_s00_00043.jpg HTTP/1.1" 200 -
+2024-10-31 13:33:59,430 - INFO - 127.0.0.1 - - [31/Oct/2024 13:33:59] "GET /images/nvcamtest_28827_s00_00044.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:01,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:01] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:06,133 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:06] "[36mGET /images/nvcamtest_28827_s00_00043.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:06,478 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:06] "[36mGET /images/nvcamtest_28827_s00_00044.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:06,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:06] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:06,900 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:06] "GET /images/nvcamtest_28827_s00_00045.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:07,298 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:07] "GET /images/nvcamtest_28827_s00_00046.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:07,598 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:07] "GET /images/nvcamtest_28827_s00_00047.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:07,907 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:07] "GET /images/nvcamtest_28827_s00_00048.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:08,272 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:08] "GET /images/nvcamtest_28827_s00_00049.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:08,596 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:08] "GET /images/nvcamtest_28827_s00_00050.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:11,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:16,841 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:16] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:19,074 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:19] "GET /images/nvcamtest_28827_s00_00051.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:19,150 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:19] "GET /images/nvcamtest_28827_s00_00052.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:19,242 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:19] "GET /images/nvcamtest_28827_s00_00053.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:19,384 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:19] "GET /images/nvcamtest_28827_s00_00054.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:19,405 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:19] "GET /images/nvcamtest_28827_s00_00055.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:19,679 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:19] "GET /images/nvcamtest_28827_s00_00058.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:19,830 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:19] "GET /images/nvcamtest_28827_s00_00060.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:19,974 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:19] "GET /images/nvcamtest_28827_s00_00061.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:19,988 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:19] "GET /images/nvcamtest_28827_s00_00062.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:20,268 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:20] "GET /images/nvcamtest_28827_s00_00065.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:20,415 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:20] "GET /images/nvcamtest_28827_s00_00067.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:20,559 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:20] "GET /images/nvcamtest_28827_s00_00068.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:20,575 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:20] "GET /images/nvcamtest_28827_s00_00069.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:20,850 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:20] "GET /images/nvcamtest_28827_s00_00072.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:20,995 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:20] "GET /images/nvcamtest_28827_s00_00073.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:20,997 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:20] "GET /images/nvcamtest_28827_s00_00074.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:21,138 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:21] "GET /images/nvcamtest_28827_s00_00075.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:21,162 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:21] "GET /images/nvcamtest_28827_s00_00076.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:21,433 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:21] "GET /images/nvcamtest_28827_s00_00079.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:21,579 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:21] "GET /images/nvcamtest_28827_s00_00080.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:21,581 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:21] "GET /images/nvcamtest_28827_s00_00081.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:21,723 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:21] "GET /images/nvcamtest_28827_s00_00082.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:21,871 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:21] "GET /images/nvcamtest_28827_s00_00084.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:21,872 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:21] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:22,015 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:22] "GET /images/nvcamtest_28827_s00_00086.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:22,162 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:22] "GET /images/nvcamtest_28827_s00_00087.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:22,167 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:22] "GET /images/nvcamtest_28827_s00_00088.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:22,307 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:22] "GET /images/nvcamtest_28827_s00_00089.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:22,455 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:22] "GET /images/nvcamtest_28827_s00_00091.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:22,599 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:22] "GET /images/nvcamtest_28827_s00_00093.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:22,746 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:22] "GET /images/nvcamtest_28827_s00_00094.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:26,745 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:26] "GET /images/nvcamtest_28827_s00_00092.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:26,910 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:26] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:26,910 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:26] "GET /images/nvcamtest_28827_s00_00090.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:27,327 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:27] "GET /images/nvcamtest_28827_s00_00085.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:27,410 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:27] "[36mGET /images/nvcamtest_28827_s00_00084.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:27,494 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:27] "GET /images/nvcamtest_28827_s00_00083.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:27,630 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:27] "[36mGET /images/nvcamtest_28827_s00_00082.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:27,774 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:27] "GET /images/nvcamtest_28827_s00_00080.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:27,922 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:27] "GET /images/nvcamtest_28827_s00_00078.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:28,061 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:28] "GET /images/nvcamtest_28827_s00_00077.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:28,078 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:28] "[36mGET /images/nvcamtest_28827_s00_00076.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:28,359 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:28] "GET /images/nvcamtest_28827_s00_00073.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:28,499 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:28] "GET /images/nvcamtest_28827_s00_00071.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:28,645 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:28] "GET /images/nvcamtest_28827_s00_00070.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:28,788 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:28] "[36mGET /images/nvcamtest_28827_s00_00068.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:28,938 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:28] "GET /images/nvcamtest_28827_s00_00066.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:29,079 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:29] "[36mGET /images/nvcamtest_28827_s00_00065.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:29,090 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:29] "GET /images/nvcamtest_28827_s00_00064.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:29,231 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:29] "GET /images/nvcamtest_28827_s00_00063.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:29,375 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:29] "[36mGET /images/nvcamtest_28827_s00_00062.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:30,375 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:30] "[36mGET /images/nvcamtest_28827_s00_00067.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:30,722 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:30] "[36mGET /images/nvcamtest_28827_s00_00069.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:31,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:31] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:32,719 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:32] "[36mGET /images/nvcamtest_28827_s00_00061.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:32,795 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:32] "[36mGET /images/nvcamtest_28827_s00_00060.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:32,885 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:32] "GET /images/nvcamtest_28827_s00_00059.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:33,028 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:33] "[36mGET /images/nvcamtest_28827_s00_00058.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:33,191 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:33] "GET /images/nvcamtest_28827_s00_00057.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:33,413 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:33] "GET /images/nvcamtest_28827_s00_00056.jpg HTTP/1.1" 200 -
+2024-10-31 13:34:33,601 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:33] "[36mGET /images/nvcamtest_28827_s00_00055.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:33,789 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:33] "[36mGET /images/nvcamtest_28827_s00_00054.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:33,974 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:33] "[36mGET /images/nvcamtest_28827_s00_00053.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:34,146 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:34] "[36mGET /images/nvcamtest_28827_s00_00052.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:34,323 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:34] "[36mGET /images/nvcamtest_28827_s00_00051.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:34,491 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:34] "[36mGET /images/nvcamtest_28827_s00_00050.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:34,691 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:34] "[36mGET /images/nvcamtest_28827_s00_00049.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:34,881 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:34] "[36mGET /images/nvcamtest_28827_s00_00048.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:35,389 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:35] "[36mGET /images/nvcamtest_28827_s00_00047.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:35,463 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:35] "[36mGET /images/nvcamtest_28827_s00_00046.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:35,548 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:35] "[36mGET /images/nvcamtest_28827_s00_00045.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:35,692 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:35] "[36mGET /images/nvcamtest_28827_s00_00044.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:35,838 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:35] "[36mGET /images/nvcamtest_28827_s00_00042.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:35,982 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:35] "[36mGET /images/nvcamtest_28827_s00_00041.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:36,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:36] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:37,010 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:37] "[36mGET /images/nvcamtest_28827_s00_00043.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:37,967 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:37] "[36mGET /images/nvcamtest_28827_s00_00040.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:38,143 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:38] "[36mGET /images/nvcamtest_28827_s00_00039.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:38,331 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:38] "[36mGET /images/nvcamtest_28827_s00_00038.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:38,522 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:38] "[36mGET /images/nvcamtest_28827_s00_00037.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:38,820 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:38] "[36mGET /images/nvcamtest_28827_s00_00036.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:39,014 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:39] "[36mGET /images/nvcamtest_28827_s00_00035.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:39,207 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:39] "[36mGET /images/nvcamtest_28827_s00_00034.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:39,411 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:39] "[36mGET /images/nvcamtest_28827_s00_00033.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:39,628 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:39] "[36mGET /images/nvcamtest_28827_s00_00032.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:39,805 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:39] "[36mGET /images/nvcamtest_28827_s00_00031.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:39,995 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:39] "[36mGET /images/nvcamtest_28827_s00_00030.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:40,319 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:40] "[36mGET /images/nvcamtest_28827_s00_00029.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:40,574 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:40] "[36mGET /images/nvcamtest_28827_s00_00028.jpg HTTP/1.1[0m" 304 -
+2024-10-31 13:34:41,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:41] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:46,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:46] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 13:34:51,842 - INFO - 127.0.0.1 - - [31/Oct/2024 13:34:51] "GET /all-images HTTP/1.1" 200 -

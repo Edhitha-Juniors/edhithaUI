@@ -1,0 +1,30 @@
+2024-10-31 14:37:11,544 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2024-10-31 14:37:11,549 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:9080
+2024-10-31 14:37:11,549 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-31 14:37:11,624 - STATUS - Client connected
+2024-10-31 14:37:11,625 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:11,630 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:11] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:11,638 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:11] "[36mGET /images/nvcamtest_11456_s00_00000.jpg HTTP/1.1[0m" 304 -
+2024-10-31 14:37:13,828 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:13] "OPTIONS /crop-image HTTP/1.1" 200 -
+2024-10-31 14:37:13,940 - STATUS - Received coordinates: x=1140, y=1641
+2024-10-31 14:37:13,941 - STATUS - Cropping Image...
+2024-10-31 14:37:13,950 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:13] "POST /crop-image HTTP/1.1" 200 -
+2024-10-31 14:37:13,956 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:13] "GET /cropped-images/cropped_image_0.png HTTP/1.1" 200 -
+2024-10-31 14:37:14,951 - STATUS - Client connected
+2024-10-31 14:37:16,628 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:16] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:21,949 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:21] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:26,947 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:26] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:31,352 - STATUS - Client connected
+2024-10-31 14:37:31,450 - STATUS - Client connected
+2024-10-31 14:37:31,957 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:31] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:37,947 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:37] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:42,948 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:42] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:47,948 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:47] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:52,948 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:52] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:37:57,946 - INFO - 127.0.0.1 - - [31/Oct/2024 14:37:57] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:38:02,616 - STATUS - Client connected
+2024-10-31 14:38:02,751 - STATUS - Client connected
+2024-10-31 14:38:02,940 - STATUS - Client connected
+2024-10-31 14:38:02,946 - INFO - 127.0.0.1 - - [31/Oct/2024 14:38:02] "GET /all-images HTTP/1.1" 200 -
+2024-10-31 14:38:03,950 - INFO - 127.0.0.1 - - [31/Oct/2024 14:38:03] "GET /all-images HTTP/1.1" 200 -

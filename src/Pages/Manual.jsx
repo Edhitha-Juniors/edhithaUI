@@ -5,8 +5,6 @@ import logo from '../assets/images/logo.png';
 import { io } from 'socket.io-client';
 
 
-
-
 const socket = io('http://localhost:9080', {
     transports: ['websocket'], 
     autoConnect: true, // Automatically connects initially// 2-second delay between reconnections
@@ -27,9 +25,8 @@ const Manual = () => {
         voltage: '',
         current: '',
         temperature: '',
-        message1: 'NO MESSAGE',
-        message2: 'Distance from Target - NA',
-        coordinates: 'xyz'
+        latitude: '',
+        longitude: ''
     });
     const [isLive, setIsLive] = useState(true);
     const [intervalId, setIntervalId] = useState(null);
@@ -81,36 +78,30 @@ const Manual = () => {
     const fetchImageUrls = useCallback((urls) => {
         const formattedUrls = urls.map(url => `http://127.0.0.1:9080/images/${url}`);
         
-        // Set image URLs
+        // Set image URLs and automatically update to the latest image
         setImageUrls(formattedUrls);
-    
-        // Update selectedImageUrl if isLive and formattedUrls has images
-        if (isLive && formattedUrls.length > 0) {
+        if (formattedUrls.length > 0) {
             setSelectedImageUrl(formattedUrls[formattedUrls.length - 1]);
-            console.log(selectedImageUrl)
         }
-    }, [isLive]);
-    
+    }, []);
+
     useEffect(() => {
-        // Fetch initial image URLs
-        const fetchInitialImages = async () => {
-            const response = await fetch('http://127.0.0.1:9080/all-images');
-            const data = await response.json();
-            fetchImageUrls(data.imageUrls);
-        };
-    
-        fetchInitialImages();
-    
-        // Listen for image updates from the server
-        socket.on('image_update', (data) => {
-            fetchImageUrls(data.imageUrls);
-        });
-    
-        return () => {
-            socket.off('image_update');
-        };
-    }, [fetchImageUrls]);
-    
+    // Define the polling interval
+    const pollingInterval = 5000; // 5 seconds
+
+    const fetchLatestImages = async () => {
+        const response = await fetch('http://127.0.0.1:9080/all-images');
+        const data = await response.json();
+        fetchImageUrls(data.imageUrls);
+    };
+
+    // Fetch images at the start and then set an interval to poll the server
+    fetchLatestImages();
+    const intervalId = setInterval(fetchLatestImages, pollingInterval);
+
+    return () => clearInterval(intervalId); // Clear interval on unmount
+}, [fetchImageUrls]);
+
     useEffect(() => {
         const handleEscPress = (event) => {
             if (event.key === 'Escape') {
@@ -219,9 +210,9 @@ const Manual = () => {
             const colour = document.querySelector('input[placeholder="Colour"]').value;
             const buttonData = {
                 id: buttons.length + 1, // Create a unique ID for each button
-                label: `Target ${buttons.length + 1}`, // You can modify this to use any input data
+                label: `${shape}`, // You can modify this to use any input data
             };
-    
+
             // Update state only when user clicks save, not during rendering
             setButtons(prevButtons => [...prevButtons, buttonData]);
             const response = await fetch('http://127.0.0.1:9080/save-details', {
@@ -240,7 +231,15 @@ const Manual = () => {
     
             if (!response.ok) {
                 throw new Error('Failed to save details');
+            } else {
+                const result = await response.json(); // Parse JSON response
+                setBackendData(prevData => ({
+                    ...prevData,
+                    latitude: result.latitude,
+                    longitude: result.longitude
+                }));
             }
+            
     
             const result = await response.json();
             // alert(result.message);
@@ -348,6 +347,16 @@ const Manual = () => {
         }
     };
 
+    const handleLock = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/lock-servo', { method: 'POST' });
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Error dropping:', error);
+        }
+    };
+
     const handleModeChange = async (mode) => {
         try {
             const response = await fetch('http://127.0.0.1:9080/change-mode', {
@@ -376,9 +385,20 @@ const Manual = () => {
             const data = await response.json();
             console.log(data.message);
         } catch (error) {
-            console.error('Error taking off:', error);
+            console.error('Error starting off:', error);
         }
     };
+
+    const stopGeotag = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:9080/stop_geotagg', { method: 'POST', mode: 'no-cors' });
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Error stopping:', error);
+        }
+    };
+
 
     const automationButton = async(id) => {
         try {
@@ -446,7 +466,7 @@ const Manual = () => {
                             <div className="inputsContainer">
                                 <input className="inputBox" type="text" placeholder="Shape" />
                                 <input className="inputBox" type="text" placeholder="Colour" />
-                                <input type="text" placeholder="Coordinates (to be rendered)" className="coordinatesBox" value={backendData.coordinates} readOnly />
+                                <input type="text" placeholder="Coordinates" className="coordinatesBox" value={`${backendData.latitude}, ${backendData.longitude}`} readOnly />
                                 <button className="saveButton" onClick={handleSaveButtonClick}>Store</button>
                                 <div className="repo-button-grid">
                                 {buttons.map((button) => (
@@ -488,6 +508,11 @@ const Manual = () => {
                             >
                                 Geotag
                             </button>  
+                            <button
+                                onClick={stopGeotag}
+                            >
+                                Stop Geotag
+                            </button> 
                             <button className="Control-Button" onClick={handleDrop}>Drop</button>
                             <button className="Control-Button" onClick={handleRTL}>RTL</button>
                             <button
@@ -514,7 +539,7 @@ const Manual = () => {
                             >
                                 Loiter
                             </button>
-                            <button className="Control-Button">Lock Servo</button>
+                            <button className="Control-Button" onClick={handleLock}>Lock Servo</button>
                         </div>
                     </div>
                     <div className="bottom-right-container">

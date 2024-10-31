@@ -1,6 +1,7 @@
 import logging
 import datetime
 from flask_socketio import SocketIO
+import os
 
 # Define the SocketIO instance
 socketio = None  # This will be set later
@@ -39,6 +40,10 @@ class ExcludeRsyncFilter(logging.Filter):
 def setup_logging(sio_instance):
     global socketio
     socketio = sio_instance
+
+    log_dir = "/Users/aahil/Edhitha/edhithaGCS/LOGS"
+    os.makedirs(log_dir, exist_ok=True)
+
     # Get the current date and time for the log filename
     current_datetime = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     output_file = f"../../LOGS/logs_{current_datetime}.txt"

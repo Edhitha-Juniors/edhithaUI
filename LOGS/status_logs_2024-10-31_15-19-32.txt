@@ -1,0 +1,14 @@
+Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+Client connected
+Client connected
+Received coordinates: x=3089, y=2214
+Cropping Image...
+Client connected
+Received coordinates: x=3065, y=2274
+Cropping Image...
+Received data: nvcamtest_11456_s00_00000.jpg, , , , 
+Saving Details...
+Error saving details: unsupported operand type(s) for -: 'str' and 'int'
+Client connected
+Client connected
+Client connected

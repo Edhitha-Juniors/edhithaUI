@@ -10,39 +10,43 @@ global is_connected
 the_connection = None
 is_connected = False
 
-# def drop():
-    # # Set the system and component ID (replace with your system and component ID)
-    # logging.getLogger().status("dropping")
-    # system_id = the_connection.target_system
-    # component_id = the_connection.target_component
-    
-    # # Set the servo channel to 7
-    # channel = 7
-    # command = mavutil.mavlink.MAV_CMD_DO_SET_SERVO
-    # param3 = 0
-    # param4 = 0
-    # param5 = 0
-    # param6 = 0
-    # param7 = 0
-    
-    # # Set PWM value for servo 7 (you can adjust the value as needed)
-    # pwm_value = 2000  # Example PWM value for dropping
-    
-    # logging.getLogger().status("Dropping at pwm %s on channel %s", pwm_value, channel)
 
-    # # Send the MAV_CMD_DO_SET_SERVO command
-    # the_connection.mav.command_long_send(
-    #     system_id, component_id,
-    #     command,
-    #     0,  # Confirmation
-    #     channel, pwm_value, param3, param4, param5, param6, param7
-    # )
+def drop(channel=7, pwm_value=1100):
+    # Set the MAV_CMD_DO_SET_SERVO command parameters
+    logging.getLogger().status("Dropping Bottle...")
+    command = mavutil.mavlink.MAV_CMD_DO_SET_SERVO
+    param1 = channel
+    param3 = 0
+    param4 = 0
+    param5 = 0
+    param6 = 0
+    param7 = 0
 
-    # msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
-    # logging.getLogger().status("Dropping message: %s", msg)
+    # Send the MAV_CMD_DO_SET_SERVO command
+    the_connection.mav.command_long_send(1, 1,command,0,param1, pwm_value, param3, param4, param5, param6, param7)
+    msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
+    logging.getLogger().status(msg)
+    logging
 
-    # # Wait for a short duration
-    # time.sleep(2)
+    # Wait for a short duration
+    time.sleep(2)
+
+def lock(channel=7, pwm_value=1900):
+    # Set the MAV_CMD_DO_SET_SERVO command parameters
+    logging.getLogger().status("In function")
+    command = mavutil.mavlink.MAV_CMD_DO_SET_SERVO
+    param1 = channel
+    param3 = 0
+    param4 = 0
+    param5 = 0
+    param6 = 0
+    param7 = 0
+
+    # Send the MAV_CMD_DO_SET_SERVO command
+    the_connection.mav.command_long_send(1, 1,command,0,param1, pwm_value, param3, param4, param5, param6, param7)
+
+    # Wait for a short duration
+    time.sleep(2)
 
 
 def toggle_connection():
@@ -61,7 +65,8 @@ def toggle_connection():
     # Start a new connection to the drone
     try:
         # logging.getLogger().status("Attempting to connect to the drone...")
-        the_connection = mavutil.mavlink_connection('udp:0.0.0.0:14550')
+        # the_connection = mavutil.mavlink_connection('tcp:192.168.1.21:5760')
+        the_connection = mavutil.mavlink_connection('udp:192.168.1.49:14550')
         # the_connection = mavutil.mavlink_connection('udp:10.42.0.1:14551')
         # the_connection = mavutil.mavlink_connection('tcp:10.42.0.1:5760')
         logging.getLogger().status("Attempting to connect to the drone...")
