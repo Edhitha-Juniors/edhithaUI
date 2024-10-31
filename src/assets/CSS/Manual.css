@@ -542,6 +542,27 @@ Controls */
 */
 
 
+.suggestions {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute; /* Position the suggestions dropdown */
+    background-color: white;
+    width: 100%; /* Ensure suggestions match input width */
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+.suggestions li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestions li:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+}
+
+
+
 /* Battery */
 /* .data-box {
     margin-bottom: 10px;

@@ -192,6 +192,7 @@ def save_details():
         shape = data.get('shape', '')
         colour = data.get('colour', '')
         id = data.get('id', '')
+        logging.getLogger().status(id)
         label = data.get('label', '')
 
         logging.getLogger().status(f"Received data: {image_name}, {shape}, {colour}, {id}, {label}")
@@ -207,7 +208,7 @@ def save_details():
         return jsonify({'message': 'Details saved successfully', 'latitude': latz, 'longitude': longz}), 200
     except Exception as e:
         # print(f"Error saving details: {str(e)}", file=sys.stderr)
-        logging.getLogger().status(f"Error saving details: {str(e)}")
+        logging.getLogger().status(f"Error saving detailsP: {str(e)}")
         return jsonify({'message': f'Failed to save details: {str(e)}'}), 500
 
 

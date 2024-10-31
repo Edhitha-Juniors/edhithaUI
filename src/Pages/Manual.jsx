@@ -10,6 +10,8 @@ const socket = io('http://localhost:9080', {
     autoConnect: true, // Automatically connects initially// 2-second delay between reconnections
 });
 
+const shapeSuggestions = ['Ball', 'Bat', 'Book', 'Bicycle', 'Broom', 'Bottle'];
+
 const Manual = () => {
 
     const [isConnected, setIsConnected] = useState(false); // State for connection status
@@ -224,7 +226,7 @@ const Manual = () => {
                     croppedImageUrl,
                     shape,
                     colour,
-                    coordinates: backendData.coordinates,
+                    // coordinates: backendData.coordinates,
                     id: buttonData.id,  // Include button id
                     label: buttonData.label
                 })
@@ -249,7 +251,7 @@ const Manual = () => {
                 // Update buttons state with the new button data
                 setButtons(prevButtons => [
                     ...prevButtons,
-                    buttonData // Add button data only if latitude and longitude exist
+                    { id: buttonData.id, label: buttonData.label } // Add button data only if latitude and longitude exist
                 ]);
                 console.log('Details saved successfully and backend data updated');
             } else {
