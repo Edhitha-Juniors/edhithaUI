@@ -1,5 +1,0 @@
-Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
-Client connected
-Client connected
-Received coordinates: x=2757, y=2299
-Cropping Image...

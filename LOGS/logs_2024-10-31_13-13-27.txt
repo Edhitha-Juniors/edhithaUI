@@ -1,8 +1,0 @@
-2024-10-31 13:13:27,597 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
-2024-10-31 13:13:27,605 - DEBUG - NativeEvent(path="/Users/aahil/Edhitha/edhithaGCS/Data/Test/images", inode=7479293, flags=20100, id=621220735): is_created, is_directory
-2024-10-31 13:13:27,606 - DEBUG - queue_event DirCreatedEvent(src_path='/Users/aahil/Edhitha/edhithaGCS/Data/Test/images', dest_path='', event_type='created', is_directory=True, is_synthetic=False)
-2024-10-31 13:13:27,606 - DEBUG - drop event DirModifiedEvent(src_path='/Users/aahil/Edhitha/edhithaGCS/Data/Test', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
-2024-10-31 13:13:27,614 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:9080
-2024-10-31 13:13:27,614 - INFO - [33mPress CTRL+C to quit[0m
-2024-10-31 13:13:27,615 - INFO -  * Restarting with watchdog (fsevents)

@@ -1,5 +1,0 @@
-2024-10-31 14:31:39,718 - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
-2024-10-31 14:31:39,721 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:9080
-2024-10-31 14:31:39,721 - INFO - [33mPress CTRL+C to quit[0m
-2024-10-31 14:31:40,737 - STATUS - Client connected

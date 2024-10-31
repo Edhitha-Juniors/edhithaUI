@@ -208,13 +208,14 @@ const Manual = () => {
         try {
             const shape = document.querySelector('input[placeholder="Shape"]').value;
             const colour = document.querySelector('input[placeholder="Colour"]').value;
+    
+            // Prepare button data but don't update the state yet
             const buttonData = {
                 id: buttons.length + 1, // Create a unique ID for each button
                 label: `${shape}`, // You can modify this to use any input data
             };
-
-            // Update state only when user clicks save, not during rendering
-            setButtons(prevButtons => [...prevButtons, buttonData]);
+    
+            // Make the POST request to save the details
             const response = await fetch('http://127.0.0.1:9080/save-details', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -229,28 +230,37 @@ const Manual = () => {
                 })
             });
     
+            // Check if the response was successful
             if (!response.ok) {
                 throw new Error('Failed to save details');
-            } else {
-                const result = await response.json(); // Parse JSON response
+            }
+    
+            const result = await response.json(); // Parse JSON response
+    
+            // Proceed only if latitude and longitude exist in the result
+            if (result.latitude && result.longitude) {
+                // Update backendData with latitude and longitude
                 setBackendData(prevData => ({
                     ...prevData,
                     latitude: result.latitude,
                     longitude: result.longitude
                 }));
+    
+                // Update buttons state with the new button data
+                setButtons(prevButtons => [
+                    ...prevButtons,
+                    buttonData // Add button data only if latitude and longitude exist
+                ]);
+                console.log('Details saved successfully and backend data updated');
+            } else {
+                console.error('Latitude and longitude not returned from backend');
             }
             
-    
-            const result = await response.json();
-            // alert(result.message);
-    
-            // Add new button after saving details
-            
-    
         } catch (error) {
             console.error('Error saving details:', error);
         }
     };
+    
     
 // --Pymavlink-----------------------------------------------------
 
