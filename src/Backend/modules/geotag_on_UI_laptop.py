@@ -8,7 +8,6 @@ import signal
 import pandas
 import paramiko
 from folium.features import DivIcon
-from logger_config import *
 import logging
 
 def signal_handler(sig, frame):
@@ -21,37 +20,44 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 def move_and_create_unique_folder(folder_name, l_path):
     # Get a list of all existing folders in the current directory
-    # print(os.listdir(folder_name))
-    existing_folders = [folder for folder in os.listdir(
-        folder_name) if os.path.isdir(os.path.join(folder_name, folder))]
+    existing_folders = sorted(
+        [folder for folder in os.listdir(folder_name) if os.path.isdir(os.path.join(folder_name, folder))],
+        key=lambda x: os.path.getmtime(os.path.join(folder_name, x)),
+        reverse=True
+    )
 
-    print(existing_folders)
-    # Initialize a counter for postfixing the folder name
-    counter = 1
+    # Check if the most recent folder contains 'images/images' with images in it
+    if existing_folders:
+        recent_folder_path = os.path.join(folder_name, existing_folders[0], 'images')
+        if os.path.exists(recent_folder_path) and any(os.path.isfile(os.path.join(recent_folder_path, f)) for f in os.listdir(recent_folder_path)):
+            # Initialize a counter for postfixing the folder name
+            counter = 1
+            new_folder_name = f"{folder_name}_{counter}"
+            new_name = os.path.basename(l_path)
+            # logging.getLogger.status(new_name)
 
-    # Generate a new folder name with a postfixed number
-    new_folder_name = f"{folder_name}_{counter}"
-    new_name = os.path.basename(l_path)
-    print(new_name)
-    # Keep incrementing the counter until a unique folder name is found
-    while new_name in existing_folders:
-        counter += 1
-        new_folder_name = f"{l_path}_{counter}"
-        new_name = os.path.basename(new_folder_name)
-    # Create the new folder
-    print(new_folder_name)
-    os.makedirs(os.path.join(new_folder_name))
+            # Generate a new unique folder name by incrementing the counter
+            while new_name in existing_folders:
+                counter += 1
+                new_folder_name = f"{l_path}_{counter}"
+                new_name = os.path.basename(new_folder_name)
 
-    print(f"Created a new folder: {new_folder_name}")
+            # Create the new unique folder
+            print(new_folder_name)
+            os.makedirs(new_folder_name)
+            print(f"Created a new folder: {new_folder_name}")
 
-    # Check if the original folder exists
-    if os.path.exists(l_path):
-        # Move the contents of the original folder to the new one
-        for item in os.listdir(l_path):
-            item_path = os.path.join(l_path, item)
-            shutil.move(item_path, new_folder_name)
+            # Move contents of the original folder to the new one if it exists
+            if os.path.exists(l_path):
+                for item in os.listdir(l_path):
+                    item_path = os.path.join(l_path, item)
+                    shutil.move(item_path, new_folder_name)
+                print(f"Moved contents of {l_path} to {new_folder_name}")
+        else:
+            print("The most recent folder does not have an 'images/images' folder with images. No folder created.")
+    else:
+        print("No existing folders found.")
 
-        print(f"Moved contents of {l_path} to {new_folder_name}")
 
 
 def parse_string_to_variables(input_string):
@@ -104,7 +110,7 @@ def path_map(waypoints, l_path):
 
 def ssh_and_run_commands(hostname, username, password, commands, l_path, cam_waypoints):
     # Create an SSH client
-    logging.getLogger().status("SSH'ing")
+    # logging.getLogger().status("SSH'ing")
     ssh_client = paramiko.SSHClient()
     # Automatically add the server's host key (this is insecure and should be done with caution)
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())

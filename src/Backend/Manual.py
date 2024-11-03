@@ -13,8 +13,8 @@ from modules.latlon import *
 from modules.automation import *
 from modules.drone_status import drone_state
 from modules.logger_config import *
-import logging
 from flask_socketio import SocketIO, emit
+
 
 
 app = Flask(__name__)
@@ -102,6 +102,34 @@ def start_watching():
         observer.stop()
     observer.join()
 
+
+def run_sync_script():
+    script_path = "/Users/aahil/Edhitha/edhithaGCS/sync_jetson.sh"
+    
+    try:
+        # Run the script with bash explicitly and allow any output to be captured
+        result = subprocess.run(
+            ["/bin/bash", script_path],
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        
+        # Log successful output
+        logging.info("Sync script ran successfully:\n" + result.stdout)
+        print("Sync script output:", result.stdout)
+    
+    except subprocess.CalledProcessError as e:
+        # Log error without raising it, allowing the function to continue
+        logging.error("Error in sync script:\n" + e.stderr)
+        print("Sync script error:", e.stderr)
+    
+    except Exception as e:
+        # Log any unexpected error without stopping further code execution
+        logging.error("Unexpected error in sync script:\n" + str(e))
+        print("Unexpected error in sync script:", str(e))
+
+
 def crop_image(image_path, x, y):
     global global_count, xco, yco
     image = cv2.imread(image_path)
@@ -143,9 +171,9 @@ def stop_python_file():
     global process
     try:
         os.kill(process.pid, signal.SIGTERM)  # Send SIGTERM signal to the process
-        logging.info("Python file stopped successfully.")
+        logging.getLogger().status("Python file stopped successfully.")
     except ProcessLookupError:
-        logging.info("Process not found. It may have already stopped.")
+        logging.getLogger().status("Process not found. It may have already stopped.")
 
 
 @app.route('/all-images', methods=['GET'])
@@ -228,15 +256,6 @@ def connectDrone():
         return jsonify({'message': 'Failed to connect to the drone'}), 500
 
 
-@app.route('/drone-status', methods=['GET'])
-def get_drone_status():
-    # print("Current Mode: ", drone_state.current_mode, flush=True)
-    return jsonify({
-        'current_mode': drone_state.current_mode,
-        'is_armed': drone_state.is_armed
-    }), 200
-
-
 @app.route('/arm-disarm', methods=['POST'])
 def armdisarm():
     data = request.get_json()
@@ -313,10 +332,12 @@ def rtl_command():
 @app.route('/start_geotagg', methods=['POST'])
 def start_geotagg():
     global process
-    process = run_python_file(geo_path)
+    process = run_python_file(geo_path)  # This will run even if run_sync_script fails
     global msgs
     msgs = "started geotagg"
-    logging.getLogger().status("Started geotagg")
+    logging.getLogger().status("Started geotagg")  # Log this information
+    logging.getLogger().status("Running sync script...")
+    run_sync_script()
     return "", 204
 
 @app.route('/stop_geotagg', methods=['POST'])
@@ -330,11 +351,11 @@ def stop_geotagg():
 
 @app.route('/reposition', methods=['POST'])
 def repos():
-    print("LALA",flush=True)
+    # stop_python_file()
     global connection
     # logging.info("bottle drop" )
-    # logging.info("Target number bottle is dropping on: %s",target_no )
-    # print("Moving towards target...", flush="True")
+    # logging.getLogger().staus("Target number bottle is dropping on: %s",target_no )
+    print("Moving towards target...", flush="True")
     global msg
     target_no = 0
     msg = "Target number bottle is dropping on: %s"+str(target_no)
@@ -342,7 +363,7 @@ def repos():
     lati = lats[id-1]
     longi = longs[id-1]
     # drop()
-    logging.getLogger().status(lati)
+    # logging.getLogger().status(lati)
     automation(lati, longi, id, connection)
     return "", 204
 

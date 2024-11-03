@@ -24,9 +24,13 @@ def drop(channel=7, pwm_value=1100):
 
     # Send the MAV_CMD_DO_SET_SERVO command
     the_connection.mav.command_long_send(1, 1,command,0,param1, pwm_value, param3, param4, param5, param6, param7)
+
     msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
-    logging.getLogger().status(msg)
-    logging
+    if msg and msg.result == 0:
+        logging.getLogger().status("Drop acknowledged: OK")
+    else:
+        error_message = f"Drop error: {msg.result}" if msg else "No message received"
+        logging.getLogger().status(error_message)
 
     # Wait for a short duration
     time.sleep(2)
@@ -78,8 +82,6 @@ def toggle_connection():
         is_connected = True
         logging.getLogger().status("Connected successfully!")
 
-        threading.Thread(target=monitor_drone_status, daemon=True).start()
-        print("Monitoring thread started.", flush=True)
 
         return the_connection, is_connected
 
@@ -89,23 +91,6 @@ def toggle_connection():
         logging.getLogger().status("Failed to connect to the drone: {str(e)}")  # Print the error message
         return None, jsonify({'message': f'Failed to connect to the drone: {str(e)}'}), 500
 
-
-def monitor_drone_status():
-    global the_connection, is_connected, drone_state
-    while is_connected:
-        msg = the_connection.recv_match(
-            type=['HEARTBEAT', 'COMMAND_ACK'], blocking=False)
-
-        if msg:
-            if msg.get_type() == 'HEARTBEAT':
-                drone_state.is_armed = bool(
-                    msg.base_mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED)
-                drone_state.current_mode = mavutil.mode_string_v10(msg)
-                # print(f"Drone Status - Mode: {drone_state.current_mode}, Arm Status: {
-                #       'Armed' if drone_state.is_armed else 'Disarmed'}", flush=True)
-
-        time.sleep(0.5)
- # Adjust the frequency of status updates as needed
 
 
 def arm():

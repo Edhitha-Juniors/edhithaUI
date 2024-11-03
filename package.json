@@ -7,7 +7,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "dev": "concurrently \"npm run start-react\" \"npm run start-python-server\" \"npm run sync-jetson\"",
+    "dev": "concurrently \"npm run start-react\" \"npm run start-python-server\"",
     "start-react": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

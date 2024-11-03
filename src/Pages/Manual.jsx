@@ -10,8 +10,6 @@ const socket = io('http://localhost:9080', {
     autoConnect: true, // Automatically connects initially// 2-second delay between reconnections
 });
 
-const shapeSuggestions = ['Ball', 'Bat', 'Book', 'Bicycle', 'Broom', 'Bottle'];
-
 const Manual = () => {
 
     const [isConnected, setIsConnected] = useState(false); // State for connection status
