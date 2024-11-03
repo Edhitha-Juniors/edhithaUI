@@ -26,3 +26,4 @@ dist-ssr
 # Ignore specific folders in your project
 Data/
 LOGS/
+Data.zip
