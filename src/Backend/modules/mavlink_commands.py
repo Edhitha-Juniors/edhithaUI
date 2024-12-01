@@ -11,9 +11,26 @@ the_connection = None
 is_connected = False
 
 
-def drop(channel=7, pwm_value=1100):
+def drop(id):
+    # Determine channel and PWM values based on the provided id
+    if id == 1:
+        channel = 8
+        pwm_value = 1950
+    elif id == 2:
+        channel = 8
+        pwm_value = 1100
+    elif id == 3:
+        channel = 7
+        pwm_value = 1900
+    elif id == 4:
+        channel = 7
+        pwm_value = 1100
+    else:
+        logging.getLogger().error(f"Invalid ID: {id}. ID must be 1, 2, or 3.")
+        return
+
     # Set the MAV_CMD_DO_SET_SERVO command parameters
-    logging.getLogger().status("Dropping Bottle...")
+    logging.getLogger().status(f"Dropping Bottle with ID {id}...")
     command = mavutil.mavlink.MAV_CMD_DO_SET_SERVO
     param1 = channel
     param3 = 0
@@ -23,19 +40,21 @@ def drop(channel=7, pwm_value=1100):
     param7 = 0
 
     # Send the MAV_CMD_DO_SET_SERVO command
-    the_connection.mav.command_long_send(1, 1,command,0,param1, pwm_value, param3, param4, param5, param6, param7)
+    the_connection.mav.command_long_send(
+        1, 1, command, 0, param1, pwm_value, param3, param4, param5, param6, param7
+    )
 
     msg = the_connection.recv_match(type='COMMAND_ACK', blocking=True)
     if msg and msg.result == 0:
-        logging.getLogger().status("Drop acknowledged: OK")
+        logging.getLogger().status(f"Drop acknowledged for ID {id}: OK")
     else:
-        error_message = f"Drop error: {msg.result}" if msg else "No message received"
+        error_message = f"Drop error for ID {id}: {msg.result}" if msg else "No message received"
         logging.getLogger().status(error_message)
 
     # Wait for a short duration
     time.sleep(2)
 
-def lock(channel=7, pwm_value=1900):
+def lock(channel=8, pwm_value=1500):
     # Set the MAV_CMD_DO_SET_SERVO command parameters
     logging.getLogger().status("In function")
     command = mavutil.mavlink.MAV_CMD_DO_SET_SERVO
@@ -69,8 +88,8 @@ def toggle_connection():
     # Start a new connection to the drone
     try:
         # logging.getLogger().status("Attempting to connect to the drone...")
-        # the_connection = mavutil.mavlink_connection('tcp:192.168.1.21:5760')
-        the_connection = mavutil.mavlink_connection('udp:192.168.1.49:14550')
+        the_connection = mavutil.mavlink_connection('tcp:192.168.1.21:5760')
+        # the_connection = mavutil.mavlink_connection('udp:192.168.1.49:14550')
         # the_connection = mavutil.mavlink_connection('udp:10.42.0.1:14551')
         # the_connection = mavutil.mavlink_connection('tcp:10.42.0.1:5760')
         logging.getLogger().status("Attempting to connect to the drone...")

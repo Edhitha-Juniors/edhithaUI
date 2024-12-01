@@ -309,7 +309,7 @@ def rtl():
 @app.route('/drop', methods=['POST'])
 def dropPkg():
     # Call the drop function
-    drop()
+    drop(4)
     return "Drop command executed", 200  # Respond with a success message
 
 @app.route('/lock-servo', methods=['POST'])
@@ -336,6 +336,7 @@ def start_geotagg():
     global msgs
     msgs = "started geotagg"
     logging.getLogger().status("Started geotagg")  # Log this information
+    time.sleep(10)
     logging.getLogger().status("Running sync script...")
     run_sync_script()
     return "", 204

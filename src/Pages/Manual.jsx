@@ -207,7 +207,7 @@ const Manual = () => {
     const handleSaveButtonClick = async () => {
         try {
             const shape = document.querySelector('input[placeholder="Shape"]').value;
-            const colour = document.querySelector('input[placeholder="Colour"]').value;
+            // const colour = document.querySelector('input[placeholder="Colour"]').value;
     
             // Prepare button data but don't update the state yet
             const buttonData = {
@@ -223,7 +223,7 @@ const Manual = () => {
                     selectedImageUrl,
                     croppedImageUrl,
                     shape,
-                    colour,
+                    // colour,
                     // coordinates: backendData.coordinates,
                     id: buttonData.id,  // Include button id
                     label: buttonData.label
@@ -475,7 +475,7 @@ const Manual = () => {
                             </div>
                             <div className="inputsContainer">
                                 <input className="inputBox" type="text" placeholder="Shape" />
-                                <input className="inputBox" type="text" placeholder="Colour" />
+                               
                                 <input type="text" placeholder="Coordinates" className="coordinatesBox" value={`${backendData.latitude}, ${backendData.longitude}`} readOnly />
                                 <button className="saveButton" onClick={handleSaveButtonClick}>Store</button>
                                 <div className="repo-button-grid">

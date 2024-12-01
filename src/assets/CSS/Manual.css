@@ -279,7 +279,7 @@ Cropped Image */
 }
 
 .inputsContainer .inputBox[type="text"] {
-    width: 45%;
+    width: 90%;
     /* Adjust width to evenly spread out */
     margin-bottom: 10px;
     /* Add some spacing between inputs */

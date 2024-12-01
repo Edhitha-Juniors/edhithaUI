@@ -4,7 +4,7 @@ import math
 from modules.mavlink_commands import *
 from modules.distcalc import *
 
-alti = 21
+alti = 30
 drop_time = 10
 
 def distance_lat_lon(lat1, lon1, lat2, lon2):
@@ -65,19 +65,19 @@ def automation(lati, longi, target_no, the_connection):
 
     logging.getLogger().status("Automation")
     gps = the_connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
-    # logging.getLogger().status("GPS during calculation: %s", gps)
+    logging.getLogger().status("GPS during calculation: %s", gps)
 
 
-    # calculated_distance = distance_lat_lon(lati/1e7, longi/1e7, gps.lat/1e7, gps.lon/1e7)
-    # gps = the_connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
-    # logging.getLogger().status("GPS before shifting to guided: %s", gps)
+    calculated_distance = distance_lat_lon(lati/1e7, longi/1e7, gps.lat/1e7, gps.lon/1e7)
+    gps = the_connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
+    logging.getLogger().status("GPS before shifting to guided: %s", gps)
     kurrentalti = gps.relative_alt/1000
     accuracy = 0.1
 
     logging.getLogger().status("alti: %s", kurrentalti)
-    logging.getLogger().status('Guided')
+    logging.getLogger().status(' Shifting to Guided')
     guided()
-    # drop()
+    # drop(target_no)
     time.sleep(1.5)
     the_connection.mav.send(mavutil.mavlink.MAVLink_set_position_target_global_int_message(
         10, the_connection.target_system, the_connection.target_component, 6, 1024, int(lati), int(longi), alti, 0, 0, 0, 0, 0, 0, 0, 0))
@@ -86,7 +86,7 @@ def automation(lati, longi, target_no, the_connection):
     global msgs
     msgs = "Repositioning for target: "+str(target_no)
 
-    # logging.getLogger().status("Real_distance between lats and lons: %s",calculated_distance)
+    logging.getLogger().status("Real_distance between lats and lons: %s",calculated_distance)
 
     logging.getLogger().status("DESIRED LAT = %s", lati / 1e7)
     logging.getLogger().status("DESIRED LONG = %s", longi / 1e7)
@@ -105,7 +105,7 @@ def automation(lati, longi, target_no, the_connection):
                 logging.getLogger().status('Started Dropping ...')
                 msgs = "starting drop"
                 time.sleep(1)
-                # drop()
+                drop(target_no)
 
                 # the_connection.mav.command_long_send(the_connection.target_system, the_connection.target_component,181, 0, 0, 1, 0, 0, 0, 0, 0)
                 time.sleep(drop_time)
@@ -115,8 +115,8 @@ def automation(lati, longi, target_no, the_connection):
                 logging.getLogger().status(
                     'Current drop loc longtitude: %s', msg.lon / 1e7)
 
-                
-
+                # distance = distance_lat_lon(lati, longi, msg.lat / 1e7, msg.lon / 1e7)
+                # logging.getLogger().status('Accuracy: %s', distance)
                 # loiter()
                 # the_connection.mav.set_mode_send(the_connection.target_system,mavutil.mavlink.MAV_MODE_FLAG_CUSTOM_MODE_ENABLED,17)
                 auto()  # Replace with your desired action
